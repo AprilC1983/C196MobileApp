@@ -3,4 +3,7 @@
     <string name="action_add_sample_data">Add sample data</string>
     <string name="title_activity_editor">Add Term</string>
     <string name="delete_all">Delete all terms</string>
+    <string name="enter_term_details">Enter term details</string>
+    <string name="new_term">New Term</string>
+    <string name="edit_term">Edit Term</string>
 </resources>

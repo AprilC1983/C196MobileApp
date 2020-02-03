@@ -19,6 +19,7 @@ import com.example.acmay.c196mobileapp.viewmodel.EditorViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.acmay.c196mobileapp.R.string.edit_term;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class EditorActivity extends AppCompatActivity {
@@ -58,10 +59,10 @@ public class EditorActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras == null){
-            setTitle("New Term");
+            setTitle(R.string.new_term);
             mNewNote = true;
         } else {
-            setTitle("Edit Term");
+            setTitle(R.string.edit_term);
             int termId = extras.getInt(TERM_ID_KEY);
             mViewModel.loadData(termId);
         }

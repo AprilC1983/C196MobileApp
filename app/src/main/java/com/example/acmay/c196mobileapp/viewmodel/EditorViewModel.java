@@ -4,10 +4,12 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.example.acmay.c196mobileapp.database.AppRepository;
 import com.example.acmay.c196mobileapp.database.TermEntity;
 
+import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -37,9 +39,12 @@ public class EditorViewModel extends AndroidViewModel {
         TermEntity term = mLiveTerm.getValue();
 
         if(term == null){
-
+            if(TextUtils.isEmpty(termText.trim())){
+                return;
+            }
+            term = new TermEntity(new Date(), termText.trim());
         } else{
-            term.setText(termText);
+            term.setText(termText.trim());
         }
         mRepository.insertTerm(term);
     }
