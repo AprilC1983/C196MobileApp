@@ -2,6 +2,7 @@ package com.example.acmay.c196mobileapp.ui;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,8 +47,11 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.course_text)
+        @BindView(R.id.term_text)
         TextView mTextView;
+        @BindView(R.id.fab)
+        FloatingActionButton mFab;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
