@@ -1,8 +1,10 @@
 package com.example.acmay.c196mobileapp;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,21 +47,31 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
-        initViewModel();
         initRecyclerView();
-
-
-
-        termsData.addAll(mViewModel.mTerms);
-        for(TermEntity course :
-                termsData){
-            Log.i("C196MobileApp", course.toString());
-        }
+        initViewModel();
     }
 
     private void initViewModel() {
+
+        final Observer<List<TermEntity>> notesObserver = new Observer<List<TermEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<TermEntity> termEntities) {
+                termsData.clear();
+                termsData.addAll(termEntities);
+
+                if(mAdapter == null){
+                    mAdapter = new TermsAdapter(termsData, MainActivity.this);
+                    mRecyclerView.setAdapter(mAdapter);
+                } else{
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        };
+
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
+
+        mViewModel.mTerms.observe(this, notesObserver);
     }
 
     private void initRecyclerView() {
@@ -67,8 +79,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new TermsAdapter(termsData, this);
-        mRecyclerView.setAdapter(mAdapter);
+
     }
 
     @Override
@@ -89,9 +100,16 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_add_sample_data) {
             addSampleData();
             return true;
+        } else if(id == R.id.action_delete_all){
+            deleteAllTerms();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteAllTerms() {
+        mViewModel.deleteAllTerms();
     }
 
     private void addSampleData() {

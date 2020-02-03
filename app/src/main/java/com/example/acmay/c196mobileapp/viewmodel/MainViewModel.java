@@ -2,6 +2,7 @@ package com.example.acmay.c196mobileapp.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.example.acmay.c196mobileapp.database.AppRepository;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
 
-    public List<TermEntity> mTerms;
+    public LiveData<List<TermEntity>> mTerms;
     private AppRepository mRepository;
 
     public MainViewModel(@NonNull Application application) {
@@ -25,5 +26,9 @@ public class MainViewModel extends AndroidViewModel {
     public void addSampleData() {
 
         mRepository.addSampleData();
+    }
+
+    public void deleteAllTerms() {
+        mRepository.deleteAllTerms();
     }
 }
