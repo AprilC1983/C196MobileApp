@@ -18,12 +18,15 @@ import com.example.acmay.c196mobileapp.viewmodel.EditorViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
+
 public class EditorActivity extends AppCompatActivity {
 
     @BindView(R.id.term_text)
     TextView mTextView;
 
     private EditorViewModel mViewModel;
+    private boolean mNewNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,5 +53,15 @@ public class EditorActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Bundle extras = getIntent().getExtras();
+        if(extras == null){
+            setTitle("New Term");
+            mNewNote = true;
+        } else {
+            setTitle("Edit Term");
+            int termId = extras.getInt(TERM_ID_KEY);
+            mViewModel.loadData(termId);
+        }
     }
 }

@@ -50,4 +50,8 @@ public class AppRepository {
             }
         });
     }
+
+    public TermEntity getTermById(int termId) {
+        return mDb.termDao().getTermById(termId);
+    }
 }
