@@ -5,10 +5,12 @@
     <string name="delete_all">Delete all terms</string>
     <string name="enter_term_details">Enter term title</string>
     <string name="new_term">Create New Term</string>
+    <string name="new_course">Create New Course</string>
     <string name="edit_term">Edit Term</string>
+    <string name="edit_course">Edit Course</string>
     <string name="enter_start">Enter start date</string>
     <string name="enter_end_date">Enter end date</string>
-    <string name="continue_button">Continue</string>
+    <string name="continue_button_text">Continue</string>
     <string name="enter_course_name">Enter course name</string>
     <string name="in_progress">In Progress</string>
     <string name="completed">Completed</string>

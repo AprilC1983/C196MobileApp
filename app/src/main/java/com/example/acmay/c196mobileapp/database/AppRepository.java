@@ -72,4 +72,14 @@ public class AppRepository {
             }
         });
     }
+
+    public CourseEntity getCourseById(int courseId) {
+        return mDb.courseDao().getCourseById(courseId);
+    }
+
+    public void insertCourse(CourseEntity course) {
+    }
+
+    public void deleteCourse(CourseEntity value) {
+    }
 }

@@ -2,52 +2,40 @@ package com.example.acmay.c196mobileapp;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.acmay.c196mobileapp.database.TermEntity;
+import com.example.acmay.c196mobileapp.database.CourseEntity;
+import com.example.acmay.c196mobileapp.viewmodel.CourseViewModel;
 import com.example.acmay.c196mobileapp.viewmodel.EditorViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
-import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 
-public class EditorActivity extends AppCompatActivity {
+public class CreateCourseActivity extends AppCompatActivity {
 
-    @BindView(R.id.term_text)
+    @BindView(R.id.course_title_text)
     TextView mTextView;
 
-    /*
-    @OnClick(R.id.continue_button)
-    void continueClickHandler(){
-        //Intent intent = new Intent(this, EditorActivity.class);
-        //startActivity(intent);
-        System.out.println("I've been clicked");
-    }
-
-     */
-
-    private EditorViewModel mViewModel;
-    private boolean mNewNote, mEditing;
+    private CourseViewModel mViewModel;
+    private boolean mNewCourse, mEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editor);
+        setContentView(R.layout.course_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
@@ -61,32 +49,32 @@ public class EditorActivity extends AppCompatActivity {
 
     private void initViewModel(){
         mViewModel = ViewModelProviders.of(this)
-                .get(EditorViewModel.class);
+                .get(CourseViewModel.class);
 
-        mViewModel.mLiveTerm.observe(this, new Observer<TermEntity>() {
+        mViewModel.mLiveCourse.observe(this, new Observer<CourseEntity>() {
             @Override
-            public void onChanged(@Nullable TermEntity termEntity) {
-                if(termEntity != null && !mEditing) {
-                    mTextView.setText(termEntity.getText());
+            public void onChanged(@Nullable CourseEntity courseEntity) {
+                if(courseEntity != null && !mEditing) {
+                    mTextView.setText(courseEntity.getText());
                 }
             }
         });
 
         Bundle extras = getIntent().getExtras();
         if(extras == null){
-            setTitle(R.string.new_term);
-            mNewNote = true;
+            setTitle(R.string.new_course);
+            mNewCourse = true;
         } else {
-            setTitle(R.string.edit_term);
-            int termId = extras.getInt(TERM_ID_KEY);
-            mViewModel.loadData(termId);
+            setTitle(R.string.edit_course);
+            int courseId = extras.getInt(COURSE_ID_KEY);
+            mViewModel.loadData(courseId);
         }
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(!mNewNote){
+        if(!mNewCourse){
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_editor, menu);
         }
@@ -99,7 +87,7 @@ public class EditorActivity extends AppCompatActivity {
             saveAndReturn();
             return true;
         } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteTerm();
+            mViewModel.deleteCourse();
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -111,7 +99,7 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTerm(mTextView.getText().toString());
+        mViewModel.saveCourse(mTextView.getText().toString());
         finish();
     }
 
@@ -120,4 +108,5 @@ public class EditorActivity extends AppCompatActivity {
         outState.putBoolean(EDITING_KEY, true);
         super.onSaveInstanceState(outState);
     }
+
 }

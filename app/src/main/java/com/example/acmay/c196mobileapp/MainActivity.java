@@ -10,6 +10,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -29,11 +30,17 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
+/*
+
     @OnClick(R.id.fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, EditorActivity.class);
         startActivity(intent);
     }
+
+
+ */
+     
 
     private List<TermEntity> termsData = new ArrayList<>();
     private TermsAdapter mAdapter;
