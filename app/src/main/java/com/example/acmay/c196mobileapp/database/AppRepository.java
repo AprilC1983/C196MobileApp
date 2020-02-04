@@ -35,14 +35,14 @@ public class AppRepository {
         return mDb.startDao().getAll();
     }
 
-//    public void addSampleData() {
-//        executer.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                mDb.termDao().insertAll(SampleData.getData());
-//            }
-//        });
-//    }
+    public void addSampleData() {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.termDao().insertAll(SampleData.getData());
+            }
+        });
+    }
 
     private LiveData<List<TermEntity>> getAllTerms(){
         return mDb.termDao().getAll();

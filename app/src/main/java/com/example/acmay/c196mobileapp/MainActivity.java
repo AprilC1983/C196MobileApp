@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addItemDecoration(divider);
 
     }
-/*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -119,5 +119,5 @@ public class MainActivity extends AppCompatActivity {
     private void addSampleData() {
         mViewModel.addSampleData();
     }
-    */
+
 }
