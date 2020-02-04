@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 
 import com.example.acmay.c196mobileapp.database.AppRepository;
 import com.example.acmay.c196mobileapp.database.TermEntity;
-import com.example.acmay.c196mobileapp.utilities.SampleData;
 
 import java.util.List;
 
@@ -23,10 +22,10 @@ public class MainViewModel extends AndroidViewModel {
         mTerms = mRepository.mTerms;
     }
 
-//    public void addSampleData() {
+    public void addSampleData() {
 
-//        mRepository.addSampleData();
-//    }
+        mRepository.addSampleData();
+    }
 
     public void deleteAllTerms() {
         mRepository.deleteAllTerms();

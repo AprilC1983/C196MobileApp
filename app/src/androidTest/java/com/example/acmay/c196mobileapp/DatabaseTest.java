@@ -7,7 +7,6 @@ import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
 import com.example.acmay.c196mobileapp.database.AppDatabase;
-import com.example.acmay.c196mobileapp.database.StartDao;
 import com.example.acmay.c196mobileapp.database.TermDao;
 import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.utilities.SampleData;
@@ -25,7 +24,6 @@ public class DatabaseTest {
     public static final String TAG = "Junit";
     private AppDatabase mDb;
     private TermDao mDao;
-    private StartDao startDao;
 
     @Before
     public void createDb(){
@@ -33,11 +31,8 @@ public class DatabaseTest {
         mDb = Room.inMemoryDatabaseBuilder(context,
                 AppDatabase.class).build();
         mDao = mDb.termDao();
-        startDao = mDb.startDao();
         Log.i(TAG, "createDb");
     }
-
-
 
     @After
     public void closeDb(){

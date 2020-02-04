@@ -48,4 +48,9 @@ public class EditorViewModel extends AndroidViewModel {
         }
         mRepository.insertTerm(term);
     }
+
+    public void deleteTerm() {
+        mRepository.deleteTerm(mLiveTerm.getValue());
+    }
+
 }
