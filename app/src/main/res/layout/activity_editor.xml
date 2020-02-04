@@ -33,7 +33,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/term_editor" />
+    <include layout="@layout/content_editor" />
 
 
 
