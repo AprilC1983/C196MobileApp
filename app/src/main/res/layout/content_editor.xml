@@ -14,8 +14,20 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/text_margin"
         android:hint="@string/enter_term_title"
-        android:inputType="textMultiLine|textCapSentences"
+        android:inputType="text|textCapSentences"
         android:autofillHints="" tools:targetApi="o" />
+
+
+    <EditText
+        android:id="@+id/start_date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:hint="@string/start_date"
+        android:inputType="date"
+        android:autofillHints="" tools:targetApi="o"/>
+
+
 
 
 

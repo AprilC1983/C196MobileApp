@@ -24,6 +24,8 @@ public class EditorActivity extends AppCompatActivity {
 
     @BindView(R.id.term_text)
     TextView mTextView;
+    @BindView(R.id.start_date)
+    TextView dateText;
 
     private EditorViewModel mViewModel;
     private boolean mNewNote, mEditing;
@@ -55,9 +57,15 @@ public class EditorActivity extends AppCompatActivity {
             public void onChanged(@Nullable TermEntity termEntity) {
                 if(termEntity != null && !mEditing) {
                     mTextView.setText(termEntity.getText());
+
                 }
             }
         });
+
+
+
+
+
 
         Bundle extras = getIntent().getExtras();
         if(extras == null){

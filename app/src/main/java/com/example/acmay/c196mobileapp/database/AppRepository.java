@@ -13,6 +13,7 @@ public class AppRepository {
     private static AppRepository ourInstance;
 
     public LiveData<List<TermEntity>> mTerms;
+    public LiveData<List<StartEntity>> mStarts;
     private AppDatabase mDb;
     private Executor executer = Executors.newSingleThreadExecutor();
 
@@ -27,16 +28,21 @@ public class AppRepository {
 
         mDb = AppDatabase.getInstance(context);
         mTerms = getAllTerms();
+        mStarts = getAllStarts();
     }
 
-    public void addSampleData() {
-        executer.execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.termDao().insertAll(SampleData.getData());
-            }
-        });
+    private LiveData<List<StartEntity>> getAllStarts() {
+        return mDb.startDao().getAll();
     }
+
+//    public void addSampleData() {
+//        executer.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                mDb.termDao().insertAll(SampleData.getData());
+//            }
+//        });
+//    }
 
     private LiveData<List<TermEntity>> getAllTerms(){
         return mDb.termDao().getAll();
@@ -51,9 +57,23 @@ public class AppRepository {
         });
     }
 
+    public void deleteAllStarts() {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.startDao().deleteAll();
+            }
+        });
+    }
+
     public TermEntity getTermById(int termId) {
         return mDb.termDao().getTermById(termId);
     }
+
+    public StartEntity getStartById(int termId) {
+        return mDb.startDao().getStartById(termId);
+    }
+
 
     public void insertTerm(final TermEntity term) {
         executer.execute(new Runnable() {
@@ -64,11 +84,29 @@ public class AppRepository {
         });
     }
 
+    public void insertStart(final StartEntity start) {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.startDao().insertStart(start);
+            }
+        });
+    }
+
     public void deleteTerm(final TermEntity term) {
         executer.execute(new Runnable() {
             @Override
             public void run() {
                 mDb.termDao().deleteTerm(term);
+            }
+        });
+    }
+
+    public void deleteStart(final StartEntity start) {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.startDao().deleteStart(start);
             }
         });
     }
