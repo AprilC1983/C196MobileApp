@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 
 import com.example.acmay.c196mobileapp.database.AppRepository;
 import com.example.acmay.c196mobileapp.database.TermEntity;
-import com.example.acmay.c196mobileapp.utilities.SampleData;
 
 import java.util.List;
 

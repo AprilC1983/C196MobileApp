@@ -63,4 +63,13 @@ public class AppRepository {
             }
         });
     }
+
+    public void deleteTerm(final TermEntity term) {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.termDao().deleteTerm(term);
+            }
+        });
+    }
 }

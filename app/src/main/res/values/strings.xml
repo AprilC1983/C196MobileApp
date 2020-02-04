@@ -6,4 +6,5 @@
     <string name="enter_term_details">Enter term details</string>
     <string name="new_term">New Term</string>
     <string name="edit_term">Edit Term</string>
+    <string name="delete">Delete</string>
 </resources>
