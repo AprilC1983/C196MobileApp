@@ -17,6 +17,16 @@
         android:inputType="text|textCapSentences"
         android:autofillHints="" tools:targetApi="o" />
 
+    <!--start date field-->
+    <EditText
+        android:id="@+id/start_date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/text_margin"
+        android:hint="@string/enter_term_details"
+        android:inputType="date"
+        android:autofillHints="" tools:targetApi="o" />
+
 
 
 </android.support.v4.widget.NestedScrollView>
