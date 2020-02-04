@@ -22,10 +22,10 @@ public class MainViewModel extends AndroidViewModel {
         mTerms = mRepository.mTerms;
     }
 
-    public void addSampleData() {
+//    public void addSampleData() {
 
-        mRepository.addSampleData();
-    }
+//        mRepository.addSampleData();
+//    }
 
     public void deleteAllTerms() {
         mRepository.deleteAllTerms();
