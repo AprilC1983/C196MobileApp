@@ -24,8 +24,8 @@ public class EditorActivity extends AppCompatActivity {
 
     @BindView(R.id.term_text)
     TextView mTextView;
-    @BindView(R.id.start_date)
-    TextView startView;
+ //   @BindView(R.id.start_date)
+ //   TextView startView;
 
 
     private EditorViewModel mViewModel;

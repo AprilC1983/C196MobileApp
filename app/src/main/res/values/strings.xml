@@ -6,4 +6,6 @@
     <string name="enter_term_details">Enter term title</string>
     <string name="new_term">New Term</string>
     <string name="edit_term">Edit Term</string>
+    <string name="enter_start">Enter term start date</string>
+    <string name="enter_end_date">Enter end date</string>
 </resources>
