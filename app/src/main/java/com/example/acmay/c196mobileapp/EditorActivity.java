@@ -120,4 +120,6 @@ public class EditorActivity extends AppCompatActivity {
         outState.putBoolean(EDITING_KEY, true);
         super.onSaveInstanceState(outState);
     }
+
+
 }

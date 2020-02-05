@@ -14,7 +14,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.database.TermEntity;
+import com.example.acmay.c196mobileapp.ui.CoursesAdapter;
 import com.example.acmay.c196mobileapp.ui.TermsAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-/*
+
 
     @OnClick(R.id.fab)
     void fabClickHandler(){
@@ -39,11 +41,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
- */
-     
-
     private List<TermEntity> termsData = new ArrayList<>();
+    //private List<CourseEntity> coursesData = new ArrayList<>();
     private TermsAdapter mAdapter;
+    //private CoursesAdapter cAdapter;
     private MainViewModel mViewModel;
 
     @Override
@@ -58,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
         initViewModel();
     }
 
+
     private void initViewModel() {
 
-        final Observer<List<TermEntity>> notesObserver = new Observer<List<TermEntity>>() {
+        final Observer<List<TermEntity>> termsObserver = new Observer<List<TermEntity>>() {
             @Override
             public void onChanged(@Nullable List<TermEntity> termEntities) {
                 termsData.clear();
@@ -78,8 +80,11 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
-        mViewModel.mTerms.observe(this, notesObserver);
+        //The problem stems from this method call
+        //Check ViewModel, Terms
+        mViewModel.mTerms.observe(this, termsObserver);
     }
+
 
     private void initRecyclerView() {
         mRecyclerView.setHasFixedSize(true);

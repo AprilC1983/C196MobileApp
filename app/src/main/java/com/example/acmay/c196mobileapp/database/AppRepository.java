@@ -13,6 +13,7 @@ public class AppRepository {
     private static AppRepository ourInstance;
 
     public LiveData<List<TermEntity>> mTerms;
+    public LiveData<List<CourseEntity>> mCourses;
     private AppDatabase mDb;
     private Executor executer = Executors.newSingleThreadExecutor();
 
@@ -27,6 +28,11 @@ public class AppRepository {
 
         mDb = AppDatabase.getInstance(context);
         mTerms = getAllTerms();
+        mCourses = getAllCourses();
+    }
+
+    private LiveData<List<CourseEntity>> getAllCourses() {
+        return mDb.courseDao().getAll();
     }
 
     public void addSampleData() {
