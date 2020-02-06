@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.fab)
     void fabClickHandler(){
-        Intent intent = new Intent(this, EditorActivity.class);
+        Intent intent = new Intent(this, TermEditorActivity.class);
         startActivity(intent);
     }
 
@@ -92,41 +92,4 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addItemDecoration(divider);
 
     }
-
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_add_sample_data) {
-            addSampleData();
-            return true;
-        } else if(id == R.id.action_delete_all){
-            deleteAllTerms();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void deleteAllTerms() {
-        mViewModel.deleteAllTerms();
-    }
-
-    private void addSampleData() {
-        mViewModel.addSampleData();
-    }
-
-     */
 }

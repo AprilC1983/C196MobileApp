@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
-public class EditorActivity extends AppCompatActivity {
+public class TermEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.term_text)
     TextView mTextView;
@@ -28,7 +28,7 @@ public class EditorActivity extends AppCompatActivity {
     /*
     @OnClick(R.id.continue_button)
     void continueClickHandler(){
-        //Intent intent = new Intent(this, EditorActivity.class);
+        //Intent intent = new Intent(this, TermEditorActivity.class);
         //startActivity(intent);
         System.out.println("I've been clicked");
     }

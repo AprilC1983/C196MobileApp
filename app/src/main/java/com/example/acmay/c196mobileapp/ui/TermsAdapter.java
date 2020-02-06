@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.acmay.c196mobileapp.EditorActivity;
+import com.example.acmay.c196mobileapp.TermEditorActivity;
 import com.example.acmay.c196mobileapp.R;
 import com.example.acmay.c196mobileapp.database.TermEntity;
 
@@ -47,7 +47,7 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.ViewHolder> 
         holder.mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, EditorActivity.class);
+                Intent intent = new Intent(mContext, TermEditorActivity.class);
                 intent.putExtra(TERM_ID_KEY, term.getId());
                 mContext.startActivity(intent);
             }
