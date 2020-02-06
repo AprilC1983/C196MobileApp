@@ -2,7 +2,6 @@ package com.example.acmay.c196mobileapp;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,33 +9,58 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.TermEntity;
+import com.example.acmay.c196mobileapp.viewmodel.CourseEditorViewModel;
 import com.example.acmay.c196mobileapp.viewmodel.TermEditorViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
-public class TermEditorActivity extends AppCompatActivity {
-
-    @BindView(R.id.term_text)
-    TextView mTextView;
+public class CourseEditorActivity extends AppCompatActivity {
 
 
-    @OnClick(R.id.continue_button)
-    void continueClickHandler(){
-        Intent intent = new Intent(this, TermEditorActivity.class);
-        startActivity(intent);
-    }
+    @BindView(R.id.course_title_text)
+    TextView courseTextView;
+
+    /*
+    @BindView(R.id.course_start_text)
+    TextView courseStsrtText;
+    @BindView(R.id.course_end_text)
+    TextView courseEndText;
+    @BindView(R.id.radioGroup)
+    RadioGroup radioGroup;
+    @BindView(R.id.in_progress_rb)
+    RadioButton inProgressBtn;
+    @BindView(R.id.completed_rb)
+    RadioButton completedRadioBtn;
+    @BindView(R.id.dropped_rb)
+    RadioButton droppedRadioBtn;
+    @BindView(R.id.plan_to_take_rb)
+    RadioButton planToTakeRadioBtn;
+    @BindView(R.id.cancel_btn)
+    Button cancelBtn;
+    @BindView(R.id.save_btn)
+    Button saveBtn;
+    @BindView(R.id.save_and_continue_btn)
+    Button saveAndContinueBtn;
 
 
 
-    private TermEditorViewModel mViewModel;
+     */
+
+
+
+
+    private CourseEditorViewModel mViewModel;
     private boolean mNewNote, mEditing;
 
     @Override
@@ -57,31 +81,36 @@ public class TermEditorActivity extends AppCompatActivity {
         initViewModel();
     }
 
+
     private void initViewModel(){
         mViewModel = ViewModelProviders.of(this)
-                .get(TermEditorViewModel.class);
+                .get(CourseEditorViewModel.class);
 
+        //NEED TO SET UP COURSEENTITY
+/*
         mViewModel.mLiveTerm.observe(this, new Observer<TermEntity>() {
             @Override
             public void onChanged(@Nullable TermEntity termEntity) {
                 if(termEntity != null && !mEditing) {
-                    mTextView.setText(termEntity.getText());
+                    courseTextView.setText(termEntity.getText());
                 }
             }
         });
 
+
+ */
         Bundle extras = getIntent().getExtras();
         if(extras == null){
-            setTitle(R.string.new_term);
+            setTitle(R.string.new_course);
             mNewNote = true;
         } else {
-            setTitle(R.string.edit_term);
-            int termId = extras.getInt(TERM_ID_KEY);
+            setTitle(R.string.edit_course);
+            int termId = extras.getInt(COURSE_ID_KEY);
             mViewModel.loadData(termId);
         }
     }
 
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if(!mNewNote){
@@ -90,6 +119,8 @@ public class TermEditorActivity extends AppCompatActivity {
         }
         return super.onCreateOptionsMenu(menu);
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -103,13 +134,15 @@ public class TermEditorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+ */
     @Override
     public void onBackPressed() {
         saveAndReturn();
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTerm(mTextView.getText().toString());
+        mViewModel.saveTerm(courseTextView.getText().toString());
         finish();
     }
 
