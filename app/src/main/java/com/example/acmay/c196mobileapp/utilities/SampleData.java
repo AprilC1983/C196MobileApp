@@ -21,11 +21,12 @@ public class SampleData {
         return cal.getTime();
     }
 
-    public static List<TermEntity> getData() {
-        List<TermEntity> notes = new ArrayList<>();
-        notes.add(new TermEntity(getDate(0), SAMPLE_TEXT_1));
-        notes.add(new TermEntity(getDate(-1), SAMPLE_TEXT_2));
-        notes.add(new TermEntity(getDate(-2), SAMPLE_TEXT_3));
-        return notes;
+    public static List<TermEntity> getTermsData() {
+        List<TermEntity> terms = new ArrayList<>();
+        terms.add(new TermEntity(getDate(0), SAMPLE_TEXT_1));
+        terms.add(new TermEntity(getDate(-1), SAMPLE_TEXT_2));
+        terms.add(new TermEntity(getDate(-2), SAMPLE_TEXT_3));
+        return terms;
     }
+
 }

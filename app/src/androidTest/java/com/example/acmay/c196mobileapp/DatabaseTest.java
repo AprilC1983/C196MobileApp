@@ -42,18 +42,21 @@ public class DatabaseTest {
 
     @Test
     public void createAndRetrieveTerms(){
-        mDao.insertAll(SampleData.getData());
+        mDao.insertAll(SampleData.getTermsData());
         int count = mDao.getCount();
         Log.i(TAG, "createAndRetrieveNotes: count=" + count);
-        assertEquals(SampleData.getData().size(), count);
+        assertEquals(SampleData.getTermsData().size(), count);
     }
 
+
     @Test
-    public void compareStrings(){
-        mDao.insertAll(SampleData.getData());
-        TermEntity original = SampleData.getData().get(0);
+    public void compareTermStrings(){
+        mDao.insertAll(SampleData.getTermsData());
+        TermEntity original = SampleData.getTermsData().get(0);
         TermEntity fromDb = mDao.getTermById(1);
         assertEquals(original.getText(), fromDb.getText());
         assertEquals(1, fromDb.getId());
     }
+
+
 }

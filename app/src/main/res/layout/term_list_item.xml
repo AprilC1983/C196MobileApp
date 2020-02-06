@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/course_fab"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:backgroundTint="@color/colorPrimary"
@@ -24,7 +24,7 @@
         tools:layout_editor_absoluteY="16dp" />
 
     <TextView
-        android:id="@+id/course_text"
+        android:id="@+id/term_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -34,7 +34,7 @@
         android:textColor="@color/list_text_color"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/course_fab"
+        app:layout_constraintStart_toEndOf="@+id/fab"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
