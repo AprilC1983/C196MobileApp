@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/ass_text"
+        android:layout_width="375dp"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/enter_term_details"
+        android:inputType="text|textCapSentences"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.383"
+        tools:targetApi="o" />
+
+
+    <EditText
+        android:id="@+id/ass_start_date_text"
+        android:layout_width="375dp"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/enter_start"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/term_text"
+        app:layout_constraintVertical_bias="0.056"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/ass_end_date_text"
+        android:layout_width="375dp"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/enter_end_date"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_date_text"
+        app:layout_constraintVertical_bias="0.064"
+        tools:targetApi="o" />
+
+    <Button
+        android:id="@+id/ass_continue_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="@string/continue_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ass_end_date_text"
+        app:layout_constraintVertical_bias="0.781" />
+
+
+</android.support.constraint.ConstraintLayout>
