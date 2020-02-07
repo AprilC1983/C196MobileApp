@@ -28,7 +28,7 @@ import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 public class CourseEditorActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.term_text)
+    @BindView(R.id.course_text)
     TextView courseTextView;
 
     /*
@@ -66,7 +66,7 @@ public class CourseEditorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editor);
+        setContentView(R.layout.course_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
