@@ -30,7 +30,7 @@ public class TermEditorActivity extends AppCompatActivity {
 
     @OnClick(R.id.continue_button)
     void continueClickHandler(){
-        Intent intent = new Intent(this, TermEditorActivity.class);
+        Intent intent = new Intent(this, CourseEditorActivity.class);
         startActivity(intent);
     }
 

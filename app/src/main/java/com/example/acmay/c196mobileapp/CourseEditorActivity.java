@@ -28,7 +28,7 @@ import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 public class CourseEditorActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.course_title_text)
+    @BindView(R.id.term_text)
     TextView courseTextView;
 
     /*
