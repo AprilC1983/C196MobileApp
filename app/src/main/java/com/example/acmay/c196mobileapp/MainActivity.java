@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.example.acmay.c196mobileapp.database.AssessmentEntity;
+import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.ui.TermsAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
@@ -37,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private List<TermEntity> termsData = new ArrayList<>();
-    //private List<CourseEntity> coursesData = new ArrayList<>();
+    private List<CourseEntity> coursesData = new ArrayList<>();
+    private List<AssessmentEntity> assessmentsData = new ArrayList<>();
     private TermsAdapter mAdapter;
     //private CoursesAdapter cAdapter;
     private MainViewModel mViewModel;
@@ -75,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
-        //The problem stems from this method call
-        //Check ViewModel, Terms
+        //this method call
         mViewModel.mTerms.observe(this, termsObserver);
     }
 

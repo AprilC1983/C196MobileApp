@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <EditText
+        android:id="@+id/course_text"
+        android:layout_width="375dp"
+        android:layout_height="@dimen/text_height"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/enter_term_details"
+        android:inputType="text|textCapSentences"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.336"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/course_start_text"
+        android:layout_width="375dp"
+        android:layout_height="@dimen/text_height"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/enter_start"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_text"
+        app:layout_constraintVertical_bias="0.056"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/course_end_text"
+        android:layout_width="375dp"
+        android:layout_height="@dimen/text_height"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/enter_end_date"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_start_text"
+        app:layout_constraintVertical_bias="0.097"
+        tools:targetApi="o" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="323dp"
+        android:layout_height="163dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_end_text"
+        app:layout_constraintVertical_bias="0.133">
+
+        <RadioButton
+            android:id="@+id/in_progress_rb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/in_progress" />
+
+        <RadioButton
+            android:id="@+id/completed_rb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/completed" />
+
+        <RadioButton
+            android:id="@+id/dropped_rb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dropped" />
+
+        <RadioButton
+            android:id="@+id/plan_to_take_rb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/plan_to_take" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:layout_marginLeft="44dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/save_btn"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <Button
+        android:id="@+id/save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+
+        android:text="@string/save"
+        app:layout_constraintStart_toEndOf="@id/cancel_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/save_and_continue_btn"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <Button
+        android:id="@+id/save_and_continue_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="44dp"
+        android:layout_marginRight="44dp"
+        android:text="@string/save_and_continue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+
+</android.support.constraint.ConstraintLayout>

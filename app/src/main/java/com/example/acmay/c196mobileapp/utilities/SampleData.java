@@ -1,5 +1,7 @@
 package com.example.acmay.c196mobileapp.utilities;
 
+import com.example.acmay.c196mobileapp.database.AssessmentEntity;
+import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.database.TermEntity;
 
 import java.util.ArrayList;
@@ -27,6 +29,22 @@ public class SampleData {
         terms.add(new TermEntity(getDate(-1), SAMPLE_TEXT_2));
         terms.add(new TermEntity(getDate(-2), SAMPLE_TEXT_3));
         return terms;
+    }
+
+    public static List<CourseEntity> getCourses(){
+        List<CourseEntity> courses = new ArrayList<>();
+        courses.add(new CourseEntity(getDate(0), SAMPLE_TEXT_1));
+        courses.add(new CourseEntity(getDate(-1), SAMPLE_TEXT_2));
+        courses.add(new CourseEntity(getDate(-2), SAMPLE_TEXT_3));
+        return courses;
+    }
+
+    public static List<AssessmentEntity> getAssessments(){
+        List<AssessmentEntity> assessments = new ArrayList<>();
+        assessments.add(new AssessmentEntity(getDate(0), SAMPLE_TEXT_1));
+        assessments.add(new AssessmentEntity(getDate(-1), SAMPLE_TEXT_2));
+        assessments.add(new AssessmentEntity(getDate(-2), SAMPLE_TEXT_3));
+        return assessments;
     }
 
 }
