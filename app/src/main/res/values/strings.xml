@@ -8,6 +8,7 @@
     <string name="new_course">Create New Course</string>
     <string name="edit_term">Edit Term</string>
     <string name="edit_course">Edit Course</string>
+    <string name="edit_assessment">Edit Assessment</string>
     <string name="enter_start">Enter start date</string>
     <string name="enter_end_date">Enter end date</string>
     <string name="continue_button_text">Continue</string>
@@ -19,4 +20,5 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="save_and_continue">Continue</string>
+    <string name="new_assessment">New Assessment</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.acmay.c196mobileapp;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,16 +15,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.viewmodel.CourseEditorViewModel;
-import com.example.acmay.c196mobileapp.viewmodel.TermEditorViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
-import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class CourseEditorActivity extends AppCompatActivity {
 
@@ -31,33 +30,12 @@ public class CourseEditorActivity extends AppCompatActivity {
     @BindView(R.id.course_text)
     TextView courseTextView;
 
-    /*
-    @BindView(R.id.course_start_text)
-    TextView courseStsrtText;
-    @BindView(R.id.course_end_text)
-    TextView courseEndText;
-    @BindView(R.id.radioGroup)
-    RadioGroup radioGroup;
-    @BindView(R.id.in_progress_rb)
-    RadioButton inProgressBtn;
-    @BindView(R.id.completed_rb)
-    RadioButton completedRadioBtn;
-    @BindView(R.id.dropped_rb)
-    RadioButton droppedRadioBtn;
-    @BindView(R.id.plan_to_take_rb)
-    RadioButton planToTakeRadioBtn;
-    @BindView(R.id.cancel_btn)
-    Button cancelBtn;
-    @BindView(R.id.save_btn)
-    Button saveBtn;
-    @BindView(R.id.save_and_continue_btn)
-    Button saveAndContinueBtn;
-
-
-
-     */
-
-
+    //Needs to be AssessmentEditorActivity, but crashes
+    @OnClick(R.id.save_and_continue_btn)
+    void continueClickHandler(){
+        Intent intent = new Intent(this, AssessmentEditorActivity.class);
+        startActivity(intent);
+    }
 
 
     private CourseEditorViewModel mViewModel;
@@ -105,8 +83,8 @@ public class CourseEditorActivity extends AppCompatActivity {
             mNewNote = true;
         } else {
             setTitle(R.string.edit_course);
-            int termId = extras.getInt(COURSE_ID_KEY);
-            mViewModel.loadData(termId);
+            int courseId = extras.getInt(COURSE_ID_KEY);
+            mViewModel.loadData(courseId);
         }
     }
 

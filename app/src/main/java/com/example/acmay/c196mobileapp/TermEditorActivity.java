@@ -24,17 +24,15 @@ import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class TermEditorActivity extends AppCompatActivity {
 
+
     @BindView(R.id.term_text)
     TextView mTextView;
-
 
     @OnClick(R.id.continue_button)
     void continueClickHandler(){
         Intent intent = new Intent(this, CourseEditorActivity.class);
         startActivity(intent);
     }
-
-
 
     private TermEditorViewModel mViewModel;
     private boolean mNewNote, mEditing;

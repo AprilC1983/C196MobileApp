@@ -38,6 +38,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.acmay.c196mobileapp.MainActivity" />
         </activity>
+
+        <activity
+            android:name=".AssessmentEditorActivity"
+            android:label="@string/title_activity_editor"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

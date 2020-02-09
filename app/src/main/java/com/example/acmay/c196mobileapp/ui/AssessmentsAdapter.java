@@ -60,7 +60,7 @@ public class AssessmentsAdapter extends RecyclerView.Adapter<AssessmentsAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.ass_text)
+        @BindView(R.id.assessment_text)
         TextView mTextView;
         @BindView(R.id.fab)
         FloatingActionButton mFab;
