@@ -31,7 +31,7 @@ public class CourseEditorActivity extends AppCompatActivity {
     TextView courseTextView;
 
     //Needs to be AssessmentEditorActivity, but crashes
-    @OnClick(R.id.save_and_continue_btn)
+    @OnClick(R.id.course_continue_btn)
     void continueClickHandler(){
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
         startActivity(intent);

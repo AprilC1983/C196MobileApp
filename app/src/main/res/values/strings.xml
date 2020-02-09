@@ -21,4 +21,6 @@
     <string name="save">Save</string>
     <string name="save_and_continue">Continue</string>
     <string name="new_assessment">New Assessment</string>
+    <string name="enter_due_date">Enter due date</string>
+    <string name="assessment_name">Assessment Name</string>
 </resources>
