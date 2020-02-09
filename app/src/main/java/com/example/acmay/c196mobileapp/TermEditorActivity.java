@@ -28,7 +28,7 @@ public class TermEditorActivity extends AppCompatActivity {
     @BindView(R.id.term_text)
     TextView mTextView;
 
-    @OnClick(R.id.continue_button)
+    @OnClick(R.id.term_continue_btn)
     void continueClickHandler(){
         Intent intent = new Intent(this, CourseEditorActivity.class);
         startActivity(intent);
