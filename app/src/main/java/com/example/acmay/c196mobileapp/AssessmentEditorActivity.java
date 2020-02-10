@@ -23,17 +23,16 @@ import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
-import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class AssessmentEditorActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.term_text)
+    @BindView(R.id.assessment_text)
     TextView assessmentTextView;
 
-    @OnClick(R.id.continue_button)
+    @OnClick(R.id.assessment_save)
     void continueClickHandler(){
-        Intent intent = new Intent(this, CourseEditorActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
@@ -43,7 +42,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editor);
+        setContentView(R.layout.assessment_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);

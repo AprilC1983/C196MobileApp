@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.acmay.c196mobileapp.AssessmentDisplayActivity;
 import com.example.acmay.c196mobileapp.CourseEditorActivity;
 import com.example.acmay.c196mobileapp.R;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
@@ -44,7 +45,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
         final CourseEntity course = mCourses.get(position);
         holder.mTextView.setText(course.getText());
 
-        holder.mFab.setOnClickListener(new View.OnClickListener() {
+        holder.cFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, CourseEditorActivity.class);
@@ -52,6 +53,18 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
                 mContext.startActivity(intent);
             }
         });
+
+        //This click listener will take user to the display of the assessments
+        holder.tFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, AssessmentDisplayActivity.class);
+                intent.putExtra(COURSE_ID_KEY, course.getId());
+                mContext.startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
@@ -63,7 +76,9 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
         @BindView(R.id.course_text)
         TextView mTextView;
         @BindView(R.id.fab)
-        FloatingActionButton mFab;
+        FloatingActionButton cFab;
+        @BindView(R.id.course_fab)
+        FloatingActionButton tFab;
 
         public ViewHolder(View itemView) {
             super(itemView);

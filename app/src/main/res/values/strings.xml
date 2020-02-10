@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">C196 Mobile App</string>
     <string name="action_add_sample_data">Add sample data</string>
-    <string name="title_activity_editor">Add Term</string>
+    <string name="courses">Courses</string>
     <string name="delete_all">Delete all terms</string>
     <string name="enter_term_details">Enter term title</string>
     <string name="new_term">Create New Term</string>
@@ -21,4 +21,7 @@
     <string name="save">Save</string>
     <string name="save_and_continue">Continue</string>
     <string name="new_assessment">New Assessment</string>
+    <string name="enter_due_date">Enter due date</string>
+    <string name="assessment_name">Assessment Name</string>
+    <string name="assessments">Assessments</string>
 </resources>

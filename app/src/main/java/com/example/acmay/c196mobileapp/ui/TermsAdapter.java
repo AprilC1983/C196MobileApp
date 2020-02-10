@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.acmay.c196mobileapp.CourseDisplayActivity;
 import com.example.acmay.c196mobileapp.TermEditorActivity;
 import com.example.acmay.c196mobileapp.R;
 import com.example.acmay.c196mobileapp.database.TermEntity;
@@ -52,6 +53,15 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.ViewHolder> 
                 mContext.startActivity(intent);
             }
         });
+
+        holder.tFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, CourseDisplayActivity.class);
+                intent.putExtra(TERM_ID_KEY, term.getId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -64,6 +74,8 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.ViewHolder> 
         TextView mTextView;
         @BindView(R.id.fab)
         FloatingActionButton mFab;
+        @BindView(R.id.term_fab)
+        FloatingActionButton tFab;
 
         public ViewHolder(View itemView) {
             super(itemView);

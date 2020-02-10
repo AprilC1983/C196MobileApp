@@ -13,7 +13,7 @@
         android:layout_margin="@dimen/text_margin"
         android:layout_marginBottom="4dp"
         android:autofillHints=""
-        android:hint="@string/enter_term_details"
+        android:hint="@string/enter_course_name"
         android:inputType="text|textCapSentences"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,19 +93,19 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/cancel_btn"
+        android:id="@+id/course_cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
         android:layout_marginLeft="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/save_btn"
+        app:layout_constraintEnd_toStartOf="@+id/course_save_btn"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <Button
-        android:id="@+id/save_btn"
+        android:id="@+id/course_save_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -113,13 +113,13 @@
         android:layout_marginRight="0dp"
 
         android:text="@string/save"
-        app:layout_constraintStart_toEndOf="@id/cancel_btn"
+        app:layout_constraintStart_toEndOf="@id/course_cancel_btn"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/save_and_continue_btn"
+        app:layout_constraintEnd_toStartOf="@+id/course_continue_btn"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <Button
-        android:id="@+id/save_and_continue_btn"
+        android:id="@+id/course_continue_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="44dp"
