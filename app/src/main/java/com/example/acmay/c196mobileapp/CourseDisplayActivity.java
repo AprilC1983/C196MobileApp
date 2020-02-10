@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class CourseDisplayActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -33,14 +33,16 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.fab)
     void fabClickHandler(){
-        Intent intent = new Intent(this, CourseDisplayActivity.class);
+        Intent intent = new Intent(this, TermEditorActivity.class);
         startActivity(intent);
     }
 
 
+
+
     private List<TermEntity> termsData = new ArrayList<>();
-    //private List<CourseEntity> coursesData = new ArrayList<>();
-    //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
+    private List<CourseEntity> coursesData = new ArrayList<>();
+    private List<AssessmentEntity> assessmentsData = new ArrayList<>();
     private TermsAdapter mAdapter;
     //private CoursesAdapter cAdapter;
     private MainViewModel mViewModel;
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 termsData.addAll(termEntities);
 
                 if(mAdapter == null){
-                    mAdapter = new TermsAdapter(termsData, MainActivity.this);
+                    mAdapter = new TermsAdapter(termsData, CourseDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
