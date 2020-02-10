@@ -29,8 +29,6 @@ public class CourseDisplayActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-
-
     @OnClick(R.id.fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, CourseEditorActivity.class);
@@ -41,8 +39,8 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
 
     private List<TermEntity> termsData = new ArrayList<>();
-    private List<CourseEntity> coursesData = new ArrayList<>();
-    private List<AssessmentEntity> assessmentsData = new ArrayList<>();
+    //private List<CourseEntity> coursesData = new ArrayList<>();
+    //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
     private TermsAdapter mAdapter;
     //private CoursesAdapter cAdapter;
     private MainViewModel mViewModel;
@@ -80,7 +78,6 @@ public class CourseDisplayActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
-        //this method call
         mViewModel.mTerms.observe(this, termsObserver);
     }
 

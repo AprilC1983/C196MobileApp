@@ -32,7 +32,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
 
     @OnClick(R.id.assessment_save)
     void continueClickHandler(){
-        Intent intent = new Intent(this, CourseEditorActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
