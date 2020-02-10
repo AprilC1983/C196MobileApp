@@ -33,7 +33,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
     @OnClick(R.id.fab)
     void fabClickHandler(){
-        Intent intent = new Intent(this, TermEditorActivity.class);
+        Intent intent = new Intent(this, CourseEditorActivity.class);
         startActivity(intent);
     }
 

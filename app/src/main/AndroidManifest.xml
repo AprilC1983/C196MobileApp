@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".TermEditorActivity"
-            android:label="@string/title_activity_editor"
+            android:label="@string/courses"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -31,7 +31,7 @@
 
         <activity
             android:name=".CourseEditorActivity"
-            android:label="@string/title_activity_editor"
+            android:label="@string/assessments"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -41,7 +41,7 @@
 
         <activity
         android:name=".AssessmentEditorActivity"
-        android:label="@string/title_activity_editor"
+        android:label="@string/courses"
         android:parentActivityName=".MainActivity"
         android:theme="@style/AppTheme.NoActionBar">
         <meta-data
@@ -51,7 +51,7 @@
 
         <activity
             android:name=".CourseDisplayActivity"
-            android:label="@string/title_activity_editor"
+            android:label="@string/courses"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.acmay.c196mobileapp.AssessmentEditorActivity;
 import com.example.acmay.c196mobileapp.CourseEditorActivity;
 import com.example.acmay.c196mobileapp.R;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
@@ -52,6 +53,19 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
                 mContext.startActivity(intent);
             }
         });
+
+        //This click listener will take user to the display of the assessments
+        /*
+        holder.mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, AssessmentEditorActivity.class);
+                intent.putExtra(COURSE_ID_KEY, course.getId());
+                mContext.startActivity(intent);
+            }
+        });
+
+         */
     }
 
     @Override
@@ -64,6 +78,8 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
         TextView mTextView;
         @BindView(R.id.fab)
         FloatingActionButton mFab;
+        @BindView(R.id.term_fab)
+        FloatingActionButton tFab;
 
         public ViewHolder(View itemView) {
             super(itemView);
