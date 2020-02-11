@@ -25,7 +25,7 @@ import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 public class TermEditorActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.term_text)
+    @BindView(R.id.display_text)
     TextView mTextView;
 
     //Saves the term information and continues to the new course screen

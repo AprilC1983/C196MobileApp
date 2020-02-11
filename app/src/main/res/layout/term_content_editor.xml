@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/term_text"
+        android:id="@+id/display_text"
         android:layout_width="375dp"
         android:layout_height="55dp"
         android:layout_margin="@dimen/text_margin"
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/term_text"
+        app:layout_constraintTop_toBottomOf="@+id/display_text"
         app:layout_constraintVertical_bias="0.056"
         tools:targetApi="o" />
 

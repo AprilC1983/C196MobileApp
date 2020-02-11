@@ -35,7 +35,7 @@ public class AssessmentsAdapter extends RecyclerView.Adapter<AssessmentsAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.assessment_list_item, parent, false);
+        View view = inflater.inflate(R.layout.list_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -44,7 +44,7 @@ public class AssessmentsAdapter extends RecyclerView.Adapter<AssessmentsAdapter.
         final AssessmentEntity assessment = mAssessments.get(position);
         holder.mTextView.setText(assessment.getText());
 
-        holder.mFab.setOnClickListener(new View.OnClickListener() {
+        holder.eFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, AssessmentEditorActivity.class);
@@ -60,10 +60,10 @@ public class AssessmentsAdapter extends RecyclerView.Adapter<AssessmentsAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.assessment_text)
+        @BindView(R.id.display_text)
         TextView mTextView;
-        @BindView(R.id.fab)
-        FloatingActionButton mFab;
+        @BindView(R.id.edit_fab)
+        FloatingActionButton eFab;
 
         public ViewHolder(View itemView) {
             super(itemView);

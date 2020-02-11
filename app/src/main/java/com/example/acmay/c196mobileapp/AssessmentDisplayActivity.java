@@ -27,7 +27,7 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    @OnClick(R.id.fab)
+    @OnClick(R.id.edit_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
         startActivity(intent);

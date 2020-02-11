@@ -12,8 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.example.acmay.c196mobileapp.database.AssessmentEntity;
-import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.ui.TermsAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "Main Activity";
 
-    @OnClick(R.id.fab)
+    @OnClick(R.id.edit_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, TermEditorActivity.class);
         startActivity(intent);

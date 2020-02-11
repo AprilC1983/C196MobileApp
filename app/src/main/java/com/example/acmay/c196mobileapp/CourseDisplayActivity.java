@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.example.acmay.c196mobileapp.database.AssessmentEntity;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.ui.CoursesAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
@@ -31,7 +30,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
     public static final String TAG = "Course Display";
 
-    @OnClick(R.id.fab)
+    @OnClick(R.id.edit_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, CourseEditorActivity.class);
         startActivity(intent);
