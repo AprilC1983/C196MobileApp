@@ -9,43 +9,43 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import com.example.acmay.c196mobileapp.database.TermEntity;
-import com.example.acmay.c196mobileapp.viewmodel.TermDetailViewModel;
+import com.example.acmay.c196mobileapp.database.CourseEntity;
+import com.example.acmay.c196mobileapp.viewmodel.CourseDetailViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_DETAIL_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_DETAIL_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 
-public class TermDetailActivity extends AppCompatActivity {
+public class CourseDetailActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.term_title_text)
-    TextView termDetailTextView;
+    @BindView(R.id.course_title_text)
+    TextView courseDetailTextView;
 
-    //Exits term detail screen and returns user to the list of courses
-    @OnClick(R.id.term_detail_exit)
+    //Exits Course detail screen and returns user to the list of courses
+    @OnClick(R.id.course_detail_exit)
     void continueClickHandler(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, CourseDisplayActivity.class);
         startActivity(intent);
         finish();
     }
 
-    //exits term detail screen
-    @OnClick(R.id.term_detail_exit)
+    //exits Course detail screen
+    @OnClick(R.id.course_detail_exit)
     void cancelClickHandler(){
         finish();
     }
 
-    private TermDetailViewModel mViewModel;
-    private boolean mNewTermDetail, mEditing;
+    private CourseDetailViewModel mViewModel;
+    private boolean mNewCourseDetail, mEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.term_detail);
+        setContentView(R.layout.course_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
@@ -63,26 +63,26 @@ public class TermDetailActivity extends AppCompatActivity {
 
     private void initViewModel(){
         mViewModel = ViewModelProviders.of(this)
-                .get(TermDetailViewModel.class);
+                .get(CourseDetailViewModel.class);
 
 
-        mViewModel.mLiveTerm.observe(this, new Observer<TermEntity>() {
+        mViewModel.mLiveCourse.observe(this, new Observer<CourseEntity>() {
             @Override
-            public void onChanged(@Nullable TermEntity termDetailEntity) {
-                if(termDetailEntity != null && !mEditing) {
-                    termDetailTextView.setText(termDetailEntity.getText());
+            public void onChanged(@Nullable CourseEntity courseDetailEntity) {
+                if(courseDetailEntity != null && !mEditing) {
+                    courseDetailTextView.setText(courseDetailEntity.getText());
                 }
             }
         });
 
         Bundle extras = getIntent().getExtras();
         if(extras == null){
-            setTitle(R.string.selected_term);
-            mNewTermDetail = true;
+            setTitle(R.string.selected_course);
+            mNewCourseDetail = true;
         } else {
-            setTitle(R.string.selected_term);
-            int termDetailId = extras.getInt(TERM_DETAIL_ID_KEY);
-            mViewModel.loadData(termDetailId);
+            setTitle(R.string.selected_course);
+            int courseDetailId = extras.getInt(COURSE_DETAIL_ID_KEY);
+            mViewModel.loadData(courseDetailId);
         }
     }
 

@@ -69,6 +69,7 @@
                 android:value="com.example.acmay.c196mobileapp.MainActivity" />
         </activity>
 
+
         <activity
             android:name=".MentorDisplayActivity"
             android:label="@string/mentor"
@@ -82,6 +83,26 @@
         <activity
             android:name=".MentorEditorActivity"
             android:label="@string/edit_mentor"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".TermDetailActivity"
+            android:label="@string/selected_term"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".CourseDetailActivity"
+            android:label="@string/selected_course"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

@@ -33,4 +33,8 @@
     <string name="exit">Exit</string>
     <string name="view_courses">View Courses</string>
     <string name="selected_term">Selected Term</string>
+    <string name="selected_course">Selected Course</string>
+    <string name="return_to_course_list">Return to Course List</string>
+    <string name="return_to_terms_list">Return to Terms List</string>
+    <string name="return_to_courses_list">Return to Courses List</string>
 </resources>

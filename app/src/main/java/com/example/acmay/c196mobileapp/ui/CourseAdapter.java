@@ -12,10 +12,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.AssessmentDisplayActivity;
+import com.example.acmay.c196mobileapp.CourseDetailActivity;
 import com.example.acmay.c196mobileapp.CourseEditorActivity;
 import com.example.acmay.c196mobileapp.MentorDisplayActivity;
 import com.example.acmay.c196mobileapp.R;
+import com.example.acmay.c196mobileapp.TermDetailActivity;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
+import com.example.acmay.c196mobileapp.database.TermDao;
 
 import java.util.List;
 
@@ -70,6 +73,17 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             }
         });
 
+        //Display the course detail screen
+        holder.mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, CourseDetailActivity.class);
+                intent.putExtra(COURSE_ID_KEY, course.getId());
+                mContext.startActivity(intent);
+                Log.i(TAG, "onClick: Open course details");
+            }
+        });
+
 
     }
 
@@ -85,6 +99,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         FloatingActionButton eFab;
         @BindView(R.id.continue_fab)
         FloatingActionButton cFab;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
