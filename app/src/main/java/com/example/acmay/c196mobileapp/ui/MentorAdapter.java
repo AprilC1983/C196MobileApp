@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.AssessmentDisplayActivity;
 import com.example.acmay.c196mobileapp.CourseDisplayActivity;
+import com.example.acmay.c196mobileapp.MentorDetailActivity;
 import com.example.acmay.c196mobileapp.MentorEditorActivity;
 import com.example.acmay.c196mobileapp.R;
 import com.example.acmay.c196mobileapp.database.MentorEntity;
@@ -48,6 +49,7 @@ public class MentorAdapter extends RecyclerView.Adapter<MentorAdapter.ViewHolder
         final MentorEntity mentor = mMentors.get(position);
         holder.mTextView.setText(mentor.getName());
 
+        //opens mentor editor activity
         holder.eFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +60,7 @@ public class MentorAdapter extends RecyclerView.Adapter<MentorAdapter.ViewHolder
             }
         });
 
+        //opens assessment list
         holder.cFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +68,17 @@ public class MentorAdapter extends RecyclerView.Adapter<MentorAdapter.ViewHolder
                 intent.putExtra(MENTOR_ID_KEY, mentor.getId());
                 mContext.startActivity(intent);
                 Log.i(TAG, "onClick: open courses display");
+            }
+        });
+
+        //displays mentor details
+        holder.mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MentorDetailActivity.class);
+                intent.putExtra(MENTOR_ID_KEY, mentor.getId());
+                mContext.startActivity(intent);
+                Log.i(TAG, "onClick: open mentor detail display");
             }
         });
     }

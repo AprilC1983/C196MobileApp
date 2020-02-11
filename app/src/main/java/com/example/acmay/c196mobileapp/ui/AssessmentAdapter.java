@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.acmay.c196mobileapp.AssessmentDetailActivity;
 import com.example.acmay.c196mobileapp.AssessmentEditorActivity;
 import com.example.acmay.c196mobileapp.R;
 import com.example.acmay.c196mobileapp.database.AssessmentEntity;
@@ -19,6 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.ASSESSMENT_DETAIL_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
 
 public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.ViewHolder> {
@@ -44,11 +46,22 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
         final AssessmentEntity assessment = mAssessments.get(position);
         holder.mTextView.setText(assessment.getText());
 
+        //open assessment editor
         holder.eFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, AssessmentEditorActivity.class);
                 intent.putExtra(ASS_ID_KEY, assessment.getId());
+                mContext.startActivity(intent);
+            }
+        });
+
+        //display assessment details
+        holder.mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, AssessmentDetailActivity.class);
+                intent.putExtra(ASSESSMENT_DETAIL_ID_KEY, assessment.getId());
                 mContext.startActivity(intent);
             }
         });

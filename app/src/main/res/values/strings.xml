@@ -25,6 +25,7 @@
     <string name="enter_due_date">Enter due date</string>
     <string name="assessment_name">Assessment Name</string>
     <string name="assessments">Assessments</string>
+    <string name="assessment">Assessment</string>
     <string name="mentor_name">Mentor Name</string>
     <string name="phone_number">Phone Number</string>
     <string name="email">Email</string>

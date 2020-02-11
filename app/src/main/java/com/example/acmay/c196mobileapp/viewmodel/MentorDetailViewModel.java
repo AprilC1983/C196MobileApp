@@ -7,30 +7,30 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.example.acmay.c196mobileapp.database.AppRepository;
-import com.example.acmay.c196mobileapp.database.TermEntity;
+import com.example.acmay.c196mobileapp.database.MentorEntity;
 
 import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class TermDetailViewModel extends AndroidViewModel {
+public class MentorDetailViewModel extends AndroidViewModel {
 
-    public MutableLiveData<TermEntity> mLiveTerm =
+    public MutableLiveData<MentorEntity> mLiveMentor =
             new MutableLiveData<>();
     private AppRepository mRepository;
     private Executor executor = Executors.newSingleThreadExecutor();
 
-    public TermDetailViewModel(@NonNull Application application) {
+    public MentorDetailViewModel(@NonNull Application application) {
         super(application);
         mRepository = AppRepository.getInstance(getApplication());
     }
 
-    public void loadData(final int termId) {
+    public void loadData(final int mentorId) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                TermEntity term = mRepository.getTermById(termId);
-                mLiveTerm.postValue(term);
+                MentorEntity mentor = mRepository.getMentorById(mentorId);
+                mLiveMentor.postValue(mentor);
             }
         });
     }
