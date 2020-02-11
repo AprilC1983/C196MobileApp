@@ -140,6 +140,16 @@
                 android:value="com.example.acmay.c196mobileapp.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".NoteEditorActivity"
+            android:label="@string/edit_note"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
 
     </application>
 

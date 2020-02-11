@@ -3,6 +3,7 @@ package com.example.acmay.c196mobileapp.utilities;
 import com.example.acmay.c196mobileapp.database.AssessmentEntity;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.database.MentorEntity;
+import com.example.acmay.c196mobileapp.database.NoteEntity;
 import com.example.acmay.c196mobileapp.database.TermEntity;
 
 import java.util.ArrayList;
@@ -54,6 +55,14 @@ public class SampleData {
         mentors.add(new MentorEntity(getDate(-1), SAMPLE_TEXT_2));
         mentors.add(new MentorEntity(getDate(-2), SAMPLE_TEXT_3));
         return mentors;
+    }
+
+    public static List<NoteEntity> getNotesData(){
+        List<NoteEntity> notes = new ArrayList<>();
+        notes.add(new NoteEntity(getDate(0), SAMPLE_TEXT_1));
+        notes.add(new NoteEntity(getDate(-1), SAMPLE_TEXT_2));
+        notes.add(new NoteEntity(getDate(-2), SAMPLE_TEXT_3));
+        return notes;
     }
 
 }

@@ -41,5 +41,6 @@
     <string name="return_to_assessment_list">Return to Assessment List</string>
     <string name="enter_note">Enter Note</string>
     <string name="notes">Notes</string>
+    <string name="edit_note">Edit Note</string>
     <string name="view_notes">View Notes</string>
 </resources>
