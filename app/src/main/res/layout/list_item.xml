@@ -32,7 +32,7 @@
         android:ellipsize="end"
         android:textSize="@dimen/list_text_size"
         android:textColor="@color/list_text_color"
-        android:name="TextView"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edit_fab"
         app:layout_constraintTop_toTopOf="parent"
