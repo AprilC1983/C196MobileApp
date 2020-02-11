@@ -13,7 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.example.acmay.c196mobileapp.database.CourseEntity;
-import com.example.acmay.c196mobileapp.ui.CoursesAdapter;
+import com.example.acmay.c196mobileapp.ui.CourseAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -43,8 +43,8 @@ public class CourseDisplayActivity extends AppCompatActivity {
     private List<CourseEntity> coursesData = new ArrayList<>();
     //private List<CourseEntity> coursesData = new ArrayList<>();
     //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
-    private CoursesAdapter mAdapter;
-    //private CoursesAdapter cAdapter;
+    private CourseAdapter mAdapter;
+    //private CourseAdapter cAdapter;
     private MainViewModel mViewModel;
 
     @Override
@@ -69,7 +69,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
                 coursesData.addAll(courseEntities);
 
                 if(mAdapter == null){
-                    mAdapter = new CoursesAdapter(coursesData, CourseDisplayActivity.this);
+                    mAdapter = new CourseAdapter(coursesData, CourseDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();

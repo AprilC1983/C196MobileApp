@@ -24,12 +24,12 @@ import butterknife.ButterKnife;
 import static android.content.ContentValues.TAG;
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 
-public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHolder> {
+public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
 
     private final List<CourseEntity> mCourses;
     private final Context mContext;
 
-    public CoursesAdapter(List<CourseEntity> mCourses, Context mContext) {
+    public CourseAdapter(List<CourseEntity> mCourses, Context mContext) {
         this.mCourses = mCourses;
         this.mContext = mContext;
     }

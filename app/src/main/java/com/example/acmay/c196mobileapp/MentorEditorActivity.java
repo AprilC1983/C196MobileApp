@@ -1,7 +1,10 @@
 package com.example.acmay.c196mobileapp;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -9,48 +12,54 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.acmay.c196mobileapp.viewmodel.AssessmentViewModel;
+import com.example.acmay.c196mobileapp.database.MentorEntity;
+import com.example.acmay.c196mobileapp.viewmodel.MentorViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.MENTOR_ID_KEY;
 
-public class AssessmentEditorActivity extends AppCompatActivity {
+public class MentorEditorActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.assessment_text)
-    TextView assessmentTextView;
+    @BindView(R.id.display_text)
+    TextView mTextView;
 
-    //Saves assessment data and returns to the main screen
-    @OnClick(R.id.assessment_save)
+    //Saves the Mentor information and continues to the new course screen
+    @OnClick(R.id.mentor_continue_btn)
     void continueClickHandler(){
-        //Intent intent = new Intent(this, MainActivity.class);
-        //startActivity(intent);
         saveAndReturn();
+        Intent intent = new Intent(this, CourseEditorActivity.class);
+        startActivity(intent);
+
     }
 
-    //exits assessment screen without saving assessment data
-    @OnClick(R.id.assessment_cancel)
+    //Exits the create Mentor screen without saving
+    @OnClick(R.id.mentor_cancel_btn)
     void cancelClickHandler(){
         finish();
     }
 
+    //Saves Mentor data without continuing to the course creation screen
+    @OnClick(R.id.mentor_save_btn)
+    void saveClickHandler(){
+        saveAndReturn();
+    }
 
-    private AssessmentViewModel mViewModel;
-    private boolean mNewNote, mEditing;
+    private MentorViewModel mViewModel;
+    private boolean mNewMentor, mEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.assessment_editor);
+        setContentView(R.layout.activity_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         ButterKnife.bind(this);
 
@@ -63,35 +72,32 @@ public class AssessmentEditorActivity extends AppCompatActivity {
 
     private void initViewModel(){
         mViewModel = ViewModelProviders.of(this)
-                .get(AssessmentViewModel.class);
+                .get(MentorViewModel.class);
 
-        /*
-        mViewModel.mLiveAssessment.observe(this, new Observer<TermEntity>() {
+        mViewModel.mLiveMentor.observe(this, new Observer<MentorEntity>() {
             @Override
-            public void onChanged(@Nullable TermEntity termEntity) {
-                if(termEntity != null && !mEditing) {
-                    mTextView.setName(termEntity.getName());
+            public void onChanged(@Nullable MentorEntity mentorEntity) {
+                if(mentorEntity != null && !mEditing) {
+                    mTextView.setText(mentorEntity.getName());
                 }
             }
         });
 
-         */
-
         Bundle extras = getIntent().getExtras();
         if(extras == null){
-            setTitle(R.string.new_assessment);
-            mNewNote = true;
+            setTitle(R.string.new_mentor);
+            mNewMentor = true;
         } else {
-            setTitle(R.string.edit_assessment);
-            int assessmentId = extras.getInt(ASS_ID_KEY);
-            mViewModel.loadData(assessmentId);
+            setTitle(R.string.edit_mentor);
+            int mentorId = extras.getInt(MENTOR_ID_KEY);
+            mViewModel.loadData(mentorId);
         }
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(!mNewNote){
+        if(!mNewMentor){
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_editor, menu);
         }
@@ -104,7 +110,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             saveAndReturn();
             return true;
         } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteAssessment();
+            mViewModel.deleteMentor();
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -116,7 +122,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveAssessment(assessmentTextView.getText().toString());
+        mViewModel.saveMentor(mTextView.getText().toString());
         finish();
     }
 

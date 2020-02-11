@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.TermEntity;
-import com.example.acmay.c196mobileapp.viewmodel.TermEditorViewModel;
+import com.example.acmay.c196mobileapp.viewmodel.TermViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,7 +49,7 @@ public class TermEditorActivity extends AppCompatActivity {
         saveAndReturn();
     }
 
-    private TermEditorViewModel mViewModel;
+    private TermViewModel mViewModel;
     private boolean mNewTerm, mEditing;
 
     @Override
@@ -72,7 +72,7 @@ public class TermEditorActivity extends AppCompatActivity {
 
     private void initViewModel(){
         mViewModel = ViewModelProviders.of(this)
-                .get(TermEditorViewModel.class);
+                .get(TermViewModel.class);
 
         mViewModel.mLiveTerm.observe(this, new Observer<TermEntity>() {
             @Override

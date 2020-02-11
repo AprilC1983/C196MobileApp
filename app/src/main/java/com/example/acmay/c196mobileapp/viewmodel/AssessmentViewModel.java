@@ -14,14 +14,14 @@ import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class AssessmentEditorViewModel extends AndroidViewModel {
+public class AssessmentViewModel extends AndroidViewModel {
 
     public MutableLiveData<AssessmentEntity> mLiveAssessment =
             new MutableLiveData<>();
     private AppRepository mRepository;
     private Executor executor = Executors.newSingleThreadExecutor();
 
-    public AssessmentEditorViewModel(@NonNull Application application) {
+    public AssessmentViewModel(@NonNull Application application) {
         super(application);
         mRepository = AppRepository.getInstance(getApplication());
     }

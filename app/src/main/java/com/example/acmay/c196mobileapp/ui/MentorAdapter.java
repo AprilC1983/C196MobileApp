@@ -5,29 +5,32 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.acmay.c196mobileapp.AssessmentEditorActivity;
+import com.example.acmay.c196mobileapp.CourseDisplayActivity;
+import com.example.acmay.c196mobileapp.MentorEditorActivity;
 import com.example.acmay.c196mobileapp.R;
-import com.example.acmay.c196mobileapp.database.AssessmentEntity;
+import com.example.acmay.c196mobileapp.database.MentorEntity;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
+import static android.content.ContentValues.TAG;
+import static com.example.acmay.c196mobileapp.utilities.Constants.MENTOR_ID_KEY;
 
-public class AssessmentsAdapter extends RecyclerView.Adapter<AssessmentsAdapter.ViewHolder> {
+public class MentorAdapter extends RecyclerView.Adapter<MentorAdapter.ViewHolder> {
 
-    private final List<AssessmentEntity> mAssessments;
+    private final List<MentorEntity> mMentors;
     private final Context mContext;
 
-    public AssessmentsAdapter(List<AssessmentEntity> mAssessments, Context mContext) {
-        this.mAssessments = mAssessments;
+    public MentorAdapter(List<MentorEntity> mMentors, Context mContext) {
+        this.mMentors = mMentors;
         this.mContext = mContext;
     }
 
@@ -41,22 +44,33 @@ public class AssessmentsAdapter extends RecyclerView.Adapter<AssessmentsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final AssessmentEntity assessment = mAssessments.get(position);
-        holder.mTextView.setText(assessment.getText());
+        final MentorEntity mentor = mMentors.get(position);
+        holder.mTextView.setText(mentor.getName());
 
         holder.eFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, AssessmentEditorActivity.class);
-                intent.putExtra(ASS_ID_KEY, assessment.getId());
+                Intent intent = new Intent(mContext, MentorEditorActivity.class);
+                intent.putExtra(MENTOR_ID_KEY, mentor.getId());
                 mContext.startActivity(intent);
+                Log.i(TAG, "onClick: Open Mentor editor");
+            }
+        });
+
+        holder.cFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, CourseDisplayActivity.class);
+                intent.putExtra(MENTOR_ID_KEY, mentor.getId());
+                mContext.startActivity(intent);
+                Log.i(TAG, "onClick: open courses display");
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mAssessments.size();
+        return mMentors.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,6 +78,8 @@ public class AssessmentsAdapter extends RecyclerView.Adapter<AssessmentsAdapter.
         TextView mTextView;
         @BindView(R.id.edit_fab)
         FloatingActionButton eFab;
+        @BindView(R.id.continue_fab)
+        FloatingActionButton cFab;
 
         public ViewHolder(View itemView) {
             super(itemView);

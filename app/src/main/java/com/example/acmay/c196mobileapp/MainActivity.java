@@ -13,7 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.example.acmay.c196mobileapp.database.TermEntity;
-import com.example.acmay.c196mobileapp.ui.TermsAdapter;
+import com.example.acmay.c196mobileapp.ui.TermAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private List<TermEntity> termsData = new ArrayList<>();
     //private List<CourseEntity> coursesData = new ArrayList<>();
     //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
-    private TermsAdapter mAdapter;
-    //private CoursesAdapter cAdapter;
+    private TermAdapter mAdapter;
+    //private CourseAdapter cAdapter;
     private MainViewModel mViewModel;
 
     @Override
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 termsData.addAll(termEntities);
 
                 if(mAdapter == null){
-                    mAdapter = new TermsAdapter(termsData, MainActivity.this);
+                    mAdapter = new TermAdapter(termsData, MainActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();

@@ -8,6 +8,7 @@
     <string name="new_course">Create New Course</string>
     <string name="edit_term">Edit Term</string>
     <string name="edit_course">Edit Course</string>
+    <string name="edit_mentor">Edit Mentor</string>
     <string name="edit_assessment">Edit Assessment</string>
     <string name="enter_start">Enter start date</string>
     <string name="enter_end_date">Enter end date</string>
@@ -26,4 +27,6 @@
     <string name="assessments">Assessments</string>
     <string name="mentor_name">Mentor Name</string>
     <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="new_mentor">Mentor</string>
 </resources>

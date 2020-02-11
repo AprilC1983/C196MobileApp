@@ -24,12 +24,12 @@ import butterknife.ButterKnife;
 import static android.content.ContentValues.TAG;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
-public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.ViewHolder> {
+public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
 
     private final List<TermEntity> mTerms;
     private final Context mContext;
 
-    public TermsAdapter(List<TermEntity> mTerms, Context mContext) {
+    public TermAdapter(List<TermEntity> mTerms, Context mContext) {
         this.mTerms = mTerms;
         this.mContext = mContext;
     }

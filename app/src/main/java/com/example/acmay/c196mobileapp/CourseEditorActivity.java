@@ -7,16 +7,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.CourseEntity;
-import com.example.acmay.c196mobileapp.viewmodel.CourseEditorViewModel;
+import com.example.acmay.c196mobileapp.viewmodel.CourseViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,7 +46,7 @@ public class CourseEditorActivity extends AppCompatActivity {
     }
 
 
-    private CourseEditorViewModel mViewModel;
+    private CourseViewModel mViewModel;
     private boolean mNewNote, mEditing;
 
     @Override
@@ -76,7 +70,7 @@ public class CourseEditorActivity extends AppCompatActivity {
 
     private void initViewModel(){
         mViewModel = ViewModelProviders.of(this)
-                .get(CourseEditorViewModel.class);
+                .get(CourseViewModel.class);
 
         //NEED TO SET UP COURSEENTITY
 

@@ -71,32 +71,32 @@
             android:id="@+id/in_progress_rb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/in_progress" />
+            android:name="@string/in_progress" />
 
         <RadioButton
             android:id="@+id/completed_rb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/completed" />
+            android:name="@string/completed" />
 
         <RadioButton
             android:id="@+id/dropped_rb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dropped" />
+            android:name="@string/dropped" />
 
         <RadioButton
             android:id="@+id/plan_to_take_rb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/plan_to_take" />
+            android:name="@string/plan_to_take" />
     </RadioGroup>
 
     <Button
         android:id="@+id/course_cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cancel"
+        android:name="@string/cancel"
         android:layout_marginLeft="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/course_save_btn"
@@ -112,7 +112,7 @@
         android:layout_marginEnd="0dp"
         android:layout_marginRight="0dp"
 
-        android:text="@string/save"
+        android:name="@string/save"
         app:layout_constraintStart_toEndOf="@id/course_cancel_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/course_continue_btn"
@@ -124,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="44dp"
         android:layout_marginRight="44dp"
-        android:text="@string/save_and_continue"
+        android:name="@string/save_and_continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
