@@ -10,11 +10,10 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
-import com.example.acmay.c196mobileapp.database.AssessmentEntity;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
-import com.example.acmay.c196mobileapp.database.TermEntity;
-import com.example.acmay.c196mobileapp.ui.TermsAdapter;
+import com.example.acmay.c196mobileapp.ui.CoursesAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -29,19 +28,22 @@ public class CourseDisplayActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    @OnClick(R.id.fab)
+    public static final String TAG = "Course Display";
+
+    @OnClick(R.id.edit_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, CourseEditorActivity.class);
         startActivity(intent);
+        Log.i(TAG, "fabClickHandler: create course");
     }
 
 
 
 
-    private List<TermEntity> termsData = new ArrayList<>();
+    private List<CourseEntity> coursesData = new ArrayList<>();
     //private List<CourseEntity> coursesData = new ArrayList<>();
     //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
-    private TermsAdapter mAdapter;
+    private CoursesAdapter mAdapter;
     //private CoursesAdapter cAdapter;
     private MainViewModel mViewModel;
 
@@ -60,14 +62,14 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
     private void initViewModel() {
 
-        final Observer<List<TermEntity>> termsObserver = new Observer<List<TermEntity>>() {
+        final Observer<List<CourseEntity>> coursesObserver = new Observer<List<CourseEntity>>() {
             @Override
-            public void onChanged(@Nullable List<TermEntity> termEntities) {
-                termsData.clear();
-                termsData.addAll(termEntities);
+            public void onChanged(@Nullable List<CourseEntity> courseEntities) {
+                coursesData.clear();
+                coursesData.addAll(courseEntities);
 
                 if(mAdapter == null){
-                    mAdapter = new TermsAdapter(termsData, CourseDisplayActivity.this);
+                    mAdapter = new CoursesAdapter(coursesData, CourseDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
@@ -78,7 +80,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
-        mViewModel.mTerms.observe(this, termsObserver);
+        mViewModel.mCourses.observe(this, coursesObserver);
     }
 
 

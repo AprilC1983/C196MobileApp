@@ -7,6 +7,8 @@ import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
 import com.example.acmay.c196mobileapp.database.AppDatabase;
+import com.example.acmay.c196mobileapp.database.CourseDao;
+import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.database.TermDao;
 import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.utilities.SampleData;
@@ -23,14 +25,16 @@ public class DatabaseTest {
 
     public static final String TAG = "Junit";
     private AppDatabase mDb;
-    private TermDao mDao;
+    private TermDao tDao;
+    private CourseDao cDao;
 
     @Before
     public void createDb(){
         Context context = InstrumentationRegistry.getTargetContext();
         mDb = Room.inMemoryDatabaseBuilder(context,
                 AppDatabase.class).build();
-        mDao = mDb.termDao();
+        tDao = mDb.termDao();
+        cDao = mDb.courseDao();
         Log.i(TAG, "createDb");
     }
 
@@ -40,20 +44,42 @@ public class DatabaseTest {
         Log.i(TAG, "closeDb");
     }
 
+    //Test to verify creation and retrieval of terms
     @Test
     public void createAndRetrieveTerms(){
-        mDao.insertAll(SampleData.getTermsData());
-        int count = mDao.getCount();
-        Log.i(TAG, "createAndRetrieveNotes: count=" + count);
-        assertEquals(SampleData.getTermsData().size(), count);
+        tDao.insertAll(SampleData.getTermsData());
+        int termCount = tDao.getCount();
+
+        Log.i(TAG, "createAndRetrieveNotes: count=" + termCount);
+        assertEquals(SampleData.getTermsData().size(), termCount);
     }
 
+    //Test to verify creation and retrieval of courses
+    @Test
+    public void createAndRetrieveCourses(){
+        cDao.insertAll(SampleData.getCoursesData());
+        int courseCount = cDao.getCount();
 
+        Log.i(TAG, "createAndRetrieveNotes: count=" + courseCount);
+        assertEquals(SampleData.getCoursesData().size(), courseCount);
+    }
+
+    //Test to compare term strings
     @Test
     public void compareTermStrings(){
-        mDao.insertAll(SampleData.getTermsData());
+        tDao.insertAll(SampleData.getTermsData());
         TermEntity original = SampleData.getTermsData().get(0);
-        TermEntity fromDb = mDao.getTermById(1);
+        TermEntity fromDb = tDao.getTermById(1);
+        assertEquals(original.getText(), fromDb.getText());
+        assertEquals(1, fromDb.getId());
+    }
+
+    //Test to compare course strings
+    @Test
+    public void compareCourseStrings(){
+        cDao.insertAll(SampleData.getCoursesData());
+        CourseEntity original = SampleData.getCoursesData().get(0);
+        CourseEntity fromDb = cDao.getCourseById(1);
         assertEquals(original.getText(), fromDb.getText());
         assertEquals(1, fromDb.getId());
     }

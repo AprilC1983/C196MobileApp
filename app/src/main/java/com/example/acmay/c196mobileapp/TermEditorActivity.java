@@ -25,17 +25,32 @@ import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 public class TermEditorActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.term_text)
+    @BindView(R.id.display_text)
     TextView mTextView;
 
+    //Saves the term information and continues to the new course screen
     @OnClick(R.id.term_continue_btn)
     void continueClickHandler(){
+        saveAndReturn();
         Intent intent = new Intent(this, CourseEditorActivity.class);
         startActivity(intent);
+
+    }
+
+    //Exits the create term screen without saving
+    @OnClick(R.id.term_cancel_btn)
+    void cancelClickHandler(){
+        finish();
+    }
+
+    //Saves term data without continuing to the course creation screen
+    @OnClick(R.id.term_save_btn)
+    void saveClickHandler(){
+        saveAndReturn();
     }
 
     private TermEditorViewModel mViewModel;
-    private boolean mNewNote, mEditing;
+    private boolean mNewTerm, mEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +86,7 @@ public class TermEditorActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if(extras == null){
             setTitle(R.string.new_term);
-            mNewNote = true;
+            mNewTerm = true;
         } else {
             setTitle(R.string.edit_term);
             int termId = extras.getInt(TERM_ID_KEY);
@@ -82,7 +97,7 @@ public class TermEditorActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(!mNewNote){
+        if(!mNewTerm){
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_editor, menu);
         }

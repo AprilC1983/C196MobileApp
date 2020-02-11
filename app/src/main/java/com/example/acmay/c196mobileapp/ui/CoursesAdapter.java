@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.content.ContentValues.TAG;
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHolder> {
@@ -36,7 +38,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.course_list_item, parent, false);
+        View view = inflater.inflate(R.layout.list_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -45,22 +47,25 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
         final CourseEntity course = mCourses.get(position);
         holder.mTextView.setText(course.getText());
 
-        holder.cFab.setOnClickListener(new View.OnClickListener() {
+        holder.eFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(mContext, CourseEditorActivity.class);
                 intent.putExtra(COURSE_ID_KEY, course.getId());
                 mContext.startActivity(intent);
+                Log.i(TAG, "onClick: Open course editor");
             }
         });
 
         //This click listener will take user to the display of the assessments
-        holder.tFab.setOnClickListener(new View.OnClickListener() {
+        holder.cFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, AssessmentDisplayActivity.class);
                 intent.putExtra(COURSE_ID_KEY, course.getId());
                 mContext.startActivity(intent);
+                Log.i(TAG, "onClick: Open assessment display");
             }
         });
 
@@ -73,12 +78,12 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.course_text)
+        @BindView(R.id.display_text)
         TextView mTextView;
-        @BindView(R.id.fab)
+        @BindView(R.id.edit_fab)
+        FloatingActionButton eFab;
+        @BindView(R.id.continue_fab)
         FloatingActionButton cFab;
-        @BindView(R.id.course_fab)
-        FloatingActionButton tFab;
 
         public ViewHolder(View itemView) {
             super(itemView);

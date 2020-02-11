@@ -30,11 +30,20 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     @BindView(R.id.assessment_text)
     TextView assessmentTextView;
 
+    //Saves assessment data and returns to the main screen
     @OnClick(R.id.assessment_save)
     void continueClickHandler(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, MainActivity.class);
+        //startActivity(intent);
+        saveAndReturn();
     }
+
+    //exits assessment screen without saving assessment data
+    @OnClick(R.id.assessment_cancel)
+    void cancelClickHandler(){
+        finish();
+    }
+
 
     private AssessmentEditorViewModel mViewModel;
     private boolean mNewNote, mEditing;
@@ -101,7 +110,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             saveAndReturn();
             return true;
         } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteTerm();
+            mViewModel.deleteAssessment();
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -113,7 +122,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTerm(assessmentTextView.getText().toString());
+        mViewModel.saveAssessment(assessmentTextView.getText().toString());
         finish();
     }
 

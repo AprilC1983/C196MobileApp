@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.viewmodel.CourseEditorViewModel;
 
 import butterknife.BindView;
@@ -30,11 +31,24 @@ public class CourseEditorActivity extends AppCompatActivity {
     @BindView(R.id.course_text)
     TextView courseTextView;
 
-    //Needs to be AssessmentEditorActivity, but crashes
+    //saves entered course data and continues to the assessment editor screen
     @OnClick(R.id.course_continue_btn)
     void continueClickHandler(){
+        saveAndReturn();
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
         startActivity(intent);
+    }
+
+    //exits course screen without saving data
+    @OnClick(R.id.course_cancel_btn)
+    void cancelClickHandler(){
+        finish();
+    }
+
+    //Saves course data without continuing to the assessment editor
+    @OnClick(R.id.course_save_btn)
+    void saveClickHandler(){
+        saveAndReturn();
     }
 
 
@@ -65,18 +79,16 @@ public class CourseEditorActivity extends AppCompatActivity {
                 .get(CourseEditorViewModel.class);
 
         //NEED TO SET UP COURSEENTITY
-/*
-        mViewModel.mLiveTerm.observe(this, new Observer<TermEntity>() {
+
+        mViewModel.mLiveCourse.observe(this, new Observer<CourseEntity>() {
             @Override
-            public void onChanged(@Nullable TermEntity termEntity) {
-                if(termEntity != null && !mEditing) {
-                    courseTextView.setText(termEntity.getText());
+            public void onChanged(@Nullable CourseEntity courseEntity) {
+                if(courseEntity != null && !mEditing) {
+                    courseTextView.setText(courseEntity.getText());
                 }
             }
         });
 
-
- */
         Bundle extras = getIntent().getExtras();
         if(extras == null){
             setTitle(R.string.new_course);
@@ -87,8 +99,8 @@ public class CourseEditorActivity extends AppCompatActivity {
             mViewModel.loadData(courseId);
         }
     }
-
 /*
+//Do I need this method?
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if(!mNewNote){
@@ -106,21 +118,23 @@ public class CourseEditorActivity extends AppCompatActivity {
             saveAndReturn();
             return true;
         } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteTerm();
+            mViewModel.deleteCourse();
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
-
+//Do I need this^^^ method?
 
  */
+
+
     @Override
     public void onBackPressed() {
         saveAndReturn();
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTerm(courseTextView.getText().toString());
+        mViewModel.saveCourse(courseTextView.getText().toString());
         finish();
     }
 

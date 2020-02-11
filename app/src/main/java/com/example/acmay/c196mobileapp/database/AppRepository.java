@@ -13,6 +13,9 @@ public class AppRepository {
     private static AppRepository ourInstance;
 
     public LiveData<List<TermEntity>> mTerms;
+    public LiveData<List<CourseEntity>> mCourses;
+    public LiveData<List<AssessmentEntity>> mAssessments;
+
     private AppDatabase mDb;
     private Executor executer = Executors.newSingleThreadExecutor();
 
@@ -26,7 +29,10 @@ public class AppRepository {
     private AppRepository(Context context) {
 
         mDb = AppDatabase.getInstance(context);
+
         mTerms = getAllTerms();
+        mCourses = getAllCourses();
+        mAssessments = getAllAssessments();
     }
 
     public void addSampleData() {
@@ -34,10 +40,14 @@ public class AppRepository {
             @Override
             public void run() {
                 mDb.termDao().insertAll(SampleData.getTermsData());
+                mDb.courseDao().insertAll(SampleData.getCoursesData());
+                mDb.assessmentDao().insertAll(SampleData.getAssessmentsData());
             }
         });
     }
 
+
+    //Term-specific methods
     private LiveData<List<TermEntity>> getAllTerms(){
         return mDb.termDao().getAll();
     }
@@ -69,6 +79,78 @@ public class AppRepository {
             @Override
             public void run() {
                 mDb.termDao().deleteTerm(term);
+            }
+        });
+    }
+
+    //Course-specific methods
+    private LiveData<List<CourseEntity>> getAllCourses(){
+        return mDb.courseDao().getAll();
+    }
+
+    public void deleteAllCourses() {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.courseDao().deleteAll();
+            }
+        });
+    }
+
+    public CourseEntity getCourseById(int courseId) {
+        return mDb.courseDao().getCourseById(courseId);
+    }
+
+    public void insertCourse(final CourseEntity course) {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.courseDao().insertCourse(course);
+            }
+        });
+    }
+
+    public void deleteCourse(final CourseEntity course) {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.courseDao().deleteCourse(course);
+            }
+        });
+    }
+
+    //Assessment-specific methods
+    private LiveData<List<AssessmentEntity>> getAllAssessments(){
+        return mDb.assessmentDao().getAll();
+    }
+
+    public void deleteAllAssessments() {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.assessmentDao().deleteAll();
+            }
+        });
+    }
+
+    public AssessmentEntity getAssessmentById(int assessmentId) {
+        return mDb.assessmentDao().getAssessmentById(assessmentId);
+    }
+
+    public void insertAssessment(final AssessmentEntity assessment) {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.assessmentDao().insertAssessment(assessment);
+            }
+        });
+    }
+
+    public void deleteAssessment(final AssessmentEntity assessment) {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.assessmentDao().deleteAssessment(assessment);
             }
         });
     }

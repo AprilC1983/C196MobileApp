@@ -11,8 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.example.acmay.c196mobileapp.database.TermEntity;
-import com.example.acmay.c196mobileapp.ui.TermsAdapter;
+import com.example.acmay.c196mobileapp.database.AssessmentEntity;
+import com.example.acmay.c196mobileapp.ui.AssessmentsAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -27,16 +27,16 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    @OnClick(R.id.fab)
+    @OnClick(R.id.edit_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
         startActivity(intent);
     }
 
-    private List<TermEntity> termsData = new ArrayList<>();
+    private List<AssessmentEntity> assessmentsData = new ArrayList<>();
     //private List<CourseEntity> coursesData = new ArrayList<>();
     //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
-    private TermsAdapter mAdapter;
+    private AssessmentsAdapter mAdapter;
     //private CoursesAdapter cAdapter;
     private MainViewModel mViewModel;
 
@@ -55,14 +55,14 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
 
     private void initViewModel() {
 
-        final Observer<List<TermEntity>> termsObserver = new Observer<List<TermEntity>>() {
+        final Observer<List<AssessmentEntity>> assessmentsObserver = new Observer<List<AssessmentEntity>>() {
             @Override
-            public void onChanged(@Nullable List<TermEntity> termEntities) {
-                termsData.clear();
-                termsData.addAll(termEntities);
+            public void onChanged(@Nullable List<AssessmentEntity> assessmentEntities) {
+                assessmentsData.clear();
+                assessmentsData.addAll(assessmentEntities);
 
                 if(mAdapter == null){
-                    mAdapter = new TermsAdapter(termsData, AssessmentDisplayActivity.this);
+                    mAdapter = new AssessmentsAdapter(assessmentsData, AssessmentDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
@@ -73,7 +73,7 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
-        mViewModel.mTerms.observe(this, termsObserver);
+        mViewModel.mAssessments.observe(this, assessmentsObserver);
     }
 
 
