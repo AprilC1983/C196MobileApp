@@ -126,10 +126,6 @@ public class TermEditorActivity extends AppCompatActivity {
         finish();
     }
 
-    private void save(){
-        mViewModel.saveTerm(mTextView.getText().toString());
-    }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(EDITING_KEY, true);

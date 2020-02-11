@@ -30,11 +30,20 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     @BindView(R.id.assessment_text)
     TextView assessmentTextView;
 
+    //Saves assessment data and returns to the main screen
     @OnClick(R.id.assessment_save)
     void continueClickHandler(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, MainActivity.class);
+        //startActivity(intent);
+        saveAndReturn();
     }
+
+    //exits assessment screen without saving assessment data
+    @OnClick(R.id.assessment_cancel)
+    void cancelClickHandler(){
+        finish();
+    }
+
 
     private AssessmentEditorViewModel mViewModel;
     private boolean mNewNote, mEditing;

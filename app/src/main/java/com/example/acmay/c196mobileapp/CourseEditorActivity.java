@@ -31,11 +31,24 @@ public class CourseEditorActivity extends AppCompatActivity {
     @BindView(R.id.course_text)
     TextView courseTextView;
 
-    //Needs to be AssessmentEditorActivity, but crashes
+    //saves entered course data and continues to the assessment editor screen
     @OnClick(R.id.course_continue_btn)
     void continueClickHandler(){
+        saveAndReturn();
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
         startActivity(intent);
+    }
+
+    //exits course screen without saving data
+    @OnClick(R.id.course_cancel_btn)
+    void cancelClickHandler(){
+        finish();
+    }
+
+    //Saves course data without continuing to the assessment editor
+    @OnClick(R.id.course_save_btn)
+    void saveClickHandler(){
+        saveAndReturn();
     }
 
 
@@ -86,7 +99,7 @@ public class CourseEditorActivity extends AppCompatActivity {
             mViewModel.loadData(courseId);
         }
     }
-
+/*
 //Do I need this method?
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,6 +124,8 @@ public class CourseEditorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 //Do I need this^^^ method?
+
+ */
 
 
     @Override
