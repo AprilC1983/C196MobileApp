@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.content.ContentValues.TAG;
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHolder> {
@@ -51,6 +53,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
                 Intent intent = new Intent(mContext, CourseEditorActivity.class);
                 intent.putExtra(COURSE_ID_KEY, course.getId());
                 mContext.startActivity(intent);
+                Log.i(TAG, "onClick: Open course editor");
             }
         });
 
@@ -61,6 +64,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
                 Intent intent = new Intent(mContext, AssessmentDisplayActivity.class);
                 intent.putExtra(COURSE_ID_KEY, course.getId());
                 mContext.startActivity(intent);
+                Log.i(TAG, "onClick: Open assessment display");
             }
         });
 

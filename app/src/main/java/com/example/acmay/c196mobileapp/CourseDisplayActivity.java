@@ -10,6 +10,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.example.acmay.c196mobileapp.database.AssessmentEntity;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
@@ -29,10 +30,13 @@ public class CourseDisplayActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
+    public static final String TAG = "Course Display";
+
     @OnClick(R.id.fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, CourseEditorActivity.class);
         startActivity(intent);
+        Log.i(TAG, "fabClickHandler: create course");
     }
 
 

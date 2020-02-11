@@ -15,6 +15,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.acmay.c196mobileapp.database.CourseEntity;
+import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.viewmodel.CourseEditorViewModel;
 
 import butterknife.BindView;
@@ -65,18 +67,16 @@ public class CourseEditorActivity extends AppCompatActivity {
                 .get(CourseEditorViewModel.class);
 
         //NEED TO SET UP COURSEENTITY
-/*
-        mViewModel.mLiveTerm.observe(this, new Observer<TermEntity>() {
+
+        mViewModel.mLiveCourse.observe(this, new Observer<CourseEntity>() {
             @Override
-            public void onChanged(@Nullable TermEntity termEntity) {
-                if(termEntity != null && !mEditing) {
-                    courseTextView.setText(termEntity.getText());
+            public void onChanged(@Nullable CourseEntity courseEntity) {
+                if(courseEntity != null && !mEditing) {
+                    courseTextView.setText(courseEntity.getText());
                 }
             }
         });
 
-
- */
         Bundle extras = getIntent().getExtras();
         if(extras == null){
             setTitle(R.string.new_course);
@@ -120,7 +120,7 @@ public class CourseEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTerm(courseTextView.getText().toString());
+        mViewModel.saveCourse(courseTextView.getText().toString());
         finish();
     }
 

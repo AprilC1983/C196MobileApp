@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.example.acmay.c196mobileapp.database.AppRepository;
+import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.database.TermEntity;
 
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.concurrent.Executors;
 
 public class CourseEditorViewModel extends AndroidViewModel {
 
-    public MutableLiveData<TermEntity> mLiveTerm =
+    public MutableLiveData<CourseEntity> mLiveCourse =
             new MutableLiveData<>();
     private AppRepository mRepository;
     private Executor executor = Executors.newSingleThreadExecutor();
@@ -25,32 +26,32 @@ public class CourseEditorViewModel extends AndroidViewModel {
         mRepository = AppRepository.getInstance(getApplication());
     }
 
-    public void loadData(final int termId) {
+    public void loadData(final int courseId) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                TermEntity term = mRepository.getTermById(termId);
-                mLiveTerm.postValue(term);
+                CourseEntity course = mRepository.getCourseById(courseId);
+                mLiveCourse.postValue(course);
             }
         });
     }
 
-    public void saveTerm(String termText) {
-        TermEntity term = mLiveTerm.getValue();
+    public void saveCourse(String CourseText) {
+        CourseEntity course = mLiveCourse.getValue();
 
-        if(term == null){
-            if(TextUtils.isEmpty(termText.trim())){
+        if(course == null){
+            if(TextUtils.isEmpty(courseText.trim())){
                 return;
             }
-            term = new TermEntity(new Date(), termText.trim());
+            course = new CourseEntity(new Date(), courseText.trim());
         } else{
-            term.setText(termText.trim());
+            course.setText(courseText.trim());
         }
-        mRepository.insertTerm(term);
+        mRepository.insertCourse(course);
     }
 
-    public void deleteTerm() {
-        mRepository.deleteTerm(mLiveTerm.getValue());
+    public void deleteCourse() {
+        mRepository.deleteCourse(mLiveCourse.getValue());
     }
 
 }

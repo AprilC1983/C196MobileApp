@@ -31,7 +31,7 @@ public class SampleData {
         return terms;
     }
 
-    public static List<CourseEntity> getCourses(){
+    public static List<CourseEntity> getCoursesData(){
         List<CourseEntity> courses = new ArrayList<>();
         courses.add(new CourseEntity(getDate(0), SAMPLE_TEXT_1));
         courses.add(new CourseEntity(getDate(-1), SAMPLE_TEXT_2));
