@@ -30,4 +30,7 @@
     <string name="email">Email</string>
     <string name="new_mentor">Add Mentor</string>
     <string name="mentor">Course Mentor</string>
+    <string name="exit">Exit</string>
+    <string name="view_courses">View Courses</string>
+    <string name="selected_term">Selected Term</string>
 </resources>
