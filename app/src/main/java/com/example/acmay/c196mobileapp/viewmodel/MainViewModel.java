@@ -30,7 +30,10 @@ public class MainViewModel extends AndroidViewModel {
         mRepository.addSampleData();
     }
 
+
     public void deleteAllTerms() {
         mRepository.deleteAllTerms();
     }
+
+
 }
