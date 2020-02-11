@@ -48,7 +48,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         setContentView(R.layout.assessment_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
@@ -77,10 +77,10 @@ public class AssessmentDetailActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras == null){
-            setTitle(R.string.assessment_name);
+            setTitle(R.string.assessment);
             mNewAssessmentDetail = true;
         } else {
-            setTitle(R.string.assessment_name);
+            setTitle(R.string.assessment);
             int assessmentDetailId = extras.getInt(ASSESSMENT_DETAIL_ID_KEY);
             mViewModel.loadData(assessmentDetailId);
         }

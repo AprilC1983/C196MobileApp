@@ -48,7 +48,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         setContentView(R.layout.course_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
@@ -68,9 +68,9 @@ public class CourseDetailActivity extends AppCompatActivity {
 
         mViewModel.mLiveCourse.observe(this, new Observer<CourseEntity>() {
             @Override
-            public void onChanged(@Nullable CourseEntity courseDetailEntity) {
-                if(courseDetailEntity != null && !mEditing) {
-                    courseDetailTextView.setText(courseDetailEntity.getText());
+            public void onChanged(@Nullable CourseEntity courseEntity) {
+                if(courseEntity != null && !mEditing) {
+                    courseDetailTextView.setText(courseEntity.getText());
                 }
             }
         });

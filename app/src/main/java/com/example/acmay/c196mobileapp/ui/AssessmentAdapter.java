@@ -37,7 +37,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.list_item, parent, false);
+        View view = inflater.inflate(R.layout.list_item_1, parent, false);
         return new ViewHolder(view);
     }
 
@@ -73,9 +73,9 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.display_text)
+        @BindView(R.id.display_text_1)
         TextView mTextView;
-        @BindView(R.id.edit_fab)
+        @BindView(R.id.edit_fab_1)
         FloatingActionButton eFab;
 
         public ViewHolder(View itemView) {
