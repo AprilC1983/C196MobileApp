@@ -39,6 +39,13 @@ public class CourseDetailActivity extends AppCompatActivity {
         finish();
     }
 
+    @OnClick(R.id.view_notes_btn)
+    void viewClickHandler(){
+        Intent intent = new Intent(this, NoteDisplayActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private CourseDetailViewModel mViewModel;
     private boolean mNewCourseDetail, mEditing;
 

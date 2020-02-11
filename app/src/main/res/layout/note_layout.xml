@@ -13,7 +13,7 @@
         android:layout_margin="@dimen/text_margin"
         android:layout_marginBottom="4dp"
         android:autofillHints=""
-        android:hint="@string/enternote"
+        android:hint="@string/enter_note"
         android:inputType="text|textCapSentences"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
