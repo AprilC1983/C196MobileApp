@@ -16,7 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.CourseEntity;
-import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.viewmodel.CourseEditorViewModel;
 
 import butterknife.BindView;
@@ -88,7 +87,7 @@ public class CourseEditorActivity extends AppCompatActivity {
         }
     }
 
-/*
+//Do I need this method?
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if(!mNewNote){
@@ -106,14 +105,14 @@ public class CourseEditorActivity extends AppCompatActivity {
             saveAndReturn();
             return true;
         } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteTerm();
+            mViewModel.deleteCourse();
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
+//Do I need this^^^ method?
 
 
- */
     @Override
     public void onBackPressed() {
         saveAndReturn();

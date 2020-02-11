@@ -8,7 +8,6 @@ import android.text.TextUtils;
 
 import com.example.acmay.c196mobileapp.database.AppRepository;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
-import com.example.acmay.c196mobileapp.database.TermEntity;
 
 import java.util.Date;
 import java.util.concurrent.Executor;
@@ -36,7 +35,7 @@ public class CourseEditorViewModel extends AndroidViewModel {
         });
     }
 
-    public void saveCourse(String CourseText) {
+    public void saveCourse(String courseText) {
         CourseEntity course = mLiveCourse.getValue();
 
         if(course == null){

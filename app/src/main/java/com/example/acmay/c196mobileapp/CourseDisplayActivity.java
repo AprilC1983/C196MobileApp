@@ -14,8 +14,7 @@ import android.util.Log;
 
 import com.example.acmay.c196mobileapp.database.AssessmentEntity;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
-import com.example.acmay.c196mobileapp.database.TermEntity;
-import com.example.acmay.c196mobileapp.ui.TermsAdapter;
+import com.example.acmay.c196mobileapp.ui.CoursesAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -42,10 +41,10 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
 
 
-    private List<TermEntity> termsData = new ArrayList<>();
+    private List<CourseEntity> coursesData = new ArrayList<>();
     //private List<CourseEntity> coursesData = new ArrayList<>();
     //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
-    private TermsAdapter mAdapter;
+    private CoursesAdapter mAdapter;
     //private CoursesAdapter cAdapter;
     private MainViewModel mViewModel;
 
@@ -64,14 +63,14 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
     private void initViewModel() {
 
-        final Observer<List<TermEntity>> termsObserver = new Observer<List<TermEntity>>() {
+        final Observer<List<CourseEntity>> coursesObserver = new Observer<List<CourseEntity>>() {
             @Override
-            public void onChanged(@Nullable List<TermEntity> termEntities) {
-                termsData.clear();
-                termsData.addAll(termEntities);
+            public void onChanged(@Nullable List<CourseEntity> courseEntities) {
+                coursesData.clear();
+                coursesData.addAll(courseEntities);
 
                 if(mAdapter == null){
-                    mAdapter = new TermsAdapter(termsData, CourseDisplayActivity.this);
+                    mAdapter = new CoursesAdapter(coursesData, CourseDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
@@ -82,7 +81,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
-        mViewModel.mTerms.observe(this, termsObserver);
+        mViewModel.mCourses.observe(this, coursesObserver);
     }
 
 
