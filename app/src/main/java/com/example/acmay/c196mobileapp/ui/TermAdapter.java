@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.CourseDisplayActivity;
+import com.example.acmay.c196mobileapp.MentorDisplayActivity;
 import com.example.acmay.c196mobileapp.TermEditorActivity;
 import com.example.acmay.c196mobileapp.R;
 import com.example.acmay.c196mobileapp.database.TermEntity;
@@ -63,7 +64,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
                 Intent intent = new Intent(mContext, CourseDisplayActivity.class);
                 intent.putExtra(TERM_ID_KEY, term.getId());
                 mContext.startActivity(intent);
-                Log.i(TAG, "onClick: open courses display");
+                Log.i(TAG, "onClick: open mentors display");
             }
         });
     }

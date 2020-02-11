@@ -29,7 +29,7 @@ public class CourseEditorActivity extends AppCompatActivity {
     @OnClick(R.id.course_continue_btn)
     void continueClickHandler(){
         saveAndReturn();
-        Intent intent = new Intent(this, AssessmentEditorActivity.class);
+        Intent intent = new Intent(this, MentorEditorActivity.class);
         startActivity(intent);
     }
 

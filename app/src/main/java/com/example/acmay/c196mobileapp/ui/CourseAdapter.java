@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.AssessmentDisplayActivity;
 import com.example.acmay.c196mobileapp.CourseEditorActivity;
+import com.example.acmay.c196mobileapp.MentorDisplayActivity;
 import com.example.acmay.c196mobileapp.R;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
 
@@ -62,7 +63,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         holder.cFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, AssessmentDisplayActivity.class);
+                Intent intent = new Intent(mContext, MentorDisplayActivity.class);
                 intent.putExtra(COURSE_ID_KEY, course.getId());
                 mContext.startActivity(intent);
                 Log.i(TAG, "onClick: Open assessment display");

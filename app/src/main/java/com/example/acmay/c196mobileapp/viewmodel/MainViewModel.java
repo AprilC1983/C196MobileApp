@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import com.example.acmay.c196mobileapp.database.AppRepository;
 import com.example.acmay.c196mobileapp.database.AssessmentEntity;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
+import com.example.acmay.c196mobileapp.database.MentorEntity;
 import com.example.acmay.c196mobileapp.database.TermEntity;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class MainViewModel extends AndroidViewModel {
     public LiveData<List<TermEntity>> mTerms;
     public LiveData<List<CourseEntity>> mCourses;
     public LiveData<List<AssessmentEntity>> mAssessments;
+    public LiveData<List<MentorEntity>> mMentors;
     private AppRepository mRepository;
 
     public MainViewModel(@NonNull Application application) {
@@ -26,6 +28,7 @@ public class MainViewModel extends AndroidViewModel {
         mTerms = mRepository.mTerms;
         mCourses = mRepository.mCourses;
         mAssessments = mRepository.mAssessments;
+        mMentors = mRepository.mMentors;
     }
 
     public void addSampleData() {

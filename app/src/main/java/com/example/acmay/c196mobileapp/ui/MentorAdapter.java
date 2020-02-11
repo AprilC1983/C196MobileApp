@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.acmay.c196mobileapp.AssessmentDisplayActivity;
 import com.example.acmay.c196mobileapp.CourseDisplayActivity;
 import com.example.acmay.c196mobileapp.MentorEditorActivity;
 import com.example.acmay.c196mobileapp.R;
@@ -60,7 +61,7 @@ public class MentorAdapter extends RecyclerView.Adapter<MentorAdapter.ViewHolder
         holder.cFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, CourseDisplayActivity.class);
+                Intent intent = new Intent(mContext, AssessmentDisplayActivity.class);
                 intent.putExtra(MENTOR_ID_KEY, mentor.getId());
                 mContext.startActivity(intent);
                 Log.i(TAG, "onClick: open courses display");

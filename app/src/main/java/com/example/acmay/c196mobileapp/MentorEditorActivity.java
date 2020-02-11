@@ -25,14 +25,14 @@ import static com.example.acmay.c196mobileapp.utilities.Constants.MENTOR_ID_KEY;
 public class MentorEditorActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.display_text)
+    @BindView(R.id.mentor_text)
     TextView mTextView;
 
     //Saves the Mentor information and continues to the new course screen
     @OnClick(R.id.mentor_continue_btn)
     void continueClickHandler(){
         saveAndReturn();
-        Intent intent = new Intent(this, CourseEditorActivity.class);
+        Intent intent = new Intent(this, AssessmentEditorActivity.class);
         startActivity(intent);
 
     }
@@ -55,7 +55,7 @@ public class MentorEditorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editor);
+        setContentView(R.layout.mentor_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
