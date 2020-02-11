@@ -39,7 +39,7 @@ public class SampleData {
         return courses;
     }
 
-    public static List<AssessmentEntity> getAssessments(){
+    public static List<AssessmentEntity> getAssessmentsData(){
         List<AssessmentEntity> assessments = new ArrayList<>();
         assessments.add(new AssessmentEntity(getDate(0), SAMPLE_TEXT_1));
         assessments.add(new AssessmentEntity(getDate(-1), SAMPLE_TEXT_2));

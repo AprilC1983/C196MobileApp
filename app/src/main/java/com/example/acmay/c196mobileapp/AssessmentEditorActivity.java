@@ -101,7 +101,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             saveAndReturn();
             return true;
         } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteTerm();
+            mViewModel.deleteAssessment();
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -113,7 +113,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTerm(assessmentTextView.getText().toString());
+        mViewModel.saveAssessment(assessmentTextView.getText().toString());
         finish();
     }
 

@@ -14,6 +14,8 @@ public class AppRepository {
 
     public LiveData<List<TermEntity>> mTerms;
     public LiveData<List<CourseEntity>> mCourses;
+    public LiveData<List<AssessmentEntity>> mAssessments;
+
     private AppDatabase mDb;
     private Executor executer = Executors.newSingleThreadExecutor();
 
@@ -27,8 +29,10 @@ public class AppRepository {
     private AppRepository(Context context) {
 
         mDb = AppDatabase.getInstance(context);
+
         mTerms = getAllTerms();
         mCourses = getAllCourses();
+        mAssessments = getAllAssessments();
     }
 
     public void addSampleData() {
@@ -37,6 +41,7 @@ public class AppRepository {
             public void run() {
                 mDb.termDao().insertAll(SampleData.getTermsData());
                 mDb.courseDao().insertAll(SampleData.getCoursesData());
+                mDb.assessmentDao().insertAll(SampleData.getAssessmentsData());
             }
         });
     }
@@ -110,6 +115,42 @@ public class AppRepository {
             @Override
             public void run() {
                 mDb.courseDao().deleteCourse(course);
+            }
+        });
+    }
+
+    //Assessment-specific methods
+    private LiveData<List<AssessmentEntity>> getAllAssessments(){
+        return mDb.assessmentDao().getAll();
+    }
+
+    public void deleteAllAssessments() {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.assessmentDao().deleteAll();
+            }
+        });
+    }
+
+    public AssessmentEntity getAssessmentById(int assessmentId) {
+        return mDb.assessmentDao().getAssessmentById(assessmentId);
+    }
+
+    public void insertAssessment(final AssessmentEntity assessment) {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.assessmentDao().insertAssessment(assessment);
+            }
+        });
+    }
+
+    public void deleteAssessment(final AssessmentEntity assessment) {
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.assessmentDao().deleteAssessment(assessment);
             }
         });
     }

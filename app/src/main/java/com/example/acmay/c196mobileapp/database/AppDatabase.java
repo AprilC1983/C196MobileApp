@@ -10,13 +10,13 @@ import android.content.Context;
 
 import static android.arch.persistence.room.Room.databaseBuilder;
 
-@Database(entities = {TermEntity.class, CourseEntity.class}, version = 2)
+@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class}, version = 3)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
-    static final Migration MIGRATION_1_2 = new Migration(1, 2){
+    static final Migration MIGRATION_2_3 = new Migration(2, 3){
         @Override
         public void migrate(SupportSQLiteDatabase database){
-            database.execSQL("CREATE TABLE courses(id INTEGER NOT NULL, text TEXT, date INTEGER, PRIMARY KEY (id))");
+            database.execSQL("CREATE TABLE assessments(id INTEGER NOT NULL, text TEXT, date INTEGER, PRIMARY KEY (id))");
         }
     };
 
@@ -26,6 +26,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TermDao termDao();
     public abstract CourseDao courseDao();
+    public abstract AssessmentDao assessmentDao();
 
     public static AppDatabase getInstance(Context context) {
 
@@ -33,7 +34,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (LOCK){
                 if(instance == null){
                     instance = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, DATABASE_NAME).addMigrations(MIGRATION_1_2).build();
+                            AppDatabase.class, DATABASE_NAME).addMigrations(MIGRATION_2_3).build();
                 }
             }
         }

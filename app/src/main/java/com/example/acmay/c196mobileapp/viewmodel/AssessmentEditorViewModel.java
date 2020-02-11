@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.example.acmay.c196mobileapp.database.AppRepository;
+import com.example.acmay.c196mobileapp.database.AssessmentEntity;
 import com.example.acmay.c196mobileapp.database.TermEntity;
 
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.concurrent.Executors;
 
 public class AssessmentEditorViewModel extends AndroidViewModel {
 
-    public MutableLiveData<TermEntity> mLiveTerm =
+    public MutableLiveData<AssessmentEntity> mLiveAssessment =
             new MutableLiveData<>();
     private AppRepository mRepository;
     private Executor executor = Executors.newSingleThreadExecutor();
@@ -25,32 +26,32 @@ public class AssessmentEditorViewModel extends AndroidViewModel {
         mRepository = AppRepository.getInstance(getApplication());
     }
 
-    public void loadData(final int termId) {
+    public void loadData(final int assessmentId) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                TermEntity term = mRepository.getTermById(termId);
-                mLiveTerm.postValue(term);
+                AssessmentEntity assessment = mRepository.getAssessmentById(assessmentId);
+                mLiveAssessment.postValue(assessment);
             }
         });
     }
 
-    public void saveTerm(String termText) {
-        TermEntity term = mLiveTerm.getValue();
+    public void saveAssessment(String assessmentText) {
+        AssessmentEntity assessment = mLiveAssessment.getValue();
 
-        if(term == null){
-            if(TextUtils.isEmpty(termText.trim())){
+        if(assessment == null){
+            if(TextUtils.isEmpty(assessmentText.trim())){
                 return;
             }
-            term = new TermEntity(new Date(), termText.trim());
+            assessment = new AssessmentEntity(new Date(), assessmentText.trim());
         } else{
-            term.setText(termText.trim());
+            assessment.setText(assessmentText.trim());
         }
-        mRepository.insertTerm(term);
+        mRepository.insertAssessment(assessment);
     }
 
-    public void deleteTerm() {
-        mRepository.deleteTerm(mLiveTerm.getValue());
+    public void deleteAssessment() {
+        mRepository.deleteAssessment(mLiveAssessment.getValue());
     }
 
 }
