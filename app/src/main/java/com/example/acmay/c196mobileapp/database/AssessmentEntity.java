@@ -14,15 +14,16 @@ public class AssessmentEntity {
     private int assessmentID;
     private int courseID;
     private Date createDate;
+    private String dueDate;
     private String title;
     private String type;
 
-    public AssessmentEntity(int assessmentID, int courseID, Date createDate, String title, String type) {
-        this.assessmentID = assessmentID;
+    public AssessmentEntity(int courseID, Date createDate, String dueDate, String title, String type) {
         this.courseID = courseID;
         this.createDate = createDate;
         this.title = title;
         this.type = type;
+        this.dueDate = dueDate;
     }
 
     @Ignore
@@ -104,6 +105,14 @@ public class AssessmentEntity {
 
     public void setCourseID(int courseID) {
         this.courseID = courseID;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 
     @Override

@@ -24,6 +24,10 @@ public class AssessmentDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.assessment_title_text)
     TextView assessmentDetailTextView;
+    @BindView(R.id.assessment_due_text)
+    TextView due;
+    @BindView(R.id.assessment_note_text)
+    TextView type;
 
     //Exits Assessment detail screen and returns user to the list of Assessments
     @OnClick(R.id.assessment_detail_exit)
@@ -68,9 +72,11 @@ public class AssessmentDetailActivity extends AppCompatActivity {
 
         mViewModel.mLiveAssessment.observe(this, new Observer<AssessmentEntity>() {
             @Override
-            public void onChanged(@Nullable AssessmentEntity assessmentDetailEntity) {
-                if(assessmentDetailEntity != null && !mEditing) {
-                    assessmentDetailTextView.setText(assessmentDetailEntity.getText());
+            public void onChanged(@Nullable AssessmentEntity assessmentEntity) {
+                if(assessmentEntity != null && !mEditing) {
+                    assessmentDetailTextView.setText(assessmentEntity.getText());
+                    type.setText("Assessment Type: " + assessmentEntity.getType());
+                    due.setText("Due on or before " + assessmentEntity.getDueDate());
                 }
             }
         });

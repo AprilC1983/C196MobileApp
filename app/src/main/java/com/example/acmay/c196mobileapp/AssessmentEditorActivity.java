@@ -7,9 +7,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.viewmodel.AssessmentViewModel;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +28,15 @@ public class AssessmentEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.assessment_text)
     TextView assessmentTextView;
+    @BindView(R.id.objective_rb)
+    RadioButton objective;
+    @BindView(R.id.performance_rb)
+    RadioButton performance;
+    @BindView(R.id.assessment_due_date)
+    TextView dueText;
+
+    public AssessmentEditorActivity() throws ParseException {
+    }
 
     //Saves assessment data and returns to the main screen
     @OnClick(R.id.assessment_save)
@@ -41,6 +55,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
 
     private AssessmentViewModel mViewModel;
     private boolean mNewNote, mEditing;
+    private int course;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +100,8 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             setTitle(R.string.edit_assessment);
             int assessmentId = extras.getInt(ASS_ID_KEY);
             mViewModel.loadData(assessmentId);
+            course = extras.getInt("courseKey");
+            //dueDate = new SimpleDateFormat("MM/dd/yyyy").parse(dueText.toString());
         }
     }
 
@@ -116,7 +133,17 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveAssessment(assessmentTextView.getText().toString());
+        String title = assessmentTextView.getText().toString();
+        String dueDate = dueText.getText().toString();
+        String type = "";
+
+        if(objective.isChecked()){
+            type = "Objective";
+        }else if(performance.isChecked()){
+            type = "Performance";
+        }
+
+        mViewModel.saveAssessment(course, dueDate, title, type);
         finish();
     }
 

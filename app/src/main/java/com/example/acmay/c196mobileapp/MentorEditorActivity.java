@@ -37,6 +37,7 @@ public class MentorEditorActivity extends AppCompatActivity {
     void continueClickHandler(){
         saveAndReturn();
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
+        intent.putExtra("courseKey", course);
         startActivity(intent);
 
     }

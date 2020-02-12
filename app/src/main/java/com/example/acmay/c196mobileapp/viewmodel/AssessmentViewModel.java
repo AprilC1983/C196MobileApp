@@ -36,16 +36,16 @@ public class AssessmentViewModel extends AndroidViewModel {
         });
     }
 
-    public void saveAssessment(String assessmentText) {
+    public void saveAssessment(int course, String dueDate, String title, String type) {
         AssessmentEntity assessment = mLiveAssessment.getValue();
 
         if(assessment == null){
-            if(TextUtils.isEmpty(assessmentText.trim())){
+            if(TextUtils.isEmpty(title.trim())){
                 return;
             }
-            assessment = new AssessmentEntity(new Date(), assessmentText.trim());
+            assessment = new AssessmentEntity(course, new Date(), dueDate, title.trim(), type.trim());
         } else{
-            assessment.setText(assessmentText.trim());
+            assessment.setText(title.trim());
         }
         mRepository.insertAssessment(assessment);
     }
