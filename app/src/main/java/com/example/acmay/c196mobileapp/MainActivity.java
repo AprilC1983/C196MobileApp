@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
-        //this method call
         mViewModel.mTerms.observe(this, termsObserver);
     }
 

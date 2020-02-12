@@ -65,7 +65,7 @@ public class DatabaseTest {
         tDao.insertAll(SampleData.getTermsData());
         TermEntity original = SampleData.getTermsData().get(0);
         TermEntity fromDb = tDao.getTermById(1);
-        assertEquals(original.getText(), fromDb.getText());
+        assertEquals(original.getTitle(), fromDb.getTitle());
         assertEquals(1, fromDb.getId());
     }
 
@@ -86,7 +86,7 @@ public class DatabaseTest {
         cDao.insertAll(SampleData.getCoursesData());
         CourseEntity original = SampleData.getCoursesData().get(0);
         CourseEntity fromDb = cDao.getCourseById(1);
-        assertEquals(original.getText(), fromDb.getText());
+        assertEquals(original.getTitle(), fromDb.getTitle());
         assertEquals(1, fromDb.getId());
     }
 

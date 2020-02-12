@@ -27,6 +27,10 @@ public class MentorEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.mentor_text)
     TextView mTextView;
+    @BindView(R.id.phone_text)
+    TextView phoneText;
+    @BindView(R.id.email_text)
+    TextView emailText;
 
     //Saves the Mentor information and continues to the new course screen
     @OnClick(R.id.mentor_continue_btn)
@@ -51,6 +55,7 @@ public class MentorEditorActivity extends AppCompatActivity {
 
     private MentorViewModel mViewModel;
     private boolean mNewMentor, mEditing;
+    private int course;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +96,7 @@ public class MentorEditorActivity extends AppCompatActivity {
             setTitle(R.string.edit_mentor);
             int mentorId = extras.getInt(MENTOR_ID_KEY);
             mViewModel.loadData(mentorId);
+            course = extras.getInt("courseKey");
         }
     }
 
@@ -122,7 +128,8 @@ public class MentorEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveMentor(mTextView.getText().toString());
+        mViewModel.saveMentor(course, mTextView.getText().toString(), phoneText.getText().toString(),
+                emailText.getText().toString());
         finish();
     }
 

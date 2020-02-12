@@ -55,7 +55,7 @@ public class TermEditorActivity extends AppCompatActivity {
 
     private TermViewModel mViewModel;
     private boolean mNewTerm, mEditing;
-    public int termID = 1;
+    private int termID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

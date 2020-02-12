@@ -18,12 +18,17 @@ import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.MENTOR_DETAIL_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.MENTOR_ID_KEY;
 
 public class MentorDetailActivity extends AppCompatActivity {
 
 
     @BindView(R.id.mentor_title_text)
     TextView mentorDetailTextView;
+    @BindView(R.id.mentor_phone)
+    TextView phone;
+    @BindView(R.id.mentor_email)
+    TextView email;
 
     //Exits Mentor detail screen and returns user to the list of courses
     @OnClick(R.id.mentor_detail_exit)
@@ -68,9 +73,11 @@ public class MentorDetailActivity extends AppCompatActivity {
 
         mViewModel.mLiveMentor.observe(this, new Observer<MentorEntity>() {
             @Override
-            public void onChanged(@Nullable MentorEntity mentorDetailEntity) {
-                if(mentorDetailEntity != null && !mEditing) {
-                    mentorDetailTextView.setText(mentorDetailEntity.getName());
+            public void onChanged(@Nullable MentorEntity mentorEntity) {
+                if(mentorEntity != null && !mEditing) {
+                    mentorDetailTextView.setText(mentorEntity.getName());
+                    phone.setText("Phone: " + mentorEntity.getPhone());
+                    email.setText("Email: " + mentorEntity.getEmail());
                 }
             }
         });
@@ -81,7 +88,7 @@ public class MentorDetailActivity extends AppCompatActivity {
             mNewMentorDetail = true;
         } else {
             setTitle(R.string.mentor);
-            int mentorDetailId = extras.getInt(MENTOR_DETAIL_ID_KEY);
+            int mentorDetailId = extras.getInt(MENTOR_ID_KEY);
             mViewModel.loadData(mentorDetailId);
         }
     }

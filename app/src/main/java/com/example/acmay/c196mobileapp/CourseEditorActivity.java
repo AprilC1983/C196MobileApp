@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.viewmodel.CourseViewModel;
 
+import java.sql.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -29,13 +31,12 @@ public class CourseEditorActivity extends AppCompatActivity {
     @BindView(R.id.course_end_text)
     TextView courseEnd;
 
-    int term;
-
     //saves entered course data and continues to the assessment editor screen
     @OnClick(R.id.course_continue_btn)
     void continueClickHandler(){
         saveAndReturn();
         Intent intent = new Intent(this, MentorEditorActivity.class);
+        intent.putExtra("courseKey", courseID);
         startActivity(intent);
     }
 
@@ -53,6 +54,8 @@ public class CourseEditorActivity extends AppCompatActivity {
 
     private CourseViewModel mViewModel;
     private boolean mNewCourse, mEditing;
+    private int courseID;
+    private int term;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,7 @@ public class CourseEditorActivity extends AppCompatActivity {
             public void onChanged(@Nullable CourseEntity courseEntity) {
                 if(courseEntity != null && !mEditing) {
                     courseTextView.setText(courseEntity.getTitle());
+                    courseID = courseEntity.getCourseID();
                 }
             }
         });
@@ -105,8 +109,11 @@ public class CourseEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveCourse(term, courseTextView.getText().toString(),
-                courseStart.getText().toString(), courseEnd.getText().toString());
+        String title = courseTextView.getText().toString();
+        String start = courseStart.getText().toString();
+        String end = courseEnd.getText().toString();
+
+        mViewModel.saveCourse(term, title, start, end);
         finish();
     }
 

@@ -8,10 +8,10 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "courses", foreignKeys = @ForeignKey(entity = TermEntity.class,
-        parentColumns = "termID", childColumns = "termID", onDelete = ForeignKey.CASCADE))
+@Entity(tableName = "courses"/*, foreignKeys = @ForeignKey(entity = TermEntity.class,
+        parentColumns = "termID", childColumns = "termID", onDelete = ForeignKey.CASCADE)*/)
 public class CourseEntity {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     private int courseID;
     private int termID;
     private Date createDate;
@@ -19,6 +19,7 @@ public class CourseEntity {
     private String endDate;
     private String title;
 
+   /*
     public CourseEntity(int courseID, int termID, Date createDate, String title, String startDate, String endDate) {
         this.courseID = courseID;
         this.termID = termID;
@@ -28,8 +29,10 @@ public class CourseEntity {
         this.title = title;
     }
 
-    @Ignore
-    public CourseEntity(int termID, Date createDate, String startDate, String endDate, String title) {
+    */
+
+
+    public CourseEntity(int termID, Date createDate, String title, String startDate, String endDate) {
         this.termID = termID;
         this.createDate = createDate;
         this.startDate = startDate;

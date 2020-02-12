@@ -35,14 +35,14 @@ public class MentorViewModel extends AndroidViewModel {
         });
     }
 
-    public void saveMentor(String mentorText) {
+    public void saveMentor(int course, String mentorText, String phone, String email) {
         MentorEntity mentor = mLiveMentor.getValue();
 
         if(mentor == null){
             if(TextUtils.isEmpty(mentorText.trim())){
                 return;
             }
-            mentor = new MentorEntity(new Date(), mentorText.trim());
+            mentor = new MentorEntity(course, new Date(), mentorText.trim(), phone, email);
         } else{
             mentor.setName(mentorText.trim());
         }
