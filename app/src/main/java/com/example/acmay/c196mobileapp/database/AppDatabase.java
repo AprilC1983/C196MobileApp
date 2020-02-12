@@ -11,7 +11,7 @@ import android.content.Context;
 import static android.arch.persistence.room.Room.databaseBuilder;
 
 @Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class,
-        MentorEntity.class, NoteEntity.class}, version = 6)
+        MentorEntity.class, NoteEntity.class}, version = 7)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     /*
@@ -45,7 +45,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
                      */
                     instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DATABASE_NAME)
-                            .build();
+                            .fallbackToDestructiveMigration().build();
                 }
             }
         }

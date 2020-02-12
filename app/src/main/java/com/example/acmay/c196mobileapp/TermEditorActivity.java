@@ -27,6 +27,10 @@ public class TermEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.display_text)
     TextView mTextView;
+    @BindView(R.id.start_date_text)
+    TextView startText;
+    @BindView(R.id.end_date_text)
+    TextView endText;
 
     //Saves the term information and continues to the new course screen
     @OnClick(R.id.term_continue_btn)
@@ -122,7 +126,7 @@ public class TermEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTerm(mTextView.getText().toString());
+        mViewModel.saveTerm(mTextView.getText().toString(), startText.getText().toString(), endText.getText().toString());
         finish();
     }
 

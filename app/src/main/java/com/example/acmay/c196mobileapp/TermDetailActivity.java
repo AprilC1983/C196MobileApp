@@ -24,7 +24,12 @@ public class TermDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.term_title_text)
     TextView termDetailTextView;
+    @BindView(R.id.term_start_text)
+    TextView termStart;
+    @BindView(R.id.term_end_text)
+    TextView termEnd;
 
+    /*
     //Exits term detail screen and returns user to the list of courses
     @OnClick(R.id.term_detail_exit)
     void continueClickHandler(){
@@ -32,6 +37,8 @@ public class TermDetailActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+     */
 
     //exits term detail screen
     @OnClick(R.id.term_detail_exit)
@@ -68,10 +75,16 @@ public class TermDetailActivity extends AppCompatActivity {
 
         mViewModel.mLiveTerm.observe(this, new Observer<TermEntity>() {
             @Override
-            public void onChanged(@Nullable TermEntity termDetailEntity) {
-                if(termDetailEntity != null && !mEditing) {
-                    termDetailTextView.setText(termDetailEntity.getTitle());
+            public void onChanged(@Nullable TermEntity termEntity) {
+                if(termEntity != null && !mEditing) {
+                    termDetailTextView.setText(termEntity.getTitle());
+                    termStart.setText(termEntity.getStartDate());
+                    termEnd.setText(termEntity.getEndDate());
                 }
+                //What would this do?
+                termDetailTextView.setText("Testing 123");
+                termStart.setText("A start Date");
+                termEnd.setText("An end Date");
             }
         });
 
@@ -83,6 +96,7 @@ public class TermDetailActivity extends AppCompatActivity {
             setTitle(R.string.selected_term);
             int termDetailId = extras.getInt(TERM_DETAIL_ID_KEY);
             mViewModel.loadData(termDetailId);
+
         }
     }
 

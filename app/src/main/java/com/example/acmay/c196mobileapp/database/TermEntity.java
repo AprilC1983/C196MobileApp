@@ -11,12 +11,20 @@ public class TermEntity {
     @PrimaryKey(autoGenerate = true)
     private int termID;
     private Date createDate;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String title;
 
-    public TermEntity(int termID, Date createDate, Date startDate, Date endDate, String title) {
+    public TermEntity(int termID, Date createDate, String startDate, String endDate, String title) {
         this.termID = termID;
+        this.createDate = createDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.title = title;
+    }
+
+    @Ignore
+    public TermEntity(Date createDate, String startDate, String endDate, String title) {
         this.createDate = createDate;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -64,19 +72,19 @@ public class TermEntity {
         this.title = title;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
