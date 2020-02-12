@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/mentor_text"
+        android:layout_width="375dp"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/mentor_name"
+        android:inputType="text|textCapSentences"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.383"
+        tools:targetApi="o" />
+
+
+    <EditText
+        android:id="@+id/phone_text"
+        android:layout_width="375dp"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/phone_number"
+        android:inputType="phone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mentor_text"
+        app:layout_constraintVertical_bias="0.056"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/email_text"
+        android:layout_width="375dp"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone_text"
+        app:layout_constraintVertical_bias="0.064"
+        tools:targetApi="o" />
+
+    <Button
+        android:id="@+id/mentor_cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/mentor_save_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_text"
+        app:layout_constraintVertical_bias="0.781" />
+
+    <Button
+        android:id="@+id/mentor_save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/mentor_continue_btn"
+        app:layout_constraintStart_toEndOf="@id/mentor_cancel_btn"
+        app:layout_constraintTop_toBottomOf="@+id/email_text"
+        app:layout_constraintVertical_bias="0.781" />
+
+    <Button
+        android:id="@+id/mentor_continue_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="@string/continue_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/mentor_save_btn"
+        app:layout_constraintTop_toBottomOf="@+id/email_text"
+        app:layout_constraintVertical_bias="0.781" />
+
+
+</android.support.constraint.ConstraintLayout>

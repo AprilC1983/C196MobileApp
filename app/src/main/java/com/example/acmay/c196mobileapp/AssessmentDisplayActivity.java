@@ -12,7 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.example.acmay.c196mobileapp.database.AssessmentEntity;
-import com.example.acmay.c196mobileapp.ui.AssessmentsAdapter;
+import com.example.acmay.c196mobileapp.ui.AssessmentAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -36,8 +36,8 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
     private List<AssessmentEntity> assessmentsData = new ArrayList<>();
     //private List<CourseEntity> coursesData = new ArrayList<>();
     //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
-    private AssessmentsAdapter mAdapter;
-    //private CoursesAdapter cAdapter;
+    private AssessmentAdapter mAdapter;
+    //private CourseAdapter cAdapter;
     private MainViewModel mViewModel;
 
     @Override
@@ -62,7 +62,7 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
                 assessmentsData.addAll(assessmentEntities);
 
                 if(mAdapter == null){
-                    mAdapter = new AssessmentsAdapter(assessmentsData, AssessmentDisplayActivity.this);
+                    mAdapter = new AssessmentAdapter(assessmentsData, AssessmentDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();

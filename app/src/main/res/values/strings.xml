@@ -8,6 +8,7 @@
     <string name="new_course">Create New Course</string>
     <string name="edit_term">Edit Term</string>
     <string name="edit_course">Edit Course</string>
+    <string name="edit_mentor">Edit Mentor Details</string>
     <string name="edit_assessment">Edit Assessment</string>
     <string name="enter_start">Enter start date</string>
     <string name="enter_end_date">Enter end date</string>
@@ -24,4 +25,24 @@
     <string name="enter_due_date">Enter due date</string>
     <string name="assessment_name">Assessment Name</string>
     <string name="assessments">Assessments</string>
+    <string name="assessment">Assessment</string>
+    <string name="mentor_name">Mentor Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="new_mentor">Add Mentor</string>
+    <string name="mentor">Course Mentor</string>
+    <string name="exit">Exit</string>
+    <string name="view_courses">View Courses</string>
+    <string name="selected_term">Selected Term</string>
+    <string name="selected_course">Selected Course</string>
+    <string name="return_to_course_list">Return to Course List</string>
+    <string name="return_to_terms_list">Return to Terms List</string>
+    <string name="return_to_mentor_list">Return to Mentor List</string>
+    <string name="return_to_assessment_list">Return to Assessment List</string>
+    <string name="enter_note">Enter Note</string>
+    <string name="notes">Notes</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="view_notes">View Notes</string>
+    <string name="objective">Objective</string>
+    <string name="performance">Performance</string>
 </resources>

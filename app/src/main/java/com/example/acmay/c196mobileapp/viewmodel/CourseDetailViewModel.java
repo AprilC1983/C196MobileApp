@@ -13,14 +13,14 @@ import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class CourseEditorViewModel extends AndroidViewModel {
+public class CourseDetailViewModel extends AndroidViewModel {
 
     public MutableLiveData<CourseEntity> mLiveCourse =
             new MutableLiveData<>();
     private AppRepository mRepository;
     private Executor executor = Executors.newSingleThreadExecutor();
 
-    public CourseEditorViewModel(@NonNull Application application) {
+    public CourseDetailViewModel(@NonNull Application application) {
         super(application);
         mRepository = AppRepository.getInstance(getApplication());
     }
@@ -35,22 +35,5 @@ public class CourseEditorViewModel extends AndroidViewModel {
         });
     }
 
-    public void saveCourse(String courseText) {
-        CourseEntity course = mLiveCourse.getValue();
-
-        if(course == null){
-            if(TextUtils.isEmpty(courseText.trim())){
-                return;
-            }
-            course = new CourseEntity(new Date(), courseText.trim());
-        } else{
-            course.setText(courseText.trim());
-        }
-        mRepository.insertCourse(course);
-    }
-
-    public void deleteCourse() {
-        mRepository.deleteCourse(mLiveCourse.getValue());
-    }
 
 }

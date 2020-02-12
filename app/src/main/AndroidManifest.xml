@@ -68,6 +68,89 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.acmay.c196mobileapp.MainActivity" />
         </activity>
+
+
+        <activity
+            android:name=".MentorDisplayActivity"
+            android:label="@string/mentor"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".MentorEditorActivity"
+            android:label="@string/edit_mentor"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".TermDetailActivity"
+            android:label="@string/selected_term"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".CourseDetailActivity"
+            android:label="@string/selected_course"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".MentorDetailActivity"
+            android:label="@string/mentor_name"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".AssessmentDetailActivity"
+            android:label="@string/assessment"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".NoteDisplayActivity"
+            android:label="@string/notes"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".NoteEditorActivity"
+            android:label="@string/edit_note"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
+
     </application>
 
 </manifest>

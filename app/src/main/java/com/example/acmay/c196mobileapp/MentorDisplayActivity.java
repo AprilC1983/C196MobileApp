@@ -12,8 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.example.acmay.c196mobileapp.database.TermEntity;
-import com.example.acmay.c196mobileapp.ui.TermAdapter;
+import com.example.acmay.c196mobileapp.database.MentorEntity;
+import com.example.acmay.c196mobileapp.ui.MentorAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -23,26 +23,28 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MentorDisplayActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    private static final String TAG = "Main Activity";
+    public static final String TAG = "Mentor Display";
 
     @OnClick(R.id.edit_fab)
     void fabClickHandler(){
-        Intent intent = new Intent(this, TermEditorActivity.class);
+        Intent intent = new Intent(this, MentorEditorActivity.class);
         startActivity(intent);
-        Log.i(TAG, "fabClickHandler: create new term");
+        Log.i(TAG, "fabClickHandler: create Mentor");
     }
 
 
-    private List<TermEntity> termsData = new ArrayList<>();
-    //private List<CourseEntity> coursesData = new ArrayList<>();
+
+
+    private List<MentorEntity> mentorsData = new ArrayList<>();
+    //private List<MentorEntity> MentorsData = new ArrayList<>();
     //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
-    private TermAdapter mAdapter;
-    //private CourseAdapter cAdapter;
+    private MentorAdapter mAdapter;
+    //private MentorAdapter cAdapter;
     private MainViewModel mViewModel;
 
     @Override
@@ -60,14 +62,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViewModel() {
 
-        final Observer<List<TermEntity>> termsObserver = new Observer<List<TermEntity>>() {
+        final Observer<List<MentorEntity>> mentorsObserver = new Observer<List<MentorEntity>>() {
             @Override
-            public void onChanged(@Nullable List<TermEntity> termEntities) {
-                termsData.clear();
-                termsData.addAll(termEntities);
+            public void onChanged(@Nullable List<MentorEntity> mentorEntities) {
+                mentorsData.clear();
+                mentorsData.addAll(mentorEntities);
 
                 if(mAdapter == null){
-                    mAdapter = new TermAdapter(termsData, MainActivity.this);
+                    mAdapter = new MentorAdapter(mentorsData, MentorDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
@@ -78,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
-        //this method call
-        mViewModel.mTerms.observe(this, termsObserver);
+        mViewModel.mMentors.observe(this, mentorsObserver);
     }
 
 

@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.CourseDisplayActivity;
+import com.example.acmay.c196mobileapp.MentorDisplayActivity;
+import com.example.acmay.c196mobileapp.TermDetailActivity;
 import com.example.acmay.c196mobileapp.TermEditorActivity;
 import com.example.acmay.c196mobileapp.R;
 import com.example.acmay.c196mobileapp.database.TermEntity;
@@ -22,14 +24,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.content.ContentValues.TAG;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
-public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.ViewHolder> {
+public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
 
     private final List<TermEntity> mTerms;
     private final Context mContext;
 
-    public TermsAdapter(List<TermEntity> mTerms, Context mContext) {
+    public TermAdapter(List<TermEntity> mTerms, Context mContext) {
         this.mTerms = mTerms;
         this.mContext = mContext;
     }
@@ -63,7 +66,18 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.ViewHolder> 
                 Intent intent = new Intent(mContext, CourseDisplayActivity.class);
                 intent.putExtra(TERM_ID_KEY, term.getId());
                 mContext.startActivity(intent);
-                Log.i(TAG, "onClick: open courses display");
+                Log.i(TAG, "onClick: open mentors display");
+            }
+        });
+
+        //display term detail screen
+        holder.mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, TermDetailActivity.class);
+                intent.putExtra(COURSE_ID_KEY, term.getId());
+                mContext.startActivity(intent);
+                Log.i(TAG, "onClick: Open term details");
             }
         });
     }

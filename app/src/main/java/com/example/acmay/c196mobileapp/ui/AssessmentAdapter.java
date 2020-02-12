@@ -5,32 +5,31 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.acmay.c196mobileapp.AssessmentDisplayActivity;
-import com.example.acmay.c196mobileapp.CourseEditorActivity;
+import com.example.acmay.c196mobileapp.AssessmentDetailActivity;
+import com.example.acmay.c196mobileapp.AssessmentEditorActivity;
 import com.example.acmay.c196mobileapp.R;
-import com.example.acmay.c196mobileapp.database.CourseEntity;
+import com.example.acmay.c196mobileapp.database.AssessmentEntity;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.content.ContentValues.TAG;
-import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.ASSESSMENT_DETAIL_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
 
-public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHolder> {
+public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.ViewHolder> {
 
-    private final List<CourseEntity> mCourses;
+    private final List<AssessmentEntity> mAssessments;
     private final Context mContext;
 
-    public CoursesAdapter(List<CourseEntity> mCourses, Context mContext) {
-        this.mCourses = mCourses;
+    public AssessmentAdapter(List<AssessmentEntity> mAssessments, Context mContext) {
+        this.mAssessments = mAssessments;
         this.mContext = mContext;
     }
 
@@ -38,52 +37,46 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.list_item, parent, false);
+        View view = inflater.inflate(R.layout.list_item_1, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final CourseEntity course = mCourses.get(position);
-        holder.mTextView.setText(course.getText());
+        final AssessmentEntity assessment = mAssessments.get(position);
+        holder.mTextView.setText(assessment.getText());
 
+        //open assessment editor
         holder.eFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(mContext, CourseEditorActivity.class);
-                intent.putExtra(COURSE_ID_KEY, course.getId());
+                Intent intent = new Intent(mContext, AssessmentEditorActivity.class);
+                intent.putExtra(ASS_ID_KEY, assessment.getId());
                 mContext.startActivity(intent);
-                Log.i(TAG, "onClick: Open course editor");
             }
         });
 
-        //This click listener will take user to the display of the assessments
-        holder.cFab.setOnClickListener(new View.OnClickListener() {
+        //display assessment details
+        holder.mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, AssessmentDisplayActivity.class);
-                intent.putExtra(COURSE_ID_KEY, course.getId());
+                Intent intent = new Intent(mContext, AssessmentDetailActivity.class);
+                intent.putExtra(ASSESSMENT_DETAIL_ID_KEY, assessment.getId());
                 mContext.startActivity(intent);
-                Log.i(TAG, "onClick: Open assessment display");
             }
         });
-
-
     }
 
     @Override
     public int getItemCount() {
-        return mCourses.size();
+        return mAssessments.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.display_text)
+        @BindView(R.id.display_text_1)
         TextView mTextView;
-        @BindView(R.id.edit_fab)
+        @BindView(R.id.edit_fab_1)
         FloatingActionButton eFab;
-        @BindView(R.id.continue_fab)
-        FloatingActionButton cFab;
 
         public ViewHolder(View itemView) {
             super(itemView);

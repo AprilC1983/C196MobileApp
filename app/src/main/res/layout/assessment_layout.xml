@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/assessment_text"
+        android:layout_width="375dp"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/assessment_name"
+        android:inputType="text|textCapSentences"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.383"
+        tools:targetApi="o" />
+
+
+    <EditText
+        android:id="@+id/assessment_due_date"
+        android:layout_width="375dp"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/enter_due_date"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_text"
+        app:layout_constraintVertical_bias="0.056"
+        tools:targetApi="o" />
+
+
+    <RadioGroup
+        android:id="@+id/assessment_radio_group"
+        android:layout_width="323dp"
+        android:layout_height="163dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_due_date"
+        app:layout_constraintVertical_bias="0.133">
+
+        <RadioButton
+            android:id="@+id/objective_rb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/objective"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/performance_rb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/performance" />
+
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/assessment_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.749"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_due_date"
+        app:layout_constraintVertical_bias="0.785" />
+
+    <Button
+        android:id="@+id/assessment_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/assessment_save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_due_date"
+        app:layout_constraintVertical_bias="0.781" />
+
+
+</android.support.constraint.ConstraintLayout>

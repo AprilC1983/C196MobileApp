@@ -7,52 +7,55 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.acmay.c196mobileapp.database.CourseEntity;
-import com.example.acmay.c196mobileapp.viewmodel.CourseViewModel;
+import com.example.acmay.c196mobileapp.database.MentorEntity;
+import com.example.acmay.c196mobileapp.viewmodel.MentorViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.MENTOR_ID_KEY;
 
-public class CourseEditorActivity extends AppCompatActivity {
+public class MentorEditorActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.course_text)
-    TextView courseTextView;
+    @BindView(R.id.mentor_text)
+    TextView mTextView;
 
-    //saves entered course data and continues to the assessment editor screen
-    @OnClick(R.id.course_continue_btn)
+    //Saves the Mentor information and continues to the new course screen
+    @OnClick(R.id.mentor_continue_btn)
     void continueClickHandler(){
         saveAndReturn();
-        Intent intent = new Intent(this, MentorEditorActivity.class);
+        Intent intent = new Intent(this, AssessmentEditorActivity.class);
         startActivity(intent);
+
     }
 
-    //exits course screen without saving data
-    @OnClick(R.id.course_cancel_btn)
+    //Exits the create Mentor screen without saving
+    @OnClick(R.id.mentor_cancel_btn)
     void cancelClickHandler(){
         finish();
     }
 
-    //Saves course data without continuing to the assessment editor
-    @OnClick(R.id.course_save_btn)
+    //Saves Mentor data without continuing to the course creation screen
+    @OnClick(R.id.mentor_save_btn)
     void saveClickHandler(){
         saveAndReturn();
     }
 
-
-    private CourseViewModel mViewModel;
-    private boolean mNewNote, mEditing;
+    private MentorViewModel mViewModel;
+    private boolean mNewMentor, mEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.course_editor);
+        setContentView(R.layout.mentor_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
@@ -67,44 +70,39 @@ public class CourseEditorActivity extends AppCompatActivity {
         initViewModel();
     }
 
-
     private void initViewModel(){
         mViewModel = ViewModelProviders.of(this)
-                .get(CourseViewModel.class);
+                .get(MentorViewModel.class);
 
-        //NEED TO SET UP COURSEENTITY
-
-        mViewModel.mLiveCourse.observe(this, new Observer<CourseEntity>() {
+        mViewModel.mLiveMentor.observe(this, new Observer<MentorEntity>() {
             @Override
-            public void onChanged(@Nullable CourseEntity courseEntity) {
-                if(courseEntity != null && !mEditing) {
-                    courseTextView.setText(courseEntity.getText());
+            public void onChanged(@Nullable MentorEntity mentorEntity) {
+                if(mentorEntity != null && !mEditing) {
+                    mTextView.setText(mentorEntity.getName());
                 }
             }
         });
 
         Bundle extras = getIntent().getExtras();
         if(extras == null){
-            setTitle(R.string.new_course);
-            mNewNote = true;
+            setTitle(R.string.new_mentor);
+            mNewMentor = true;
         } else {
-            setTitle(R.string.edit_course);
-            int courseId = extras.getInt(COURSE_ID_KEY);
-            mViewModel.loadData(courseId);
+            setTitle(R.string.edit_mentor);
+            int mentorId = extras.getInt(MENTOR_ID_KEY);
+            mViewModel.loadData(mentorId);
         }
     }
-/*
-//Do I need this method?
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(!mNewNote){
+        if(!mNewMentor){
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_editor, menu);
         }
         return super.onCreateOptionsMenu(menu);
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -112,15 +110,11 @@ public class CourseEditorActivity extends AppCompatActivity {
             saveAndReturn();
             return true;
         } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteCourse();
+            mViewModel.deleteMentor();
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
-//Do I need this^^^ method?
-
- */
-
 
     @Override
     public void onBackPressed() {
@@ -128,7 +122,7 @@ public class CourseEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveCourse(courseTextView.getText().toString());
+        mViewModel.saveMentor(mTextView.getText().toString());
         finish();
     }
 

@@ -6,65 +6,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/assessment_text"
+
+    <TextView
+        android:id="@+id/assessment_title_text"
         android:layout_width="375dp"
         android:layout_height="55dp"
         android:layout_margin="@dimen/text_margin"
         android:layout_marginBottom="4dp"
+
         android:autofillHints=""
-        android:hint="@string/assessment_name"
-        android:inputType="text|textCapSentences"
+        android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.383"
+        app:layout_constraintVertical_bias="0.336"
         tools:targetApi="o" />
 
-
-    <EditText
-        android:id="@+id/assessment_due_date"
+    <TextView
+        android:id="@+id/assessment_due_text"
         android:layout_width="375dp"
         android:layout_height="55dp"
         android:layout_margin="@dimen/text_margin"
+
         android:layout_marginBottom="4dp"
         android:autofillHints=""
-        android:hint="@string/enter_due_date"
-        android:inputType="date"
+        android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessment_text"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_title_text"
         app:layout_constraintVertical_bias="0.056"
         tools:targetApi="o" />
 
-    <Button
-        android:id="@+id/assessment_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:text="@string/save"
+    <TextView
+        android:id="@+id/assessment_note_text"
+        android:layout_width="375dp"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+
+        android:autofillHints=""
+        android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.749"
+        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessment_due_date"
-        app:layout_constraintVertical_bias="0.785" />
+        app:layout_constraintTop_toBottomOf="@+id/assessment_due_text"
+        app:layout_constraintVertical_bias="0.097"
+        tools:targetApi="o" />
 
     <Button
-        android:id="@+id/assessment_cancel"
+        android:id="@+id/assessment_detail_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/assessment_save"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessment_due_date"
-        app:layout_constraintVertical_bias="0.781" />
+        android:text="@string/return_to_assessment_list"
 
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_note_text"
+        app:layout_constraintVertical_bias="0.502" />
 
 </android.support.constraint.ConstraintLayout>

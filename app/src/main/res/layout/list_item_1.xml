@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/ass_fab"
+        android:id="@+id/edit_fab_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:backgroundTint="@color/colorPrimary"
@@ -24,18 +24,19 @@
         tools:layout_editor_absoluteY="16dp" />
 
     <TextView
-        android:id="@+id/assessment_text"
+        android:id="@+id/display_text_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:maxLines="2"
         android:ellipsize="end"
-        android:textSize="@dimen/list_text_size"
-        android:textColor="@color/list_text_color"
+        android:maxLines="2"
         android:text="TextView"
+        android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ass_fab"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toEndOf="@+id/edit_fab_1"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

@@ -33,7 +33,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/course_layout" />
+    <include layout="@layout/course_detail_layout" />
 
 
 

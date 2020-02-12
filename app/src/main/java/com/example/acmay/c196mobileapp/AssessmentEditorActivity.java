@@ -1,10 +1,7 @@
 package com.example.acmay.c196mobileapp;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,10 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.acmay.c196mobileapp.database.TermEntity;
-import com.example.acmay.c196mobileapp.viewmodel.AssessmentEditorViewModel;
-import com.example.acmay.c196mobileapp.viewmodel.CourseEditorViewModel;
-import com.example.acmay.c196mobileapp.viewmodel.TermEditorViewModel;
+import com.example.acmay.c196mobileapp.viewmodel.AssessmentViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,7 +39,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     }
 
 
-    private AssessmentEditorViewModel mViewModel;
+    private AssessmentViewModel mViewModel;
     private boolean mNewNote, mEditing;
 
     @Override
@@ -69,14 +63,14 @@ public class AssessmentEditorActivity extends AppCompatActivity {
 
     private void initViewModel(){
         mViewModel = ViewModelProviders.of(this)
-                .get(AssessmentEditorViewModel.class);
+                .get(AssessmentViewModel.class);
 
         /*
         mViewModel.mLiveAssessment.observe(this, new Observer<TermEntity>() {
             @Override
             public void onChanged(@Nullable TermEntity termEntity) {
                 if(termEntity != null && !mEditing) {
-                    mTextView.setText(termEntity.getText());
+                    mTextView.setName(termEntity.getName());
                 }
             }
         });
