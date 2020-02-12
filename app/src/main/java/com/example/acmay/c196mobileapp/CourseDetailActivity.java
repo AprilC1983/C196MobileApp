@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_DETAIL_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 
 public class CourseDetailActivity extends AppCompatActivity {
@@ -95,7 +96,7 @@ public class CourseDetailActivity extends AppCompatActivity {
                     courseStart.setText("Start Date: " + courseEntity.getStartDate());
                     courseEnd.setText("End Date: " + courseEntity.getEndDate());
                 }
-                courseStart.setText("Test string");
+
             }
         });
 
@@ -105,7 +106,7 @@ public class CourseDetailActivity extends AppCompatActivity {
             mNewCourseDetail = true;
         } else {
             setTitle(R.string.selected_course);
-            int courseDetailId = extras.getInt(COURSE_DETAIL_ID_KEY);
+            int courseDetailId = extras.getInt(COURSE_ID_KEY);
             mViewModel.loadData(courseDetailId);
         }
     }
