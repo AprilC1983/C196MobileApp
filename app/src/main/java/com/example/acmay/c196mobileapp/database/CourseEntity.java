@@ -3,6 +3,7 @@ package com.example.acmay.c196mobileapp.database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
@@ -18,10 +19,20 @@ public class CourseEntity {
     private Date endDate;
     private String title;
 
+    public CourseEntity(int courseID, int termID, Date createDate, Date startDate, Date endDate, String title) {
+        this.courseID = courseID;
+        this.termID = termID;
+        this.createDate = createDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.title = title;
+    }
+
     @Ignore
     public CourseEntity() {
     }
 
+    @Ignore
     public CourseEntity(int id, Date date, String title) {
         this.courseID = id;
         this.createDate = date;

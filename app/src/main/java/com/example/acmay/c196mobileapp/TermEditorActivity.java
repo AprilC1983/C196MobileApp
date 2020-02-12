@@ -78,7 +78,7 @@ public class TermEditorActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable TermEntity termEntity) {
                 if(termEntity != null && !mEditing) {
-                    mTextView.setText(termEntity.getText());
+                    mTextView.setText(termEntity.getTitle());
                 }
             }
         });

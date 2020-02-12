@@ -21,10 +21,10 @@ public interface TermDao {
     @Delete
     void deleteTerm(TermEntity termEntity);
 
-    @Query("SELECT * FROM terms WHERE id = :id")
+    @Query("SELECT * FROM terms WHERE termID = :id")
     TermEntity getTermById(int id);
 
-    @Query("SELECT * FROM terms ORDER BY date DESC")
+    @Query("SELECT * FROM terms ORDER BY createDate DESC")
     LiveData<List<TermEntity>> getAll();
 
     @Query("DELETE FROM terms")

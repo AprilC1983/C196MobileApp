@@ -70,7 +70,7 @@ public class TermDetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable TermEntity termDetailEntity) {
                 if(termDetailEntity != null && !mEditing) {
-                    termDetailTextView.setText(termDetailEntity.getText());
+                    termDetailTextView.setText(termDetailEntity.getTitle());
                 }
             }
         });

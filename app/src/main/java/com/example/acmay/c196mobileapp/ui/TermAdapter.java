@@ -48,7 +48,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final TermEntity term = mTerms.get(position);
-        holder.mTextView.setText(term.getText());
+        holder.mTextView.setText(term.getTitle());
 
         holder.eFab.setOnClickListener(new View.OnClickListener() {
             @Override

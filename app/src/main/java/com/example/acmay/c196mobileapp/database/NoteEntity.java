@@ -16,10 +16,18 @@ public class NoteEntity {
     private Date date;
     private String text;
 
+    public NoteEntity(int noteID, int courseID, Date date, String text) {
+        this.noteID = noteID;
+        this.courseID = courseID;
+        this.date = date;
+        this.text = text;
+    }
+
     @Ignore
     public NoteEntity() {
     }
 
+    @Ignore
     public NoteEntity(int id, Date date, String text) {
         this.noteID = id;
         this.date = date;

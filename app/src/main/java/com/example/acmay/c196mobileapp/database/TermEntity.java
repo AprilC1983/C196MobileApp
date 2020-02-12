@@ -10,24 +10,24 @@ import java.util.Date;
 public class TermEntity {
     @PrimaryKey(autoGenerate = true)
     private int termID;
-
-    public int getTermID() {
-        return termID;
-    }
-
-    public void setTermID(int termID) {
-        this.termID = termID;
-    }
-
     private Date createDate;
     private Date startDate;
     private Date endDate;
     private String title;
 
+    public TermEntity(int termID, Date createDate, Date startDate, Date endDate, String title) {
+        this.termID = termID;
+        this.createDate = createDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.title = title;
+    }
+
     @Ignore
     public TermEntity() {
     }
 
+    @Ignore
     public TermEntity(int id, Date createDate, String title) {
         this.termID = id;
         this.createDate = createDate;
@@ -78,6 +78,14 @@ public class TermEntity {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public int getTermID() {
+        return termID;
+    }
+
+    public void setTermID(int termID) {
+        this.termID = termID;
     }
 
     @Override

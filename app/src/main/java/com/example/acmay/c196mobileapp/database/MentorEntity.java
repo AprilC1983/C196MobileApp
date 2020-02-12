@@ -18,6 +18,15 @@ public class MentorEntity {
     private String phone;
     private String email;
 
+    public MentorEntity(int mentorID, int courseID, Date createDate, String name, String phone, String email) {
+        this.mentorID = mentorID;
+        this.courseID = courseID;
+        this.createDate = createDate;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+    }
+
     @Ignore
     public MentorEntity(int id, Date date, String name, String phone, String email) {
         this.mentorID = id;
@@ -31,6 +40,7 @@ public class MentorEntity {
     public MentorEntity() {
     }
 
+    @Ignore
     public MentorEntity(int id, Date date, String name) {
         this.mentorID = id;
         this.createDate = date;

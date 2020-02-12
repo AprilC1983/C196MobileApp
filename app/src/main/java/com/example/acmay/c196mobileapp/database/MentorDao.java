@@ -21,10 +21,10 @@ public interface MentorDao {
     @Delete
     void deleteMentor(MentorEntity mentorEntity);
 
-    @Query("SELECT * FROM mentors WHERE id = :id")
+    @Query("SELECT * FROM mentors WHERE mentorID = :id")
     MentorEntity getMentorById(int id);
 
-    @Query("SELECT * FROM mentors ORDER BY date DESC")
+    @Query("SELECT * FROM mentors ORDER BY createDate DESC")
     LiveData<List<MentorEntity>> getAll();
 
     @Query("DELETE FROM mentors")

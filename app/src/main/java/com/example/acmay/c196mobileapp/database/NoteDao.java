@@ -21,7 +21,7 @@ public interface NoteDao {
     @Delete
     void deleteNote(NoteEntity noteEntity);
 
-    @Query("SELECT * FROM notes WHERE id = :id")
+    @Query("SELECT * FROM notes WHERE noteID = :id")
     NoteEntity getNoteById(int id);
 
     @Query("SELECT * FROM notes ORDER BY date DESC")

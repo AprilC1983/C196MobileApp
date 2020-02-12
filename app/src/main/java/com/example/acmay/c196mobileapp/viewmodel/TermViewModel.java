@@ -44,7 +44,7 @@ public class TermViewModel extends AndroidViewModel {
             }
             term = new TermEntity(new Date(), termText.trim());
         } else{
-            term.setText(termText.trim());
+            term.setTitle(termText.trim());
         }
         mRepository.insertTerm(term);
     }

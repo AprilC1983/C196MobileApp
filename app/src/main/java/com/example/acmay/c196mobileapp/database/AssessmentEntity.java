@@ -17,10 +17,19 @@ public class AssessmentEntity {
     private String title;
     private String type;
 
+    public AssessmentEntity(int assessmentID, int courseID, Date createDate, String title, String type) {
+        this.assessmentID = assessmentID;
+        this.courseID = courseID;
+        this.createDate = createDate;
+        this.title = title;
+        this.type = type;
+    }
+
     @Ignore
     public AssessmentEntity() {
     }
 
+    @Ignore
     public AssessmentEntity(int id, Date date, String text) {
         this.assessmentID = id;
         this.createDate = date;

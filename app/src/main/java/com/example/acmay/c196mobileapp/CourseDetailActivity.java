@@ -86,7 +86,7 @@ public class CourseDetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable CourseEntity courseEntity) {
                 if(courseEntity != null && !mEditing) {
-                    courseDetailTextView.setText(courseEntity.getText());
+                    courseDetailTextView.setText(courseEntity.getTitle());
                 }
             }
         });

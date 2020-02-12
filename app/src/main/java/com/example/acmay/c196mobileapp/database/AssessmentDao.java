@@ -21,10 +21,10 @@ public interface AssessmentDao {
     @Delete
     void deleteAssessment(AssessmentEntity assessmentEntity);
 
-    @Query("SELECT * FROM assessments WHERE id = :id")
+    @Query("SELECT * FROM assessments WHERE assessmentID = :id")
     AssessmentEntity getAssessmentById(int id);
 
-    @Query("SELECT * FROM assessments ORDER BY date DESC")
+    @Query("SELECT * FROM assessments ORDER BY createDate DESC")
     LiveData<List<AssessmentEntity>> getAll();
 
     @Query("DELETE FROM assessments")
