@@ -42,7 +42,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.list_item, parent, false);
+        View view = inflater.inflate(R.layout.list_item_1, parent, false);
         return new ViewHolder(view);
     }
 
@@ -62,6 +62,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             }
         });
 
+        /*
         //This click listener will take user to the display of the assessments
         holder.cFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +73,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 Log.i(TAG, "onClick: Open assessment display");
             }
         });
+
+         */
 /*
         //Display the Note detail screen
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
@@ -95,12 +98,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.display_text)
+        @BindView(R.id.display_text_1)
         TextView mTextView;
-        @BindView(R.id.edit_fab)
+        @BindView(R.id.edit_fab_1)
         FloatingActionButton eFab;
-        @BindView(R.id.continue_fab)
-        FloatingActionButton cFab;
+        //@BindView(R.id.continue_fab)
+        //FloatingActionButton cFab;
 
 
         public ViewHolder(View itemView) {

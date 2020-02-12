@@ -12,8 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.example.acmay.c196mobileapp.database.CourseEntity;
-import com.example.acmay.c196mobileapp.ui.CourseAdapter;
+import com.example.acmay.c196mobileapp.database.NoteEntity;
+import com.example.acmay.c196mobileapp.ui.NoteAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -37,14 +37,8 @@ public class NoteDisplayActivity extends AppCompatActivity {
         Log.i(TAG, "fabClickHandler: create Note");
     }
 
-
-
-
-    private List<CourseEntity> coursesData = new ArrayList<>();
-    //private List<CourseEntity> coursesData = new ArrayList<>();
-    //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
-    private CourseAdapter mAdapter;
-    //private CourseAdapter cAdapter;
+    private List<NoteEntity> notesData = new ArrayList<>();
+    private NoteAdapter mAdapter;
     private MainViewModel mViewModel;
 
     @Override
@@ -62,14 +56,14 @@ public class NoteDisplayActivity extends AppCompatActivity {
 
     private void initViewModel() {
 
-        final Observer<List<CourseEntity>> coursesObserver = new Observer<List<CourseEntity>>() {
+        final Observer<List<NoteEntity>> notesObserver = new Observer<List<NoteEntity>>() {
             @Override
-            public void onChanged(@Nullable List<CourseEntity> courseEntities) {
-                coursesData.clear();
-                coursesData.addAll(courseEntities);
+            public void onChanged(@Nullable List<NoteEntity> noteEntities) {
+                notesData.clear();
+                notesData.addAll(noteEntities);
 
                 if(mAdapter == null){
-                    mAdapter = new CourseAdapter(coursesData, NoteDisplayActivity.this);
+                    mAdapter = new NoteAdapter(notesData, NoteDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
@@ -80,7 +74,7 @@ public class NoteDisplayActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
-        mViewModel.mCourses.observe(this, coursesObserver);
+        mViewModel.mNotes.observe(this, notesObserver);
     }
 
 

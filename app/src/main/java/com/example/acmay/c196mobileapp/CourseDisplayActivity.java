@@ -37,14 +37,8 @@ public class CourseDisplayActivity extends AppCompatActivity {
         Log.i(TAG, "fabClickHandler: create course");
     }
 
-
-
-
     private List<CourseEntity> coursesData = new ArrayList<>();
-    //private List<CourseEntity> coursesData = new ArrayList<>();
-    //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
     private CourseAdapter mAdapter;
-    //private CourseAdapter cAdapter;
     private MainViewModel mViewModel;
 
     @Override
@@ -82,7 +76,6 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
         mViewModel.mCourses.observe(this, coursesObserver);
     }
-
 
     private void initRecyclerView() {
         mRecyclerView.setHasFixedSize(true);

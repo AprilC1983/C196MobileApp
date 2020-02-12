@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.example.acmay.c196mobileapp.database.AppRepository;
-import com.example.acmay.c196mobileapp.database.CourseEntity;
+import com.example.acmay.c196mobileapp.database.NoteEntity;
 
 import java.util.Date;
 import java.util.concurrent.Executor;
@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 
 public class NoteViewModel extends AndroidViewModel {
 
-    public MutableLiveData<CourseEntity> mLiveCourse =
+    public MutableLiveData<NoteEntity> mLiveNote =
             new MutableLiveData<>();
     private AppRepository mRepository;
     private Executor executor = Executors.newSingleThreadExecutor();
@@ -25,32 +25,32 @@ public class NoteViewModel extends AndroidViewModel {
         mRepository = AppRepository.getInstance(getApplication());
     }
 
-    public void loadData(final int courseId) {
+    public void loadData(final int noteId) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                CourseEntity course = mRepository.getCourseById(courseId);
-                mLiveCourse.postValue(course);
+                NoteEntity note = mRepository.getNoteById(noteId);
+                mLiveNote.postValue(note);
             }
         });
     }
 
-    public void saveCourse(String courseText) {
-        CourseEntity course = mLiveCourse.getValue();
+    public void saveNote(String noteText) {
+        NoteEntity note = mLiveNote.getValue();
 
-        if(course == null){
-            if(TextUtils.isEmpty(courseText.trim())){
+        if(note == null){
+            if(TextUtils.isEmpty(noteText.trim())){
                 return;
             }
-            course = new CourseEntity(new Date(), courseText.trim());
+            note = new NoteEntity(new Date(), noteText.trim());
         } else{
-            course.setText(courseText.trim());
+            note.setText(noteText.trim());
         }
-        mRepository.insertCourse(course);
+        mRepository.insertNote(note);
     }
 
-    public void deleteCourse() {
-        mRepository.deleteCourse(mLiveCourse.getValue());
+    public void deleteNote() {
+        mRepository.deleteNote(mLiveNote.getValue());
     }
 
 }

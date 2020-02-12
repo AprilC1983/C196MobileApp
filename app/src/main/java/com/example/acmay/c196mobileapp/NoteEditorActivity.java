@@ -2,57 +2,48 @@ package com.example.acmay.c196mobileapp;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import com.example.acmay.c196mobileapp.database.CourseEntity;
-import com.example.acmay.c196mobileapp.viewmodel.CourseViewModel;
+import com.example.acmay.c196mobileapp.database.NoteEntity;
+import com.example.acmay.c196mobileapp.viewmodel.NoteViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.NOTE_ID_KEY;
 
 public class NoteEditorActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.course_text)
-    TextView courseTextView;
+    @BindView(R.id.note_text)
+    TextView noteTextView;
 
-    //saves entered course data and continues to the assessment editor screen
-    @OnClick(R.id.course_continue_btn)
-    void continueClickHandler(){
-        saveAndReturn();
-        Intent intent = new Intent(this, MentorEditorActivity.class);
-        startActivity(intent);
-    }
-
-    //exits course screen without saving data
-    @OnClick(R.id.course_cancel_btn)
+    //exits Note screen without saving data
+    @OnClick(R.id.note_cancel)
     void cancelClickHandler(){
         finish();
     }
 
-    //Saves course data without continuing to the assessment editor
-    @OnClick(R.id.course_save_btn)
+    //Saves Note data without continuing to the assessment editor
+    @OnClick(R.id.note_save)
     void saveClickHandler(){
         saveAndReturn();
     }
 
 
-    private CourseViewModel mViewModel;
+    private NoteViewModel mViewModel;
     private boolean mNewNote, mEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.course_editor);
+        setContentView(R.layout.note_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
@@ -70,56 +61,28 @@ public class NoteEditorActivity extends AppCompatActivity {
 
     private void initViewModel(){
         mViewModel = ViewModelProviders.of(this)
-                .get(CourseViewModel.class);
+                .get(NoteViewModel.class);
 
-        //NEED TO SET UP COURSEENTITY
 
-        mViewModel.mLiveCourse.observe(this, new Observer<CourseEntity>() {
+        mViewModel.mLiveNote.observe(this, new Observer<NoteEntity>() {
             @Override
-            public void onChanged(@Nullable CourseEntity courseEntity) {
-                if(courseEntity != null && !mEditing) {
-                    courseTextView.setText(courseEntity.getText());
+            public void onChanged(@Nullable NoteEntity noteEntity) {
+                if(noteEntity != null && !mEditing) {
+                    noteTextView.setText(noteEntity.getText());
                 }
             }
         });
 
         Bundle extras = getIntent().getExtras();
         if(extras == null){
-            setTitle(R.string.new_course);
+            setTitle(R.string.edit_note);
             mNewNote = true;
         } else {
-            setTitle(R.string.edit_course);
-            int courseId = extras.getInt(COURSE_ID_KEY);
-            mViewModel.loadData(courseId);
+            setTitle(R.string.edit_note);
+            int noteId = extras.getInt(NOTE_ID_KEY);
+            mViewModel.loadData(noteId);
         }
     }
-/*
-//Do I need this method?
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if(!mNewNote){
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_editor, menu);
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            saveAndReturn();
-            return true;
-        } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteCourse();
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-//Do I need this^^^ method?
-
- */
 
 
     @Override
@@ -128,7 +91,7 @@ public class NoteEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveCourse(courseTextView.getText().toString());
+        mViewModel.saveNote(noteTextView.getText().toString());
         finish();
     }
 
