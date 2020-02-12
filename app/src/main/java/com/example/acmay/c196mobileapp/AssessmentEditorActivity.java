@@ -63,7 +63,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
         setContentView(R.layout.assessment_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
