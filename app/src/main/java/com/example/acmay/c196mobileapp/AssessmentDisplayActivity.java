@@ -34,10 +34,7 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
     }
 
     private List<AssessmentEntity> assessmentsData = new ArrayList<>();
-    //private List<CourseEntity> coursesData = new ArrayList<>();
-    //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
     private AssessmentAdapter mAdapter;
-    //private CourseAdapter cAdapter;
     private MainViewModel mViewModel;
 
     @Override

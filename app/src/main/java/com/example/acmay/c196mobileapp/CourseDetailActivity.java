@@ -29,6 +29,7 @@ public class CourseDetailActivity extends AppCompatActivity {
     @BindView(R.id.course_end_text)
     TextView courseEnd;
 
+    /*
     //Exits Course detail screen and returns user to the list of courses
     @OnClick(R.id.course_detail_exit)
     void continueClickHandler(){
@@ -36,7 +37,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
+*/
     //exits Course detail screen
     @OnClick(R.id.course_detail_exit)
     void cancelClickHandler(){
@@ -94,6 +95,7 @@ public class CourseDetailActivity extends AppCompatActivity {
                     courseStart.setText("Start Date: " + courseEntity.getStartDate());
                     courseEnd.setText("End Date: " + courseEntity.getEndDate());
                 }
+                courseStart.setText("Test string");
             }
         });
 

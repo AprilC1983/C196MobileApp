@@ -42,7 +42,7 @@ public class CourseViewModel extends AndroidViewModel {
             if(TextUtils.isEmpty(courseText.trim())){
                 return;
             }
-            course = new CourseEntity(termID, new Date(), courseText.trim(), startDate, endDate);
+            course = new CourseEntity(termID, new Date(), startDate, endDate, courseText.trim());
         } else{
             course.setTitle(courseText.trim());
         }
