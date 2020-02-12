@@ -43,4 +43,6 @@
     <string name="notes">Notes</string>
     <string name="edit_note">Edit Note</string>
     <string name="view_notes">View Notes</string>
+    <string name="objective">Objective</string>
+    <string name="performance">Performance</string>
 </resources>
