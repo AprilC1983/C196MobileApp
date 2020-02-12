@@ -15,12 +15,21 @@ public class CourseEntity {
     private int courseID;
     private int termID;
     private Date createDate;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String title;
 
-    public CourseEntity(int courseID, int termID, Date createDate, Date startDate, Date endDate, String title) {
+    public CourseEntity(int courseID, int termID, Date createDate, String title, String startDate, String endDate) {
         this.courseID = courseID;
+        this.termID = termID;
+        this.createDate = createDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.title = title;
+    }
+
+    @Ignore
+    public CourseEntity(int termID, Date createDate, String startDate, String endDate, String title) {
         this.termID = termID;
         this.createDate = createDate;
         this.startDate = startDate;
@@ -85,19 +94,19 @@ public class CourseEntity {
         this.createDate = createDate;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

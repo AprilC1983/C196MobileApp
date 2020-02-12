@@ -18,12 +18,18 @@ import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class CourseEditorActivity extends AppCompatActivity {
 
-
     @BindView(R.id.course_text)
     TextView courseTextView;
+    @BindView(R.id.course_start_text)
+    TextView courseStart;
+    @BindView(R.id.course_end_text)
+    TextView courseEnd;
+
+    int term;
 
     //saves entered course data and continues to the assessment editor screen
     @OnClick(R.id.course_continue_btn)
@@ -45,9 +51,8 @@ public class CourseEditorActivity extends AppCompatActivity {
         saveAndReturn();
     }
 
-
     private CourseViewModel mViewModel;
-    private boolean mNewNote, mEditing;
+    private boolean mNewCourse, mEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +77,6 @@ public class CourseEditorActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(CourseViewModel.class);
 
-        //NEED TO SET UP COURSEENTITY
-
         mViewModel.mLiveCourse.observe(this, new Observer<CourseEntity>() {
             @Override
             public void onChanged(@Nullable CourseEntity courseEntity) {
@@ -86,40 +89,14 @@ public class CourseEditorActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if(extras == null){
             setTitle(R.string.new_course);
-            mNewNote = true;
+            mNewCourse = true;
         } else {
             setTitle(R.string.edit_course);
             int courseId = extras.getInt(COURSE_ID_KEY);
             mViewModel.loadData(courseId);
+            term = extras.getInt("termKey");
         }
     }
-/*
-//Do I need this method?
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if(!mNewNote){
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_editor, menu);
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            saveAndReturn();
-            return true;
-        } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteCourse();
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-//Do I need this^^^ method?
-
- */
 
 
     @Override
@@ -128,7 +105,8 @@ public class CourseEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveCourse(courseTextView.getText().toString());
+        mViewModel.saveCourse(term, courseTextView.getText().toString(),
+                courseStart.getText().toString(), courseEnd.getText().toString());
         finish();
     }
 

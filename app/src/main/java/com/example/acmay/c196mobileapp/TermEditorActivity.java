@@ -37,8 +37,8 @@ public class TermEditorActivity extends AppCompatActivity {
     void continueClickHandler(){
         saveAndReturn();
         Intent intent = new Intent(this, CourseEditorActivity.class);
+        intent.putExtra("termKey", termID);
         startActivity(intent);
-
     }
 
     //Exits the create term screen without saving
@@ -55,6 +55,7 @@ public class TermEditorActivity extends AppCompatActivity {
 
     private TermViewModel mViewModel;
     private boolean mNewTerm, mEditing;
+    public int termID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,7 @@ public class TermEditorActivity extends AppCompatActivity {
             public void onChanged(@Nullable TermEntity termEntity) {
                 if(termEntity != null && !mEditing) {
                     mTextView.setText(termEntity.getTitle());
+                    termID = termEntity.getId();
                 }
             }
         });
@@ -97,7 +99,6 @@ public class TermEditorActivity extends AppCompatActivity {
             mViewModel.loadData(termId);
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

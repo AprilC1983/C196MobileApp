@@ -8,6 +8,10 @@ import java.util.Date;
 
 @Entity(tableName = "terms")
 public class TermEntity {
+    public int getTermID() {
+        return termID;
+    }
+
     @PrimaryKey(autoGenerate = true)
     private int termID;
     private Date createDate;
@@ -86,14 +90,6 @@ public class TermEntity {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
-    }
-
-    public int getTermID() {
-        return termID;
-    }
-
-    public void setTermID(int termID) {
-        this.termID = termID;
     }
 
     @Override

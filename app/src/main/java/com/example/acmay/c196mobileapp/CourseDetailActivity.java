@@ -24,6 +24,10 @@ public class CourseDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.course_title_text)
     TextView courseDetailTextView;
+    @BindView(R.id.course_start_text)
+    TextView courseStart;
+    @BindView(R.id.course_end_text)
+    TextView courseEnd;
 
     //Exits Course detail screen and returns user to the list of courses
     @OnClick(R.id.course_detail_exit)
@@ -87,6 +91,8 @@ public class CourseDetailActivity extends AppCompatActivity {
             public void onChanged(@Nullable CourseEntity courseEntity) {
                 if(courseEntity != null && !mEditing) {
                     courseDetailTextView.setText(courseEntity.getTitle());
+                    courseStart.setText("Start Date: " + courseEntity.getStartDate());
+                    courseEnd.setText("End Date: " + courseEntity.getEndDate());
                 }
             }
         });
