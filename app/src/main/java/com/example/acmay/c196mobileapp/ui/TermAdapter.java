@@ -75,7 +75,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, TermDetailActivity.class);
-                intent.putExtra(COURSE_ID_KEY, term.getId());
+                intent.putExtra(TERM_ID_KEY, term.getId());
                 mContext.startActivity(intent);
                 Log.i(TAG, "onClick: Open term details");
             }
