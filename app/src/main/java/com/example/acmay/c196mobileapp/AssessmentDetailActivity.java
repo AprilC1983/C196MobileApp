@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.ASSESSMENT_DETAIL_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 
 public class AssessmentDetailActivity extends AppCompatActivity {
@@ -24,7 +24,12 @@ public class AssessmentDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.assessment_title_text)
     TextView assessmentDetailTextView;
+    @BindView(R.id.assessment_due_text)
+    TextView due;
+    @BindView(R.id.assessment_note_text)
+    TextView type;
 
+    /*
     //Exits Assessment detail screen and returns user to the list of Assessments
     @OnClick(R.id.assessment_detail_exit)
     void continueClickHandler(){
@@ -32,6 +37,8 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+     */
 
     //exits Assessment detail screen
     @OnClick(R.id.assessment_detail_exit)
@@ -68,9 +75,11 @@ public class AssessmentDetailActivity extends AppCompatActivity {
 
         mViewModel.mLiveAssessment.observe(this, new Observer<AssessmentEntity>() {
             @Override
-            public void onChanged(@Nullable AssessmentEntity assessmentDetailEntity) {
-                if(assessmentDetailEntity != null && !mEditing) {
-                    assessmentDetailTextView.setText(assessmentDetailEntity.getText());
+            public void onChanged(@Nullable AssessmentEntity assessmentEntity) {
+                if(assessmentEntity != null && !mEditing) {
+                    assessmentDetailTextView.setText("Title: " + assessmentEntity.getText());
+                    type.setText("Assessment Type: " + assessmentEntity.getType());
+                    due.setText("Due on or before " + assessmentEntity.getDueDate());
                 }
             }
         });
@@ -81,7 +90,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
             mNewAssessmentDetail = true;
         } else {
             setTitle(R.string.assessment);
-            int assessmentDetailId = extras.getInt(ASSESSMENT_DETAIL_ID_KEY);
+            int assessmentDetailId = extras.getInt(ASS_ID_KEY);
             mViewModel.loadData(assessmentDetailId);
         }
     }

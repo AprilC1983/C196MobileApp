@@ -35,6 +35,7 @@ public class MainViewModel extends AndroidViewModel {
         mNotes = mRepository.mNotess;
     }
 
+
     public void addSampleData() {
 
         mRepository.addSampleData();

@@ -23,6 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
+
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
@@ -30,20 +32,18 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "Main Activity";
 
-    @OnClick(R.id.edit_fab)
+    @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, TermEditorActivity.class);
+        intent.putExtra(TERM_ID_KEY, termId);
         startActivity(intent);
-        Log.i(TAG, "fabClickHandler: create new term");
     }
 
 
     private List<TermEntity> termsData = new ArrayList<>();
-    //private List<CourseEntity> coursesData = new ArrayList<>();
-    //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
     private TermAdapter mAdapter;
-    //private CourseAdapter cAdapter;
     private MainViewModel mViewModel;
+    int termId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
+
+
                 }
             }
         };
@@ -78,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
 
-        //this method call
         mViewModel.mTerms.observe(this, termsObserver);
     }
 

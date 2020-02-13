@@ -10,8 +10,10 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.example.acmay.c196mobileapp.database.AssessmentEntity;
+import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.ui.AssessmentAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
@@ -22,23 +24,28 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
+
 public class AssessmentDisplayActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    @OnClick(R.id.edit_fab)
+    @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        Log.i("zz", "fabClickHandler assdisplay: cid = " + courseId);
         startActivity(intent);
     }
 
-    private List<AssessmentEntity> assessmentsData = new ArrayList<>();
-    //private List<CourseEntity> coursesData = new ArrayList<>();
-    //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
+    private List<AssessmentEntity> allAssessments = new ArrayList<>();
+    private List<AssessmentEntity> displayAssessments = new ArrayList<>();
     private AssessmentAdapter mAdapter;
-    //private CourseAdapter cAdapter;
     private MainViewModel mViewModel;
+    private int courseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +53,8 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
         initRecyclerView();
         initViewModel();
@@ -58,11 +66,17 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
         final Observer<List<AssessmentEntity>> assessmentsObserver = new Observer<List<AssessmentEntity>>() {
             @Override
             public void onChanged(@Nullable List<AssessmentEntity> assessmentEntities) {
-                assessmentsData.clear();
-                assessmentsData.addAll(assessmentEntities);
+                allAssessments.clear();
+                allAssessments.addAll(assessmentEntities);
+
+                List<AssessmentEntity> selectedAssessments;
+                selectedAssessments = getSelected(allAssessments);
+
+                displayAssessments.clear();
+                displayAssessments.addAll(selectedAssessments);
 
                 if(mAdapter == null){
-                    mAdapter = new AssessmentAdapter(assessmentsData, AssessmentDisplayActivity.this);
+                    mAdapter = new AssessmentAdapter(displayAssessments, AssessmentDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
@@ -87,5 +101,23 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
 
         mRecyclerView.addItemDecoration(divider);
 
+    }
+
+    private List<AssessmentEntity> getSelected(List<AssessmentEntity> all){
+        Bundle extras = getIntent().getExtras();
+        courseId = extras.getInt(COURSE_ID_KEY);
+        Log.i("zzz", "getSelected in assessment display: cid is" + courseId);
+
+        List<AssessmentEntity> selected = new ArrayList<>();
+        for(int i = 0; i < allAssessments.size(); i++){
+            AssessmentEntity assessment;
+            assessment = allAssessments.get(i);
+
+            int course = assessment.getCourseID();
+            if(course == courseId){
+                selected.add(assessment);
+            }
+        }
+        return selected;
     }
 }

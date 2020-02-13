@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,15 +28,23 @@ public class TermEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.display_text)
     TextView mTextView;
+    @BindView(R.id.start_date_text)
+    TextView startText;
+    @BindView(R.id.end_date_text)
+    TextView endText;
 
+    /*
     //Saves the term information and continues to the new course screen
     @OnClick(R.id.term_continue_btn)
     void continueClickHandler(){
         saveAndReturn();
         Intent intent = new Intent(this, CourseEditorActivity.class);
+        intent.putExtra(TERM_ID_KEY, termID);
+        Log.i("editorkeys", "continueClickHandler: tid term continue is " + termID);
         startActivity(intent);
-
     }
+
+     */
 
     //Exits the create term screen without saving
     @OnClick(R.id.term_cancel_btn)
@@ -51,6 +60,8 @@ public class TermEditorActivity extends AppCompatActivity {
 
     private TermViewModel mViewModel;
     private boolean mNewTerm, mEditing;
+    private int termID;
+    int termIDEEE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +69,7 @@ public class TermEditorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
@@ -78,7 +89,9 @@ public class TermEditorActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable TermEntity termEntity) {
                 if(termEntity != null && !mEditing) {
-                    mTextView.setText(termEntity.getText());
+                    mTextView.setText(termEntity.getTitle());
+                    //termID = termEntity.getId();
+                    Log.i("editorkeys", "onChanged: tid is " + termID);
                 }
             }
         });
@@ -89,11 +102,10 @@ public class TermEditorActivity extends AppCompatActivity {
             mNewTerm = true;
         } else {
             setTitle(R.string.edit_term);
-            int termId = extras.getInt(TERM_ID_KEY);
-            mViewModel.loadData(termId);
+            termID = extras.getInt(TERM_ID_KEY);
+            mViewModel.loadData(termID);
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -122,7 +134,7 @@ public class TermEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTerm(mTextView.getText().toString());
+        mViewModel.saveTerm(mTextView.getText().toString(), startText.getText().toString(), endText.getText().toString());
         finish();
     }
 

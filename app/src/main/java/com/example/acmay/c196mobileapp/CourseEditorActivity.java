@@ -7,10 +7,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.viewmodel.CourseViewModel;
+
+import java.sql.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,20 +25,37 @@ import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class CourseEditorActivity extends AppCompatActivity {
 
-
     @BindView(R.id.course_text)
     TextView courseTextView;
+    @BindView(R.id.course_start_text)
+    TextView courseStart;
+    @BindView(R.id.course_end_text)
+    TextView courseEnd;
+    @BindView(R.id.plan_to_take_rb)
+    RadioButton plannedRb;
+    @BindView(R.id.in_progress_rb)
+    RadioButton inProgRb;
+    @BindView(R.id.completed_rb)
+    RadioButton completedRb;
+    @BindView(R.id.dropped_rb)
+    RadioButton droppedRb;
 
+    /*
     //saves entered course data and continues to the assessment editor screen
     @OnClick(R.id.course_continue_btn)
     void continueClickHandler(){
         saveAndReturn();
         Intent intent = new Intent(this, MentorEditorActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseID);
+        Log.i("editorkeys", "continueClickHandler: from course editor cid is" + courseID);
         startActivity(intent);
     }
+
+     */
 
     //exits course screen without saving data
     @OnClick(R.id.course_cancel_btn)
@@ -45,9 +69,10 @@ public class CourseEditorActivity extends AppCompatActivity {
         saveAndReturn();
     }
 
-
     private CourseViewModel mViewModel;
-    private boolean mNewNote, mEditing;
+    private boolean mNewCourse, mEditing;
+    private int courseID;
+    private int termID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +80,7 @@ public class CourseEditorActivity extends AppCompatActivity {
         setContentView(R.layout.course_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
@@ -72,39 +97,38 @@ public class CourseEditorActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(CourseViewModel.class);
 
-        //NEED TO SET UP COURSEENTITY
-
         mViewModel.mLiveCourse.observe(this, new Observer<CourseEntity>() {
             @Override
             public void onChanged(@Nullable CourseEntity courseEntity) {
                 if(courseEntity != null && !mEditing) {
-                    courseTextView.setText(courseEntity.getText());
+                    courseTextView.setText(courseEntity.getTitle());
                 }
             }
         });
 
         Bundle extras = getIntent().getExtras();
+
         if(extras == null){
             setTitle(R.string.new_course);
-            mNewNote = true;
+            mNewCourse = true;
         } else {
             setTitle(R.string.edit_course);
-            int courseId = extras.getInt(COURSE_ID_KEY);
-            mViewModel.loadData(courseId);
+            courseID = extras.getInt(COURSE_ID_KEY);
+            Log.i("cid", "course id = " + courseID);
+            mViewModel.loadData(courseID);
+            termID = extras.getInt(TERM_ID_KEY);
         }
+
     }
-/*
-//Do I need this method?
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(!mNewNote){
+        if(!mNewCourse){
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_editor, menu);
         }
         return super.onCreateOptionsMenu(menu);
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -117,9 +141,6 @@ public class CourseEditorActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-//Do I need this^^^ method?
-
- */
 
 
     @Override
@@ -128,7 +149,22 @@ public class CourseEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveCourse(courseTextView.getText().toString());
+        String title = courseTextView.getText().toString();
+        String start = courseStart.getText().toString();
+        String end = courseEnd.getText().toString();
+        String status = "";
+
+        if(plannedRb.isChecked()){
+            status = "Plan to take";
+        }else if(inProgRb.isChecked()){
+            status = "In progress";
+        }else if(completedRb.isChecked()){
+            status = "Completed";
+        }else if(droppedRb.isChecked()){
+            status = "dropped";
+        }
+
+        mViewModel.saveCourse(termID, start, end, title, status);
         finish();
     }
 

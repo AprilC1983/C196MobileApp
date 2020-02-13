@@ -1,27 +1,41 @@
 package com.example.acmay.c196mobileapp.database;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "notes")
+@Entity(tableName = "notes"/*, foreignKeys = @ForeignKey(entity = NoteEntity.class,
+        parentColumns = "courseID", childColumns = "courseID", onDelete = ForeignKey.RESTRICT)*/)
 public class NoteEntity {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int noteID;
+    private int courseID;
     private Date date;
     private String text;
+
+    public NoteEntity(int courseID, Date date, String text) {
+        this.courseID = courseID;
+        this.date = date;
+        this.text = text;
+    }
+
+
 
     @Ignore
     public NoteEntity() {
     }
 
+    /*
     public NoteEntity(int id, Date date, String text) {
-        this.id = id;
+        this.courseID = id;
         this.date = date;
         this.text = text;
     }
+
+     */
 
     @Ignore
     public NoteEntity(Date date, String text) {
@@ -30,11 +44,11 @@ public class NoteEntity {
     }
 
     public int getId() {
-        return id;
+        return noteID;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.noteID = id;
     }
 
     public Date getDate() {
@@ -53,10 +67,26 @@ public class NoteEntity {
         this.text = text;
     }
 
+    public int getNoteID() {
+        return noteID;
+    }
+
+    public void setNoteID(int noteID) {
+        this.noteID = noteID;
+    }
+
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
+    }
+
     @Override
     public String toString() {
         return "NoteEntity{" +
-                "id=" + id +
+                "id=" + noteID +
                 ", date=" + date +
                 ", text='" + text + '\'' +
                 '}';

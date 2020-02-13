@@ -16,22 +16,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_DETAIL_ID_KEY;
+//import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_DETAIL_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class TermDetailActivity extends AppCompatActivity {
 
 
     @BindView(R.id.term_title_text)
     TextView termDetailTextView;
-
-    //Exits term detail screen and returns user to the list of courses
-    @OnClick(R.id.term_detail_exit)
-    void continueClickHandler(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
+    @BindView(R.id.term_start_text)
+    TextView termStart;
+    @BindView(R.id.term_end_text)
+    TextView termEnd;
 
     //exits term detail screen
     @OnClick(R.id.term_detail_exit)
@@ -68,9 +65,11 @@ public class TermDetailActivity extends AppCompatActivity {
 
         mViewModel.mLiveTerm.observe(this, new Observer<TermEntity>() {
             @Override
-            public void onChanged(@Nullable TermEntity termDetailEntity) {
-                if(termDetailEntity != null && !mEditing) {
-                    termDetailTextView.setText(termDetailEntity.getText());
+            public void onChanged(@Nullable TermEntity termEntity) {
+                if(termEntity != null && !mEditing) {
+                    termDetailTextView.setText("Term: " + termEntity.getTitle());
+                    termStart.setText("Start Date: " + termEntity.getStartDate());
+                    termEnd.setText("End Date: " + termEntity.getEndDate());
                 }
             }
         });
@@ -81,8 +80,9 @@ public class TermDetailActivity extends AppCompatActivity {
             mNewTermDetail = true;
         } else {
             setTitle(R.string.selected_term);
-            int termDetailId = extras.getInt(TERM_DETAIL_ID_KEY);
+            int termDetailId = extras.getInt(TERM_ID_KEY);
             mViewModel.loadData(termDetailId);
+
         }
     }
 

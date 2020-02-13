@@ -48,7 +48,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final TermEntity term = mTerms.get(position);
-        holder.mTextView.setText(term.getText());
+        holder.mTextView.setText(term.getTitle());
 
         holder.eFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +56,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
                 Intent intent = new Intent(mContext, TermEditorActivity.class);
                 intent.putExtra(TERM_ID_KEY, term.getId());
                 mContext.startActivity(intent);
-                Log.i(TAG, "onClick: Open term editor");
+                Log.i("editorkeys", "onClick: Open term editor tid is " + term.getId());
             }
         });
 
@@ -75,7 +75,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, TermDetailActivity.class);
-                intent.putExtra(COURSE_ID_KEY, term.getId());
+                intent.putExtra(TERM_ID_KEY, term.getId());
                 mContext.startActivity(intent);
                 Log.i(TAG, "onClick: Open term details");
             }

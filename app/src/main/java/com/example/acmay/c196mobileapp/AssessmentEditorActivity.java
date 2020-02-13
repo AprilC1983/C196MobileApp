@@ -1,21 +1,29 @@
 package com.example.acmay.c196mobileapp;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.acmay.c196mobileapp.database.AssessmentEntity;
 import com.example.acmay.c196mobileapp.viewmodel.AssessmentViewModel;
+
+import java.text.ParseException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 
 public class AssessmentEditorActivity extends AppCompatActivity {
@@ -23,12 +31,19 @@ public class AssessmentEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.assessment_text)
     TextView assessmentTextView;
+    @BindView(R.id.objective_rb)
+    RadioButton objective;
+    @BindView(R.id.performance_rb)
+    RadioButton performance;
+    @BindView(R.id.assessment_due_date)
+    TextView dueText;
+
+    public AssessmentEditorActivity() throws ParseException {
+    }
 
     //Saves assessment data and returns to the main screen
     @OnClick(R.id.assessment_save)
     void continueClickHandler(){
-        //Intent intent = new Intent(this, MainActivity.class);
-        //startActivity(intent);
         saveAndReturn();
     }
 
@@ -41,6 +56,8 @@ public class AssessmentEditorActivity extends AppCompatActivity {
 
     private AssessmentViewModel mViewModel;
     private boolean mNewNote, mEditing;
+    private int courseId;
+    private int assId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +65,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
         setContentView(R.layout.assessment_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_check);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -65,17 +82,19 @@ public class AssessmentEditorActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(AssessmentViewModel.class);
 
-        /*
-        mViewModel.mLiveAssessment.observe(this, new Observer<TermEntity>() {
+
+        mViewModel.mLiveAssessment.observe(this, new Observer<AssessmentEntity>() {
             @Override
-            public void onChanged(@Nullable TermEntity termEntity) {
-                if(termEntity != null && !mEditing) {
-                    mTextView.setName(termEntity.getName());
+            public void onChanged(@Nullable AssessmentEntity assessmentEntity) {
+                if(assessmentEntity != null && !mEditing) {
+                    assessmentTextView.setText(assessmentEntity.getTitle());
+                    assId = assessmentEntity.getId();
+                    courseId = assessmentEntity.getCourseID();
                 }
             }
         });
 
-         */
+
 
         Bundle extras = getIntent().getExtras();
         if(extras == null){
@@ -83,8 +102,9 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             mNewNote = true;
         } else {
             setTitle(R.string.edit_assessment);
-            int assessmentId = extras.getInt(ASS_ID_KEY);
-            mViewModel.loadData(assessmentId);
+            assId = extras.getInt(ASS_ID_KEY);
+            mViewModel.loadData(assId);
+            courseId = extras.getInt(COURSE_ID_KEY);
         }
     }
 
@@ -116,7 +136,17 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveAssessment(assessmentTextView.getText().toString());
+        String title = assessmentTextView.getText().toString();
+        String dueDate = dueText.getText().toString();
+        String type = "";
+
+        if(objective.isChecked()){
+            type = "Objective";
+        }else if(performance.isChecked()){
+            type = "Performance";
+        }
+
+        mViewModel.saveAssessment(courseId, dueDate, title, type);
         finish();
     }
 

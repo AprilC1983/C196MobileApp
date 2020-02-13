@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.CourseEntity;
@@ -16,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_DETAIL_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 
 public class CourseDetailActivity extends AppCompatActivity {
@@ -24,7 +25,14 @@ public class CourseDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.course_title_text)
     TextView courseDetailTextView;
+    @BindView(R.id.course_start_text)
+    TextView courseStart;
+    @BindView(R.id.course_end_text)
+    TextView courseEnd;
+    @BindView(R.id.status_text)
+    TextView courseStatus;
 
+    /*
     //Exits Course detail screen and returns user to the list of courses
     @OnClick(R.id.course_detail_exit)
     void continueClickHandler(){
@@ -32,7 +40,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
+*/
     //exits Course detail screen
     @OnClick(R.id.course_detail_exit)
     void cancelClickHandler(){
@@ -40,23 +48,28 @@ public class CourseDetailActivity extends AppCompatActivity {
     }
 
     //open the note editor activity to add a note
-    @OnClick(R.id.add_note_btn)
+    @OnClick(R.id.view_btn)
     void addClickHandler(){
-        Intent intent = new Intent(this, NoteEditorActivity.class);
+        Intent intent = new Intent(this, NoteDisplayActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        Log.i("ndis", "addClickHandler: cid is " + courseId);
         startActivity(intent);
         finish();
     }
 
     //view existing notes
-    @OnClick(R.id.view_notes_btn)
+    @OnClick(R.id.add_btn)
     void viewClickHandler(){
-        Intent intent = new Intent(this, NoteDisplayActivity.class);
+        Intent intent = new Intent(this, NoteEditorActivity.class);
         startActivity(intent);
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        Log.i("ndis", "viewClickHandler: cid is " + courseId);
         finish();
     }
 
     private CourseDetailViewModel mViewModel;
     private boolean mNewCourseDetail, mEditing;
+    private int courseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +99,12 @@ public class CourseDetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable CourseEntity courseEntity) {
                 if(courseEntity != null && !mEditing) {
-                    courseDetailTextView.setText(courseEntity.getText());
+                    courseDetailTextView.setText("Course Title: " + courseEntity.getTitle());
+                    courseStart.setText("Start Date: " + courseEntity.getStartDate());
+                    courseEnd.setText("End Date: " + courseEntity.getEndDate());
+                    courseStatus.setText("Status: " + courseEntity.getStatus());
                 }
+
             }
         });
 
@@ -97,8 +114,8 @@ public class CourseDetailActivity extends AppCompatActivity {
             mNewCourseDetail = true;
         } else {
             setTitle(R.string.selected_course);
-            int courseDetailId = extras.getInt(COURSE_DETAIL_ID_KEY);
-            mViewModel.loadData(courseDetailId);
+            courseId = extras.getInt(COURSE_ID_KEY);
+            mViewModel.loadData(courseId);
         }
     }
 

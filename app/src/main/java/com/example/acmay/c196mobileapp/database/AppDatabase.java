@@ -11,15 +11,18 @@ import android.content.Context;
 import static android.arch.persistence.room.Room.databaseBuilder;
 
 @Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class,
-        MentorEntity.class, NoteEntity.class}, version = 5)
+        MentorEntity.class, NoteEntity.class}, version = 16)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
+    /*
     static final Migration MIGRATION_4_5 = new Migration(4, 5){
         @Override
         public void migrate(SupportSQLiteDatabase database){
             database.execSQL("CREATE TABLE notes(id INTEGER NOT NULL, text TEXT, date INTEGER, PRIMARY KEY (id))");
         }
     };
+
+     */
 
     public static final String DATABASE_NAME = "AppDatabase.db";
     private static volatile AppDatabase instance;
@@ -36,8 +39,13 @@ public abstract class AppDatabase extends RoomDatabase {
         if(instance == null){
             synchronized (LOCK){
                 if(instance == null){
+                    /*
                     instance = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, DATABASE_NAME).addMigrations(MIGRATION_4_5).build();
+
+                     */
+                    instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DATABASE_NAME)
+                            .fallbackToDestructiveMigration().build();
                 }
             }
         }

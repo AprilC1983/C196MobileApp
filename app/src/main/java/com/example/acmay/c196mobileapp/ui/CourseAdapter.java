@@ -49,7 +49,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final CourseEntity course = mCourses.get(position);
-        holder.mTextView.setText(course.getText());
+        holder.mTextView.setText(course.getTitle());
 
         holder.eFab.setOnClickListener(new View.OnClickListener() {
             @Override

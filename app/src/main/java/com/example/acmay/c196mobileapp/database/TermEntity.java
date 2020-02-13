@@ -8,57 +8,96 @@ import java.util.Date;
 
 @Entity(tableName = "terms")
 public class TermEntity {
+    public int getTermID() {
+        return termID;
+    }
+
     @PrimaryKey(autoGenerate = true)
-    private int id;
-    private Date date;
-    private String text;
+    private int termID;
+    private Date createDate;
+    private String startDate;
+    private String endDate;
+    private String title;
+
+    public TermEntity(int termID, Date createDate, String startDate, String endDate, String title) {
+        this.termID = termID;
+        this.createDate = createDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.title = title;
+    }
+
+    @Ignore
+    public TermEntity(Date createDate, String startDate, String endDate, String title) {
+        this.createDate = createDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.title = title;
+    }
 
     @Ignore
     public TermEntity() {
     }
 
-    public TermEntity(int id, Date date, String text) {
-        this.id = id;
-        this.date = date;
-        this.text = text;
+    @Ignore
+    public TermEntity(int id, Date createDate, String title) {
+        this.termID = id;
+        this.createDate = createDate;
+        this.title = title;
     }
 
     @Ignore
-    public TermEntity(Date date, String text) {
-        this.date = date;
-        this.text = text;
+    public TermEntity(Date createDate, String title) {
+        this.createDate = createDate;
+        this.title = title;
     }
 
     public int getId() {
-        return id;
+        return termID;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.termID = id;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public String getText() {
-        return text;
+    public String getTitle() {
+        return title;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     @Override
     public String toString() {
         return "TermEntity{" +
-                "id=" + id +
-                ", date=" + date +
-                ", text='" + text + '\'' +
+                "id=" + termID +
+                ", createDate=" + createDate +
+                ", title='" + title + '\'' +
                 '}';
     }
 }

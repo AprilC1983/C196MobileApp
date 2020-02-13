@@ -17,10 +17,10 @@
         android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389"
+        app:layout_constraintVertical_bias="0.336"
         tools:targetApi="o" />
 
     <TextView
@@ -33,7 +33,7 @@
         android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_title_text"
         app:layout_constraintVertical_bias="0.056"
@@ -49,10 +49,26 @@
         android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_start_text"
-        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintVertical_bias="0.097"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/status_text"
+        android:layout_width="375dp"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_end_text"
+        app:layout_constraintVertical_bias="0.097"
         tools:targetApi="o" />
 
     <Button
@@ -70,23 +86,23 @@
         app:layout_constraintVertical_bias="0.801" />
 
     <Button
-        android:id="@+id/view_notes_btn"
+        android:id="@+id/add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/view_notes"
+        android:text="@string/enter_note"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.677"
-        app:layout_constraintStart_toEndOf="@id/add_note_btn"
+        app:layout_constraintStart_toEndOf="@id/view_btn"
         app:layout_constraintTop_toBottomOf="@+id/course_end_text"
         app:layout_constraintVertical_bias="0.519" />
 
     <Button
-        android:id="@+id/add_note_btn"
+        android:id="@+id/view_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter_note"
+        android:text="@string/view_notes"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

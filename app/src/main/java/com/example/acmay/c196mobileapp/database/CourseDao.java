@@ -21,10 +21,10 @@ public interface CourseDao {
     @Delete
     void deleteCourse(CourseEntity courseEntity);
 
-    @Query("SELECT * FROM courses WHERE id = :id")
+    @Query("SELECT * FROM courses WHERE courseID = :id")
     CourseEntity getCourseById(int id);
 
-    @Query("SELECT * FROM courses ORDER BY date DESC")
+    @Query("SELECT * FROM courses ORDER BY createDate DESC")
     LiveData<List<CourseEntity>> getAll();
 
     @Query("DELETE FROM courses")

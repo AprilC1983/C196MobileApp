@@ -16,12 +16,15 @@ import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.ui.CourseAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class CourseDisplayActivity extends AppCompatActivity {
 
@@ -30,16 +33,20 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
     public static final String TAG = "Course Display";
 
-    @OnClick(R.id.edit_fab)
+    @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, CourseEditorActivity.class);
+        intent.putExtra(TERM_ID_KEY, termId);
         startActivity(intent);
         Log.i(TAG, "fabClickHandler: create course");
     }
 
-    private List<CourseEntity> coursesData = new ArrayList<>();
+    private List<CourseEntity> allCourses = new ArrayList<>();
+    private List<CourseEntity> displayCourses = new ArrayList<>();
     private CourseAdapter mAdapter;
     private MainViewModel mViewModel;
+
+    private int termId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,23 +54,32 @@ public class CourseDisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
         initRecyclerView();
         initViewModel();
     }
 
 
+
+    ///////////////////////////////////////////kjcnvkdfnkxfnd
     private void initViewModel() {
 
         final Observer<List<CourseEntity>> coursesObserver = new Observer<List<CourseEntity>>() {
             @Override
             public void onChanged(@Nullable List<CourseEntity> courseEntities) {
-                coursesData.clear();
-                coursesData.addAll(courseEntities);
+                allCourses.clear();
+                allCourses.addAll(courseEntities);
+
+                List<CourseEntity> selectedCourses;
+                selectedCourses = getSelected(allCourses);
+
+                displayCourses.clear();
+                displayCourses.addAll(selectedCourses);
 
                 if(mAdapter == null){
-                    mAdapter = new CourseAdapter(coursesData, CourseDisplayActivity.this);
+                    mAdapter = new CourseAdapter(displayCourses, CourseDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
@@ -76,6 +92,17 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
         mViewModel.mCourses.observe(this, coursesObserver);
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 
     private void initRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
@@ -87,5 +114,23 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
         mRecyclerView.addItemDecoration(divider);
 
+    }
+
+    //returns a list of courses associated with the selected term
+    private List<CourseEntity> getSelected(List<CourseEntity> all){
+        Bundle extras = getIntent().getExtras();
+        termId = extras.getInt(TERM_ID_KEY);
+
+        List<CourseEntity> selected = new ArrayList<>();
+        for(int i = 0; i < allCourses.size(); i++){
+            CourseEntity course;
+            course = allCourses.get(i);
+
+            int term = course.getTermID();
+            if(term == termId){
+                selected.add(course);
+            }
+        }
+        return selected;
     }
 }
