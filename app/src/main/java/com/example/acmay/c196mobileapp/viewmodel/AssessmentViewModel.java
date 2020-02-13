@@ -46,6 +46,8 @@ public class AssessmentViewModel extends AndroidViewModel {
             assessment = new AssessmentEntity(course, new Date(), dueDate, title.trim(), type.trim());
         } else{
             assessment.setText(title.trim());
+            assessment.setDueDate(dueDate.trim());
+            assessment.setType(type.trim());
         }
         mRepository.insertAssessment(assessment);
     }

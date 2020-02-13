@@ -92,7 +92,9 @@ public class MentorEditorActivity extends AppCompatActivity {
             public void onChanged(@Nullable MentorEntity mentorEntity) {
                 if(mentorEntity != null && !mEditing) {
                     mTextView.setText(mentorEntity.getName());
-                    mentorId = mentorEntity.getMentorID();
+                    phoneText.setText(mentorEntity.getPhone());
+                    emailText.setText(mentorEntity.getEmail());
+                    //mentorId = mentorEntity.getMentorID();
                 }
             }
         });

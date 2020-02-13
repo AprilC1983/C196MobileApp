@@ -61,7 +61,6 @@ public class TermEditorActivity extends AppCompatActivity {
     private TermViewModel mViewModel;
     private boolean mNewTerm, mEditing;
     private int termID;
-    int termIDEEE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +89,8 @@ public class TermEditorActivity extends AppCompatActivity {
             public void onChanged(@Nullable TermEntity termEntity) {
                 if(termEntity != null && !mEditing) {
                     mTextView.setText(termEntity.getTitle());
-                    //termID = termEntity.getId();
-                    Log.i("editorkeys", "onChanged: tid is " + termID);
+                    startText.setText(termEntity.getStartDate());
+                    endText.setText(termEntity.getEndDate());
                 }
             }
         });

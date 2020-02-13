@@ -32,9 +32,9 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     @BindView(R.id.assessment_text)
     TextView assessmentTextView;
     @BindView(R.id.objective_rb)
-    RadioButton objective;
+    RadioButton objectiveRb;
     @BindView(R.id.performance_rb)
-    RadioButton performance;
+    RadioButton performanceRb;
     @BindView(R.id.assessment_due_date)
     TextView dueText;
 
@@ -58,6 +58,8 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     private boolean mNewNote, mEditing;
     private int courseId;
     private int assId;
+    String perf = "Performance";
+    String obj = "Objective";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +89,18 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable AssessmentEntity assessmentEntity) {
                 if(assessmentEntity != null && !mEditing) {
+                    String assessmentType = assessmentEntity.getType();
+
                     assessmentTextView.setText(assessmentEntity.getTitle());
-                    assId = assessmentEntity.getId();
-                    courseId = assessmentEntity.getCourseID();
+                    dueText.setText(assessmentEntity.getDueDate());
+
+                    if(assessmentType == perf){
+                        performanceRb.setChecked(true);
+                    }else if(assessmentType == obj){
+                        objectiveRb.setChecked(true);
+                    }
+                    //assId = assessmentEntity.getId();
+                    //courseId = assessmentEntity.getCourseID();
                 }
             }
         });
@@ -140,10 +151,10 @@ public class AssessmentEditorActivity extends AppCompatActivity {
         String dueDate = dueText.getText().toString();
         String type = "";
 
-        if(objective.isChecked()){
-            type = "Objective";
-        }else if(performance.isChecked()){
-            type = "Performance";
+        if(objectiveRb.isChecked()){
+            type = obj;
+        }else if(performanceRb.isChecked()){
+            type = perf;
         }
 
         mViewModel.saveAssessment(courseId, dueDate, title, type);
