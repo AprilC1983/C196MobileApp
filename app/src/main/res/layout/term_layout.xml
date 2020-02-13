@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
 
     <EditText
         android:id="@+id/display_text"
@@ -17,45 +17,45 @@
         android:inputType="text|textCapSentences"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.277"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.383"
+        app:layout_constraintVertical_bias="0.339"
         tools:targetApi="o" />
 
-
-    <EditText
-        android:id="@+id/start_date_text"
-        android:layout_width="375dp"
-        android:layout_height="55dp"
+    <DatePicker
+        android:id="@+id/term_start_picker"
+        android:layout_width="@dimen/spinner_width"
+        android:layout_height="@dimen/spinner_height"
         android:layout_margin="@dimen/text_margin"
         android:layout_marginBottom="4dp"
-        android:autofillHints=""
-        android:hint="@string/enter_start"
-        android:inputType="date"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/display_text"
-        app:layout_constraintVertical_bias="0.056"
+        app:layout_constraintVertical_bias="0.051"
         tools:targetApi="o" />
 
-    <EditText
-        android:id="@+id/end_date_text"
-        android:layout_width="375dp"
-        android:layout_height="55dp"
+    <DatePicker
+        android:id="@+id/term_end_picker"
+        android:layout_width="@dimen/spinner_width"
+        android:layout_height="@dimen/spinner_height"
         android:layout_margin="@dimen/text_margin"
         android:layout_marginBottom="4dp"
-        android:autofillHints=""
-        android:hint="@string/enter_end_date"
-        android:inputType="date"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_date_text"
-        app:layout_constraintVertical_bias="0.064"
+        app:layout_constraintTop_toBottomOf="@+id/term_start_picker"
+        app:layout_constraintVertical_bias="0.198"
         tools:targetApi="o" />
 
     <Button
@@ -67,7 +67,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/term_save_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/end_date_text"
+        app:layout_constraintTop_toBottomOf="@+id/term_end_picker"
         app:layout_constraintVertical_bias="0.781" />
 
     <Button
@@ -79,8 +79,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/term_cancel_btn"
-        app:layout_constraintTop_toBottomOf="@+id/end_date_text"
+        app:layout_constraintTop_toBottomOf="@+id/term_end_picker"
         app:layout_constraintVertical_bias="0.781" />
+
+    <TextView
+        android:id="@+id/start_label"
+        android:layout_width="@dimen/label_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="51dp"
+        android:text="@string/enter_start"
+        app:layout_constraintEnd_toStartOf="@+id/term_start_picker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/display_text" />
+
+    <TextView
+        android:id="@+id/end_label"
+        android:layout_width="@dimen/label_width"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_end_date"
+
+        app:layout_constraintBottom_toTopOf="@+id/term_cancel_btn"
+        app:layout_constraintEnd_toStartOf="@+id/term_end_picker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_label"
+        app:layout_constraintVertical_bias="0.576" />
 
     <!--
     <Button

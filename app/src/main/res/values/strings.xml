@@ -10,8 +10,8 @@
     <string name="edit_course">Edit Course</string>
     <string name="edit_mentor">Edit Mentor Details</string>
     <string name="edit_assessment">Edit Assessment</string>
-    <string name="enter_start">Enter start date</string>
-    <string name="enter_end_date">Enter end date</string>
+    <string name="enter_start">Start</string>
+    <string name="enter_end_date">End</string>
     <string name="continue_button_text">Continue</string>
     <string name="enter_course_name">Enter course name</string>
     <string name="in_progress">In Progress</string>

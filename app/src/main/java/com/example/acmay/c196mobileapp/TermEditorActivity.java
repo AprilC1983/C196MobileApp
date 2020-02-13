@@ -2,15 +2,14 @@ package com.example.acmay.c196mobileapp;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.TermEntity;
@@ -28,10 +27,10 @@ public class TermEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.display_text)
     TextView mTextView;
-    @BindView(R.id.start_date_text)
-    TextView startText;
-    @BindView(R.id.end_date_text)
-    TextView endText;
+    @BindView(R.id.term_start_picker)
+    DatePicker startDate;
+    @BindView(R.id.term_end_picker)
+    DatePicker endDate;
 
     /*
     //Saves the term information and continues to the new course screen
@@ -89,8 +88,8 @@ public class TermEditorActivity extends AppCompatActivity {
             public void onChanged(@Nullable TermEntity termEntity) {
                 if(termEntity != null && !mEditing) {
                     mTextView.setText(termEntity.getTitle());
-                    startText.setText(termEntity.getStartDate());
-                    endText.setText(termEntity.getEndDate());
+                    //startText.setText(termEntity.getStartDate());
+                    //endText.setText(termEntity.getEndDate());
                 }
             }
         });
@@ -133,7 +132,7 @@ public class TermEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTerm(mTextView.getText().toString(), startText.getText().toString(), endText.getText().toString());
+        //mViewModel.saveTerm(mTextView.getText().toString(), startText.getText().toString(), endText.getText().toString());
         finish();
     }
 
