@@ -36,14 +36,15 @@ public class CourseDisplayActivity extends AppCompatActivity {
     @OnClick(R.id.edit_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, CourseEditorActivity.class);
+        intent.putExtra(TERM_ID_KEY, termId);
         startActivity(intent);
         Log.i(TAG, "fabClickHandler: create course");
     }
 
     private List<CourseEntity> allCourses = new ArrayList<>();
-    //private ArrayList<CourseEntity> allCourses = new ArrayList<>();
     private CourseAdapter mAdapter;
     private MainViewModel mViewModel;
+    private int termId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,24 +67,12 @@ public class CourseDisplayActivity extends AppCompatActivity {
         final Observer<List<CourseEntity>> coursesObserver = new Observer<List<CourseEntity>>() {
             @Override
             public void onChanged(@Nullable List<CourseEntity> courseEntities) {
-                List<CourseEntity> selectedCourses = new ArrayList<>();
+                //List<CourseEntity> selectedCourses = new ArrayList<>();
                 allCourses.clear();
                 allCourses.addAll(courseEntities);
 
-
-                //selects courses associated with the selected term
-                Bundle extras = getIntent().getExtras();
-                int termId = extras.getInt(TERM_ID_KEY);
-
-                for(int i = 0; i < allCourses.size(); i++){
-                    CourseEntity course;
-                    course = allCourses.get(i);
-
-                    int term = course.getTermID();
-                    if(term == termId){
-                        selectedCourses.add(course);
-                    }
-                }
+                List<CourseEntity> selectedCourses;
+                selectedCourses = getSelected(allCourses);
 
                 if(mAdapter == null){
                     mAdapter = new CourseAdapter(selectedCourses, CourseDisplayActivity.this);
@@ -121,5 +110,23 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
         mRecyclerView.addItemDecoration(divider);
 
+    }
+
+    //returns a list of courses associated with the selected term
+    private List<CourseEntity> getSelected(List<CourseEntity> all){
+        Bundle extras = getIntent().getExtras();
+        int termId = extras.getInt(TERM_ID_KEY);
+
+        List<CourseEntity> selected = new ArrayList<>();
+        for(int i = 0; i < allCourses.size(); i++){
+            CourseEntity course;
+            course = allCourses.get(i);
+
+            int term = course.getTermID();
+            if(term == termId){
+                selected.add(course);
+            }
+        }
+        return selected;
     }
 }

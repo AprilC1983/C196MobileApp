@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_DETAIL_ID_KEY;
+//import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_DETAIL_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 

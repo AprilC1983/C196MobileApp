@@ -94,15 +94,19 @@ public class CourseEditorActivity extends AppCompatActivity {
         });
 
         Bundle extras = getIntent().getExtras();
+
         if(extras == null){
+            //term = extras.getInt(TERM_ID_KEY);
             setTitle(R.string.new_course);
             mNewCourse = true;
         } else {
             setTitle(R.string.edit_course);
             int courseId = extras.getInt(COURSE_ID_KEY);
             mViewModel.loadData(courseId);
-            term = extras.getInt("termKey");
+            //term = extras.getInt(TERM_ID_KEY);
+            term = extras.getInt(TERM_ID_KEY);
         }
+
     }
 
     @Override

@@ -37,7 +37,8 @@ public class TermEditorActivity extends AppCompatActivity {
     void continueClickHandler(){
         saveAndReturn();
         Intent intent = new Intent(this, CourseEditorActivity.class);
-        intent.putExtra("termKey", termID);
+        intent.putExtra(TERM_ID_KEY, termID);
+        //intent.putExtra(TERM_ID_KEY, termID);
         startActivity(intent);
     }
 

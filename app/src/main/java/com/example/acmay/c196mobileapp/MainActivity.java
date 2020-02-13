@@ -23,6 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
+
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.edit_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, TermEditorActivity.class);
+        //intent.putExtra(TERM_ID_KEY, termId);
         startActivity(intent);
     }
 
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private List<TermEntity> termsData = new ArrayList<>();
     private TermAdapter mAdapter;
     private MainViewModel mViewModel;
+    //private int termId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

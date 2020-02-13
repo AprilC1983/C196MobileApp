@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_DETAIL_ID_KEY;
+//import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_DETAIL_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
@@ -67,7 +67,7 @@ public class TermDetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable TermEntity termEntity) {
                 if(termEntity != null && !mEditing) {
-                    termDetailTextView.setText(termEntity.getTitle());
+                    termDetailTextView.setText(termEntity.getTitle() + "  term id: " + termEntity.getId());
                     termStart.setText("Start Date: " + termEntity.getStartDate());
                     termEnd.setText("End Date: " + termEntity.getEndDate());
                 }
