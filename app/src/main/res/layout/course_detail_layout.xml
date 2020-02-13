@@ -70,23 +70,23 @@
         app:layout_constraintVertical_bias="0.801" />
 
     <Button
-        android:id="@+id/view_notes_btn"
+        android:id="@+id/add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/view_notes"
+        android:text="@string/enter_note"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.677"
-        app:layout_constraintStart_toEndOf="@id/add_note_btn"
+        app:layout_constraintStart_toEndOf="@id/view_btn"
         app:layout_constraintTop_toBottomOf="@+id/course_end_text"
         app:layout_constraintVertical_bias="0.519" />
 
     <Button
-        android:id="@+id/add_note_btn"
+        android:id="@+id/view_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter_note"
+        android:text="@string/view_notes"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
