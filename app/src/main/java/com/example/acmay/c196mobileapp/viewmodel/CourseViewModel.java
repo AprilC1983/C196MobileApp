@@ -56,6 +56,9 @@ public class CourseViewModel extends AndroidViewModel {
             course = new CourseEntity(termID, new Date(), startDate.trim(), endDate.trim(), courseText.trim(), status.trim());
         } else{
             course.setTitle(courseText.trim());
+            course.setStartDate(startDate.trim());
+            course.setEndDate(endDate.trim());
+            course.setStatus(status.trim());
         }
         mRepository.insertCourse(course);
     }

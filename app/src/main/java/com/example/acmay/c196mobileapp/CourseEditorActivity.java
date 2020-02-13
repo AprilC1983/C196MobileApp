@@ -73,6 +73,10 @@ public class CourseEditorActivity extends AppCompatActivity {
     private boolean mNewCourse, mEditing;
     private int courseID;
     private int termID;
+    String planned = "Plan to take";
+    String taking = "In Progress";
+    String completed = "Completed";
+    String dropped = "Dropped";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +105,21 @@ public class CourseEditorActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable CourseEntity courseEntity) {
                 if(courseEntity != null && !mEditing) {
+                    String currentStatus = courseEntity.getStatus();
+
+                    if(currentStatus == planned){
+                        plannedRb.setChecked(true);
+                    }else if(currentStatus == taking){
+                        inProgRb.setChecked(true);
+                    }else if(currentStatus == completed){
+                        completedRb.setChecked(true);
+                    }else if(currentStatus == dropped){
+                        droppedRb.setChecked(true);
+                    }
+
                     courseTextView.setText(courseEntity.getTitle());
+                    courseStart.setText(courseEntity.getStartDate());
+                    courseEnd.setText(courseEntity.getEndDate());
                 }
             }
         });
@@ -155,17 +173,17 @@ public class CourseEditorActivity extends AppCompatActivity {
         String status = "";
 
         if(plannedRb.isChecked()){
-            status = "Plan to take";
+            status = planned;
         }else if(inProgRb.isChecked()){
-            status = "In progress";
+            status = taking;
         }else if(completedRb.isChecked()){
-            status = "Completed";
+            status = completed;
         }else if(droppedRb.isChecked()){
-            status = "dropped";
+            status = dropped;
         }
 
-        mViewModel.saveCourse(termID, start, end, title, status);
-        finish();
+            mViewModel.saveCourse(termID, start, end, title, status);
+            finish();
     }
 
     @Override
