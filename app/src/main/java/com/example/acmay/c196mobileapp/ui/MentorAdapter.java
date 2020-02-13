@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.content.ContentValues.TAG;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.MENTOR_ID_KEY;
 
 public class MentorAdapter extends RecyclerView.Adapter<MentorAdapter.ViewHolder> {
@@ -55,6 +56,7 @@ public class MentorAdapter extends RecyclerView.Adapter<MentorAdapter.ViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MentorEditorActivity.class);
                 intent.putExtra(MENTOR_ID_KEY, mentor.getId());
+                intent.putExtra(COURSE_ID_KEY, mentor.getCourseID());
                 mContext.startActivity(intent);
                 Log.i(TAG, "onClick: Open Mentor editor");
             }
@@ -66,6 +68,7 @@ public class MentorAdapter extends RecyclerView.Adapter<MentorAdapter.ViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, AssessmentDisplayActivity.class);
                 intent.putExtra(MENTOR_ID_KEY, mentor.getId());
+                intent.putExtra(COURSE_ID_KEY, mentor.getCourseID());
                 mContext.startActivity(intent);
                 Log.i(TAG, "onClick: open courses display");
             }
@@ -77,6 +80,7 @@ public class MentorAdapter extends RecyclerView.Adapter<MentorAdapter.ViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MentorDetailActivity.class);
                 intent.putExtra(MENTOR_ID_KEY, mentor.getId());
+                intent.putExtra(COURSE_ID_KEY, mentor.getCourseID());
                 mContext.startActivity(intent);
                 Log.i(TAG, "onClick: open mentor detail display");
             }

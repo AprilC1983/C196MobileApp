@@ -40,7 +40,7 @@ public class MentorDisplayActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MentorEditorActivity.class);
         intent.putExtra(COURSE_ID_KEY, courseId);
         startActivity(intent);
-        Log.i(TAG, "fabClickHandler: create Mentor");
+        //Log.i("zz", "fabClickHandler mentor: cid is " + courseId);
     }
 
 
@@ -108,6 +108,7 @@ public class MentorDisplayActivity extends AppCompatActivity {
     private List<MentorEntity> getSelected(List<MentorEntity> all){
         Bundle extras = getIntent().getExtras();
         courseId = extras.getInt(COURSE_ID_KEY);
+        Log.i("zz", "getSelected in mentor display cid is: " + courseId);
 
         List<MentorEntity> selected = new ArrayList<>();
 

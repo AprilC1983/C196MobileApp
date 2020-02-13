@@ -10,8 +10,10 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.example.acmay.c196mobileapp.database.AssessmentEntity;
+import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.ui.AssessmentAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
@@ -23,6 +25,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class AssessmentDisplayActivity extends AppCompatActivity {
 
@@ -32,13 +36,15 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
     @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
-        //intent.putExtra(ASS_ID_KEY)
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        Log.i("zz", "fabClickHandler assdisplay: cid = " + courseId);
         startActivity(intent);
     }
 
-    private List<AssessmentEntity> assessmentsData = new ArrayList<>();
+    private List<AssessmentEntity> allAssessments = new ArrayList<>();
     private AssessmentAdapter mAdapter;
     private MainViewModel mViewModel;
+    private int courseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +65,14 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
         final Observer<List<AssessmentEntity>> assessmentsObserver = new Observer<List<AssessmentEntity>>() {
             @Override
             public void onChanged(@Nullable List<AssessmentEntity> assessmentEntities) {
-                assessmentsData.clear();
-                assessmentsData.addAll(assessmentEntities);
+                allAssessments.clear();
+                allAssessments.addAll(assessmentEntities);
+
+                List<AssessmentEntity> selectedAssessments;
+                selectedAssessments = getSelected(allAssessments);
 
                 if(mAdapter == null){
-                    mAdapter = new AssessmentAdapter(assessmentsData, AssessmentDisplayActivity.this);
+                    mAdapter = new AssessmentAdapter(selectedAssessments, AssessmentDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
@@ -88,5 +97,23 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
 
         mRecyclerView.addItemDecoration(divider);
 
+    }
+
+    private List<AssessmentEntity> getSelected(List<AssessmentEntity> all){
+        Bundle extras = getIntent().getExtras();
+        courseId = extras.getInt(COURSE_ID_KEY);
+        Log.i("zzz", "getSelected in assessment display: cid is" + courseId);
+
+        List<AssessmentEntity> selected = new ArrayList<>();
+        for(int i = 0; i < allAssessments.size(); i++){
+            AssessmentEntity assessment;
+            assessment = allAssessments.get(i);
+
+            int course = assessment.getCourseID();
+            if(course == courseId){
+                selected.add(assessment);
+            }
+        }
+        return selected;
     }
 }

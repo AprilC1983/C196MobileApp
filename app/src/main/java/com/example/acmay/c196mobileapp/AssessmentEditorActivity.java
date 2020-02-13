@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,18 +14,16 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.AssessmentEntity;
-import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.viewmodel.AssessmentViewModel;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 
 public class AssessmentEditorActivity extends AppCompatActivity {
@@ -45,8 +44,6 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     //Saves assessment data and returns to the main screen
     @OnClick(R.id.assessment_save)
     void continueClickHandler(){
-        //Intent intent = new Intent(this, MainActivity.class);
-        //startActivity(intent);
         saveAndReturn();
     }
 
@@ -59,8 +56,8 @@ public class AssessmentEditorActivity extends AppCompatActivity {
 
     private AssessmentViewModel mViewModel;
     private boolean mNewNote, mEditing;
-    private int course;
-    private int assID;
+    private int courseId;
+    private int assId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +88,9 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             public void onChanged(@Nullable AssessmentEntity assessmentEntity) {
                 if(assessmentEntity != null && !mEditing) {
                     assessmentTextView.setText(assessmentEntity.getTitle());
-                    assID = assessmentEntity.getId();
+                    assId = assessmentEntity.getId();
+                    courseId = assessmentEntity.getCourseID();
+                    Log.i("yyy", "courseId is " + courseId);
                 }
             }
         });
@@ -104,10 +103,10 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             mNewNote = true;
         } else {
             setTitle(R.string.edit_assessment);
-            int assessmentId = extras.getInt(ASS_ID_KEY);
-            mViewModel.loadData(assessmentId);
-            course = extras.getInt("courseKey");
-            //dueDate = new SimpleDateFormat("MM/dd/yyyy").parse(dueText.toString());
+            assId = extras.getInt(ASS_ID_KEY);
+            mViewModel.loadData(assId);
+            courseId = extras.getInt(COURSE_ID_KEY);
+            Log.i("yyy", "cid is  " + courseId);
         }
     }
 
@@ -149,7 +148,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             type = "Performance";
         }
 
-        mViewModel.saveAssessment(course, dueDate, title, type);
+        mViewModel.saveAssessment(courseId, dueDate, title, type);
         finish();
     }
 

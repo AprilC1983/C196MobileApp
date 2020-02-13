@@ -89,8 +89,6 @@ public class CourseEditorActivity extends AppCompatActivity {
             public void onChanged(@Nullable CourseEntity courseEntity) {
                 if(courseEntity != null && !mEditing) {
                     courseTextView.setText(courseEntity.getTitle());
-                    //courseID = courseEntity.getCourseID();
-                    Log.i("other", "courseid: " + courseID);
                 }
             }
         });

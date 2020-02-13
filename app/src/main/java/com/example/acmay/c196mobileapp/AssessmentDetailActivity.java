@@ -29,6 +29,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
     @BindView(R.id.assessment_note_text)
     TextView type;
 
+    /*
     //Exits Assessment detail screen and returns user to the list of Assessments
     @OnClick(R.id.assessment_detail_exit)
     void continueClickHandler(){
@@ -36,6 +37,8 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+     */
 
     //exits Assessment detail screen
     @OnClick(R.id.assessment_detail_exit)
@@ -74,7 +77,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable AssessmentEntity assessmentEntity) {
                 if(assessmentEntity != null && !mEditing) {
-                    assessmentDetailTextView.setText(assessmentEntity.getText());
+                    assessmentDetailTextView.setText(assessmentEntity.getText() + " assigned to course " + assessmentEntity.getCourseID());
                     type.setText("Assessment Type: " + assessmentEntity.getType());
                     due.setText("Due on or before " + assessmentEntity.getDueDate());
                 }
