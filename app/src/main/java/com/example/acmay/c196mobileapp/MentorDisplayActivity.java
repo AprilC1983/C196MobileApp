@@ -45,6 +45,7 @@ public class MentorDisplayActivity extends AppCompatActivity {
 
 
     private List<MentorEntity> allMentors = new ArrayList<>();
+    private List<MentorEntity> displayMentors = new ArrayList<>();
     private MentorAdapter mAdapter;
     private MainViewModel mViewModel;
     private int courseId;
@@ -75,8 +76,11 @@ public class MentorDisplayActivity extends AppCompatActivity {
                 List<MentorEntity> selectedMentors;
                 selectedMentors = getSelected(allMentors);
 
+                displayMentors.clear();
+                displayMentors.addAll(selectedMentors);
+
                 if(mAdapter == null){
-                    mAdapter = new MentorAdapter(selectedMentors, MentorDisplayActivity.this);
+                    mAdapter = new MentorAdapter(displayMentors, MentorDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();

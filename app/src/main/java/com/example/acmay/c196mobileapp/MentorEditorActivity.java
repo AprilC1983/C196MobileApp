@@ -34,16 +34,19 @@ public class MentorEditorActivity extends AppCompatActivity {
     @BindView(R.id.email_text)
     TextView emailText;
 
+    /*
     //Saves the Mentor information and continues to the new course screen
     @OnClick(R.id.mentor_continue_btn)
     void continueClickHandler(){
         saveAndReturn();
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
         intent.putExtra(COURSE_ID_KEY, courseId);
-        Log.i("zz", "continueClickHandler: cid is " + courseId);
+        Log.i("editorkeys", "continueClickHandler: from mentor editor is " + courseId);
         startActivity(intent);
 
     }
+
+     */
 
     //Exits the create Mentor screen without saving
     @OnClick(R.id.mentor_cancel_btn)

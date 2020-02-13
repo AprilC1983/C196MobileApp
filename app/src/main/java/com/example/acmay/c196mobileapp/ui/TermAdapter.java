@@ -56,7 +56,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
                 Intent intent = new Intent(mContext, TermEditorActivity.class);
                 intent.putExtra(TERM_ID_KEY, term.getId());
                 mContext.startActivity(intent);
-                Log.i(TAG, "onClick: Open term editor");
+                Log.i("editorkeys", "onClick: Open term editor tid is " + term.getId());
             }
         });
 

@@ -13,7 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.example.acmay.c196mobileapp.database.CourseEntity;
+import com.example.acmay.c196mobileapp.database.MentorEntity;
 import com.example.acmay.c196mobileapp.database.NoteEntity;
+import com.example.acmay.c196mobileapp.ui.MentorAdapter;
 import com.example.acmay.c196mobileapp.ui.NoteAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
@@ -25,6 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.MENTOR_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class NoteDisplayActivity extends AppCompatActivity {
@@ -32,14 +35,16 @@ public class NoteDisplayActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    public static final String TAG = "Note Display";
+    public static final String TAG = "nnnn";
 
     @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, NoteEditorActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseId);
         startActivity(intent);
-        Log.i(TAG, "fabClickHandler: create Note");
+        Log.i("ndis", "fabClickHandler mentor: cid is " + courseId);
     }
+
 
     private List<NoteEntity> allNotes = new ArrayList<>();
     private List<NoteEntity> displayNotes = new ArrayList<>();
@@ -61,6 +66,7 @@ public class NoteDisplayActivity extends AppCompatActivity {
     }
 
 
+    //displays the selected Note(s)
     private void initViewModel() {
 
         final Observer<List<NoteEntity>> notesObserver = new Observer<List<NoteEntity>>() {
@@ -74,7 +80,6 @@ public class NoteDisplayActivity extends AppCompatActivity {
 
                 displayNotes.clear();
                 displayNotes.addAll(selectedNotes);
-
 
                 if(mAdapter == null){
                     mAdapter = new NoteAdapter(displayNotes, NoteDisplayActivity.this);
@@ -92,6 +97,7 @@ public class NoteDisplayActivity extends AppCompatActivity {
     }
 
 
+    //initializes the recyclerview
     private void initRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -104,11 +110,14 @@ public class NoteDisplayActivity extends AppCompatActivity {
 
     }
 
+    //returns a list of courses associated with the selected term
     private List<NoteEntity> getSelected(List<NoteEntity> all){
         Bundle extras = getIntent().getExtras();
         courseId = extras.getInt(COURSE_ID_KEY);
+        Log.i("zz", "getSelected in note display cid is: " + courseId);
 
         List<NoteEntity> selected = new ArrayList<>();
+
         for(int i = 0; i < allNotes.size(); i++){
             NoteEntity note;
             note = allNotes.get(i);

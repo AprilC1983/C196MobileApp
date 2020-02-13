@@ -35,14 +35,18 @@ public class CourseEditorActivity extends AppCompatActivity {
     @BindView(R.id.course_end_text)
     TextView courseEnd;
 
+    /*
     //saves entered course data and continues to the assessment editor screen
     @OnClick(R.id.course_continue_btn)
     void continueClickHandler(){
         saveAndReturn();
         Intent intent = new Intent(this, MentorEditorActivity.class);
         intent.putExtra(COURSE_ID_KEY, courseID);
+        Log.i("editorkeys", "continueClickHandler: from course editor cid is" + courseID);
         startActivity(intent);
     }
+
+     */
 
     //exits course screen without saving data
     @OnClick(R.id.course_cancel_btn)

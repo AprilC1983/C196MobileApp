@@ -17,7 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-//import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_DETAIL_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 
@@ -51,7 +50,7 @@ public class CourseDetailActivity extends AppCompatActivity {
     void addClickHandler(){
         Intent intent = new Intent(this, NoteEditorActivity.class);
         intent.putExtra(COURSE_ID_KEY, courseId);
-        Log.i("nid", "addClickHandler: cid is " + courseId);
+        Log.i("ndis", "addClickHandler: cid is " + courseId);
         startActivity(intent);
         finish();
     }
@@ -61,6 +60,8 @@ public class CourseDetailActivity extends AppCompatActivity {
     void viewClickHandler(){
         Intent intent = new Intent(this, NoteDisplayActivity.class);
         startActivity(intent);
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        Log.i("ndis", "viewClickHandler: cid is " + courseId);
         finish();
     }
 

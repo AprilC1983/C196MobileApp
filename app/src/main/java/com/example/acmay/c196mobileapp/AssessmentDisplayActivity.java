@@ -42,6 +42,7 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
     }
 
     private List<AssessmentEntity> allAssessments = new ArrayList<>();
+    private List<AssessmentEntity> displayAssessments = new ArrayList<>();
     private AssessmentAdapter mAdapter;
     private MainViewModel mViewModel;
     private int courseId;
@@ -71,8 +72,11 @@ public class AssessmentDisplayActivity extends AppCompatActivity {
                 List<AssessmentEntity> selectedAssessments;
                 selectedAssessments = getSelected(allAssessments);
 
+                displayAssessments.clear();
+                displayAssessments.addAll(selectedAssessments);
+
                 if(mAdapter == null){
-                    mAdapter = new AssessmentAdapter(selectedAssessments, AssessmentDisplayActivity.this);
+                    mAdapter = new AssessmentAdapter(displayAssessments, AssessmentDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();

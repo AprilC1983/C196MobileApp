@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, TermEditorActivity.class);
+        intent.putExtra(TERM_ID_KEY, termId);
         startActivity(intent);
     }
 
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private List<TermEntity> termsData = new ArrayList<>();
     private TermAdapter mAdapter;
     private MainViewModel mViewModel;
+    int termId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
-                    //final TermEntity term = mAdapter.get(position);
+
+
                 }
             }
         };
