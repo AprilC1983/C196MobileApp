@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity(tableName = "courses"/*, foreignKeys = @ForeignKey(entity = TermEntity.class,
         parentColumns = "termID", childColumns = "termID", onDelete = ForeignKey.CASCADE)*/)
 public class CourseEntity {
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     private int courseID;
     private int termID;
     private Date createDate;
@@ -46,7 +46,7 @@ public class CourseEntity {
 
     @Ignore
     public CourseEntity(int id, Date date, String title) {
-        this.courseID = id;
+        this.termID = id;
         this.createDate = date;
         this.title = title;
     }
@@ -120,6 +120,8 @@ public class CourseEntity {
     public void setCourseID(int courseID) {
         this.courseID = courseID;
     }
+
+
 
     @Override
     public String toString() {

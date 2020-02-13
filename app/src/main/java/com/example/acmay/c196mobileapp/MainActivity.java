@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     void fabClickHandler(){
         Intent intent = new Intent(this, TermEditorActivity.class);
         startActivity(intent);
-        Log.i(TAG, "fabClickHandler: create new term");
     }
 
 

@@ -92,7 +92,8 @@ public class CourseDetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable CourseEntity courseEntity) {
                 if(courseEntity != null && !mEditing) {
-                    courseDetailTextView.setText(courseEntity.getTitle());
+                    courseDetailTextView.setText(courseEntity.getTitle() +
+                     " termid = " + courseEntity.getTermID());
                     courseStart.setText("Start Date: " + courseEntity.getStartDate());
                     courseEnd.setText("End Date: " + courseEntity.getEndDate());
                 }

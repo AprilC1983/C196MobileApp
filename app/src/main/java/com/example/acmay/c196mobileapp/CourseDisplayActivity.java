@@ -16,12 +16,15 @@ import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.ui.CourseAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class CourseDisplayActivity extends AppCompatActivity {
 
@@ -37,7 +40,8 @@ public class CourseDisplayActivity extends AppCompatActivity {
         Log.i(TAG, "fabClickHandler: create course");
     }
 
-    private List<CourseEntity> coursesData = new ArrayList<>();
+    private List<CourseEntity> allCourses = new ArrayList<>();
+    //private ArrayList<CourseEntity> allCourses = new ArrayList<>();
     private CourseAdapter mAdapter;
     private MainViewModel mViewModel;
 
@@ -55,16 +59,34 @@ public class CourseDisplayActivity extends AppCompatActivity {
     }
 
 
+
+    ///////////////////////////////////////////kjcnvkdfnkxfnd
     private void initViewModel() {
 
         final Observer<List<CourseEntity>> coursesObserver = new Observer<List<CourseEntity>>() {
             @Override
             public void onChanged(@Nullable List<CourseEntity> courseEntities) {
-                coursesData.clear();
-                coursesData.addAll(courseEntities);
+                List<CourseEntity> selectedCourses = new ArrayList<>();
+                allCourses.clear();
+                allCourses.addAll(courseEntities);
+
+
+                //selects courses associated with the selected term
+                Bundle extras = getIntent().getExtras();
+                int termId = extras.getInt(TERM_ID_KEY);
+
+                for(int i = 0; i < allCourses.size(); i++){
+                    CourseEntity course;
+                    course = allCourses.get(i);
+
+                    int term = course.getTermID();
+                    if(term == termId){
+                        selectedCourses.add(course);
+                    }
+                }
 
                 if(mAdapter == null){
-                    mAdapter = new CourseAdapter(coursesData, CourseDisplayActivity.this);
+                    mAdapter = new CourseAdapter(selectedCourses, CourseDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
@@ -77,6 +99,17 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
         mViewModel.mCourses.observe(this, coursesObserver);
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 
     private void initRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
