@@ -110,6 +110,7 @@ public class MentorDisplayActivity extends AppCompatActivity {
         courseId = extras.getInt(COURSE_ID_KEY);
 
         List<MentorEntity> selected = new ArrayList<>();
+
         for(int i = 0; i < allMentors.size(); i++){
             MentorEntity mentor;
             mentor = allMentors.get(i);

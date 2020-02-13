@@ -20,7 +20,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.ASSESSMENT_DETAIL_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
 
 public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.ViewHolder> {
@@ -61,7 +60,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, AssessmentDetailActivity.class);
-                intent.putExtra(ASSESSMENT_DETAIL_ID_KEY, assessment.getId());
+                intent.putExtra(ASS_ID_KEY, assessment.getId());
                 mContext.startActivity(intent);
             }
         });
