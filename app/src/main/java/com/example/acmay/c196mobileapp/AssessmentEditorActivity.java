@@ -1,7 +1,9 @@
 package com.example.acmay.c196mobileapp;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,6 +12,8 @@ import android.view.MenuItem;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.acmay.c196mobileapp.database.AssessmentEntity;
+import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.viewmodel.AssessmentViewModel;
 
 import java.text.ParseException;
@@ -56,6 +60,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     private AssessmentViewModel mViewModel;
     private boolean mNewNote, mEditing;
     private int course;
+    private int assID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,17 +85,18 @@ public class AssessmentEditorActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(AssessmentViewModel.class);
 
-        /*
-        mViewModel.mLiveAssessment.observe(this, new Observer<TermEntity>() {
+
+        mViewModel.mLiveAssessment.observe(this, new Observer<AssessmentEntity>() {
             @Override
-            public void onChanged(@Nullable TermEntity termEntity) {
-                if(termEntity != null && !mEditing) {
-                    mTextView.setName(termEntity.getName());
+            public void onChanged(@Nullable AssessmentEntity assessmentEntity) {
+                if(assessmentEntity != null && !mEditing) {
+                    assessmentTextView.setText(assessmentEntity.getTitle());
+                    assID = assessmentEntity.getId();
                 }
             }
         });
 
-         */
+
 
         Bundle extras = getIntent().getExtras();
         if(extras == null){
