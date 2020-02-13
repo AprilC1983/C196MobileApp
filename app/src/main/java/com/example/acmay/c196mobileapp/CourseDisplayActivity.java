@@ -42,6 +42,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
     }
 
     private List<CourseEntity> allCourses = new ArrayList<>();
+    private List<CourseEntity> displayCourses = new ArrayList<>();
     private CourseAdapter mAdapter;
     private MainViewModel mViewModel;
 
@@ -74,8 +75,11 @@ public class CourseDisplayActivity extends AppCompatActivity {
                 List<CourseEntity> selectedCourses;
                 selectedCourses = getSelected(allCourses);
 
+                displayCourses.clear();
+                displayCourses.addAll(selectedCourses);
+
                 if(mAdapter == null){
-                    mAdapter = new CourseAdapter(selectedCourses, CourseDisplayActivity.this);
+                    mAdapter = new CourseAdapter(displayCourses, CourseDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();

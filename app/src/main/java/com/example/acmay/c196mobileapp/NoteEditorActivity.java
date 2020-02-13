@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.NoteEntity;
@@ -15,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.NOTE_ID_KEY;
 
@@ -39,6 +41,7 @@ public class NoteEditorActivity extends AppCompatActivity {
 
     private NoteViewModel mViewModel;
     private boolean mNewNote, mEditing;
+    private int courseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,8 @@ public class NoteEditorActivity extends AppCompatActivity {
             setTitle(R.string.edit_note);
             int noteId = extras.getInt(NOTE_ID_KEY);
             mViewModel.loadData(noteId);
+            courseId = extras.getInt(COURSE_ID_KEY);
+            Log.i("nid", "initViewModel: cid is " + courseId);
         }
     }
 
@@ -91,7 +96,7 @@ public class NoteEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveNote(noteTextView.getText().toString());
+        mViewModel.saveNote(courseId, noteTextView.getText().toString());
         finish();
     }
 

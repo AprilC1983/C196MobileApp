@@ -35,14 +35,14 @@ public class NoteViewModel extends AndroidViewModel {
         });
     }
 
-    public void saveNote(String noteText) {
+    public void saveNote(int courseId, String noteText) {
         NoteEntity note = mLiveNote.getValue();
 
         if(note == null){
             if(TextUtils.isEmpty(noteText.trim())){
                 return;
             }
-            note = new NoteEntity(new Date(), noteText.trim());
+            note = new NoteEntity(courseId, new Date(), noteText.trim());
         } else{
             note.setText(noteText.trim());
         }

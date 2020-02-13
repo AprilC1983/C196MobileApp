@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.CourseEntity;
@@ -49,6 +50,8 @@ public class CourseDetailActivity extends AppCompatActivity {
     @OnClick(R.id.add_note_btn)
     void addClickHandler(){
         Intent intent = new Intent(this, NoteEditorActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        Log.i("nid", "addClickHandler: cid is " + courseId);
         startActivity(intent);
         finish();
     }
@@ -63,6 +66,7 @@ public class CourseDetailActivity extends AppCompatActivity {
 
     private CourseDetailViewModel mViewModel;
     private boolean mNewCourseDetail, mEditing;
+    private int courseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,8 +111,8 @@ public class CourseDetailActivity extends AppCompatActivity {
             mNewCourseDetail = true;
         } else {
             setTitle(R.string.selected_course);
-            int courseDetailId = extras.getInt(COURSE_ID_KEY);
-            mViewModel.loadData(courseDetailId);
+            courseId = extras.getInt(COURSE_ID_KEY);
+            mViewModel.loadData(courseId);
         }
     }
 

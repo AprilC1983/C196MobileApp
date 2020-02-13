@@ -17,7 +17,6 @@ public class NoteEntity {
     private String text;
 
     public NoteEntity(int courseID, Date date, String text) {
-        this.noteID = noteID;
         this.courseID = courseID;
         this.date = date;
         this.text = text;
