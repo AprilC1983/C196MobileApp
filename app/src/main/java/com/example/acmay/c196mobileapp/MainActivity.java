@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
     private List<TermEntity> termsData = new ArrayList<>();
     private TermAdapter mAdapter;
     private MainViewModel mViewModel;
-    //private int termId = 0;
+    private int termId;
+
+    //TermEntity term = mAdapter.get(position);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
+                    //final TermEntity term = mAdapter.get(position);
                 }
             }
         };

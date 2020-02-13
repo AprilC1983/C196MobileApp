@@ -44,7 +44,9 @@ public class CourseDisplayActivity extends AppCompatActivity {
     private List<CourseEntity> allCourses = new ArrayList<>();
     private CourseAdapter mAdapter;
     private MainViewModel mViewModel;
-    private int termId;
+
+    //Bundle extras = getIntent().getExtras();
+    int termId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +117,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
     //returns a list of courses associated with the selected term
     private List<CourseEntity> getSelected(List<CourseEntity> all){
         Bundle extras = getIntent().getExtras();
-        int termId = extras.getInt(TERM_ID_KEY);
+        termId = extras.getInt(TERM_ID_KEY);
 
         List<CourseEntity> selected = new ArrayList<>();
         for(int i = 0; i < allCourses.size(); i++){
