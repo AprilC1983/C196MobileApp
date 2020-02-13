@@ -90,7 +90,6 @@ public class AssessmentEditorActivity extends AppCompatActivity {
                     assessmentTextView.setText(assessmentEntity.getTitle());
                     assId = assessmentEntity.getId();
                     courseId = assessmentEntity.getCourseID();
-                    Log.i("yyy", "courseId is " + courseId);
                 }
             }
         });
@@ -106,7 +105,6 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             assId = extras.getInt(ASS_ID_KEY);
             mViewModel.loadData(assId);
             courseId = extras.getInt(COURSE_ID_KEY);
-            Log.i("yyy", "cid is  " + courseId);
         }
     }
 

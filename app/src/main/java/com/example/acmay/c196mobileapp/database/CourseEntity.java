@@ -18,20 +18,18 @@ public class CourseEntity {
     private String startDate;
     private String endDate;
     private String title;
+    private String status;
 
-   /*
-    public CourseEntity(int courseID, int termID, Date createDate, String title, String startDate, String endDate) {
-        this.courseID = courseID;
+    public CourseEntity(int termID, Date createDate, String startDate, String endDate, String title, String status) {
         this.termID = termID;
         this.createDate = createDate;
         this.startDate = startDate;
         this.endDate = endDate;
         this.title = title;
+        this.status = status;
     }
 
-    */
-
-
+    @Ignore
     public CourseEntity(int termID, Date createDate, String title, String startDate, String endDate) {
         this.termID = termID;
         this.createDate = createDate;
@@ -119,6 +117,14 @@ public class CourseEntity {
 
     public void setCourseID(int courseID) {
         this.courseID = courseID;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 

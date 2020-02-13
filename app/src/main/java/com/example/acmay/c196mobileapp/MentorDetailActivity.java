@@ -73,7 +73,7 @@ public class MentorDetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable MentorEntity mentorEntity) {
                 if(mentorEntity != null && !mEditing) {
-                    mentorDetailTextView.setText(mentorEntity.getName() + " assigned to course " + mentorEntity.getCourseID());
+                    mentorDetailTextView.setText("Name: " + mentorEntity.getName());
                     phone.setText("Phone: " + mentorEntity.getPhone());
                     email.setText("Email: " + mentorEntity.getEmail());
                 }

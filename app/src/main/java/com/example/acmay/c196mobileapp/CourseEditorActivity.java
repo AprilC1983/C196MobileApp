@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.CourseEntity;
@@ -34,6 +35,14 @@ public class CourseEditorActivity extends AppCompatActivity {
     TextView courseStart;
     @BindView(R.id.course_end_text)
     TextView courseEnd;
+    @BindView(R.id.plan_to_take_rb)
+    RadioButton plannedRb;
+    @BindView(R.id.in_progress_rb)
+    RadioButton inProgRb;
+    @BindView(R.id.completed_rb)
+    RadioButton completedRb;
+    @BindView(R.id.dropped_rb)
+    RadioButton droppedRb;
 
     /*
     //saves entered course data and continues to the assessment editor screen
@@ -143,8 +152,19 @@ public class CourseEditorActivity extends AppCompatActivity {
         String title = courseTextView.getText().toString();
         String start = courseStart.getText().toString();
         String end = courseEnd.getText().toString();
+        String status = "";
 
-        mViewModel.saveCourse(termID, title, start, end);
+        if(plannedRb.isChecked()){
+            status = "Plan to take";
+        }else if(inProgRb.isChecked()){
+            status = "In progress";
+        }else if(completedRb.isChecked()){
+            status = "Completed";
+        }else if(droppedRb.isChecked()){
+            status = "dropped";
+        }
+
+        mViewModel.saveCourse(termID, start, end, title, status);
         finish();
     }
 

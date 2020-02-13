@@ -67,7 +67,7 @@ public class TermDetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable TermEntity termEntity) {
                 if(termEntity != null && !mEditing) {
-                    termDetailTextView.setText(termEntity.getTitle() + "  term id: " + termEntity.getId());
+                    termDetailTextView.setText("Term: " + termEntity.getTitle());
                     termStart.setText("Start Date: " + termEntity.getStartDate());
                     termEnd.setText("End Date: " + termEntity.getEndDate());
                 }

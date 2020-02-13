@@ -77,7 +77,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable AssessmentEntity assessmentEntity) {
                 if(assessmentEntity != null && !mEditing) {
-                    assessmentDetailTextView.setText(assessmentEntity.getText() + " assigned to course " + assessmentEntity.getCourseID());
+                    assessmentDetailTextView.setText("Title: " + assessmentEntity.getText());
                     type.setText("Assessment Type: " + assessmentEntity.getType());
                     due.setText("Due on or before " + assessmentEntity.getDueDate());
                 }

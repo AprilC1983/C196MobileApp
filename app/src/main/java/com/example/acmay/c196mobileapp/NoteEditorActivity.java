@@ -30,9 +30,9 @@ public class NoteEditorActivity extends AppCompatActivity {
     //exits Note screen without saving data
     @OnClick(R.id.note_cancel)
     void cancelClickHandler(){
-        Intent intent = new Intent(this, CourseDetailActivity.class);
-        intent.putExtra(COURSE_ID_KEY, courseId);
-        startActivity(intent);
+        //Intent intent = new Intent(this, CourseDetailActivity.class);
+        //intent.putExtra(COURSE_ID_KEY, courseId);
+        //startActivity(intent);
         finish();
     }
 
