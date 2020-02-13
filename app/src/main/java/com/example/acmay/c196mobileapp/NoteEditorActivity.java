@@ -2,6 +2,7 @@ package com.example.acmay.c196mobileapp;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -29,12 +30,18 @@ public class NoteEditorActivity extends AppCompatActivity {
     //exits Note screen without saving data
     @OnClick(R.id.note_cancel)
     void cancelClickHandler(){
+        Intent intent = new Intent(this, CourseDetailActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        startActivity(intent);
         finish();
     }
 
     //Saves Note data without continuing to the assessment editor
     @OnClick(R.id.note_save)
     void saveClickHandler(){
+        Intent intent = new Intent(this, NoteDisplayActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        startActivity(intent);
         saveAndReturn();
     }
 

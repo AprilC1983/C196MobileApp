@@ -48,7 +48,7 @@ public class CourseDetailActivity extends AppCompatActivity {
     //open the note editor activity to add a note
     @OnClick(R.id.add_note_btn)
     void addClickHandler(){
-        Intent intent = new Intent(this, NoteEditorActivity.class);
+        Intent intent = new Intent(this, NoteDisplayActivity.class);
         intent.putExtra(COURSE_ID_KEY, courseId);
         Log.i("ndis", "addClickHandler: cid is " + courseId);
         startActivity(intent);
@@ -58,7 +58,7 @@ public class CourseDetailActivity extends AppCompatActivity {
     //view existing notes
     @OnClick(R.id.view_notes_btn)
     void viewClickHandler(){
-        Intent intent = new Intent(this, NoteDisplayActivity.class);
+        Intent intent = new Intent(this, NoteEditorActivity.class);
         startActivity(intent);
         intent.putExtra(COURSE_ID_KEY, courseId);
         Log.i("ndis", "viewClickHandler: cid is " + courseId);
