@@ -10,5 +10,5 @@ public class Constants {
     //public static final String TERM_DETAIL_ID_KEY = "term_detail_id_key";
     //public static final String COURSE_DETAIL_ID_KEY = "course_detail_id_key";
     //public static final String MENTOR_DETAIL_ID_KEY = "mentor_detail_id_key";
-    public static final String ASSESSMENT_DETAIL_ID_KEY = "assessment_detail_id_key";
+    //public static final String ASSESSMENT_DETAIL_ID_KEY = "assessment_detail_id_key";
 }

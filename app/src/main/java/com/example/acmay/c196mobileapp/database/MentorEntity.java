@@ -18,21 +18,10 @@ public class MentorEntity {
     private String phone;
     private String email;
 
-    public MentorEntity(int mentorID, int courseID, Date createDate, String name, String phone, String email) {
-        this.mentorID = mentorID;
+
+    public MentorEntity(int courseID, Date createDate, String name, String phone, String email) {
         this.courseID = courseID;
         this.createDate = createDate;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-    }
-
-
-
-    @Ignore
-    public MentorEntity(int id, Date date, String name, String phone, String email) {
-        this.courseID = id;
-        this.createDate = date;
         this.name = name;
         this.phone = phone;
         this.email = email;

@@ -32,10 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "Main Activity";
 
-    @OnClick(R.id.edit_fab)
+    @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, TermEditorActivity.class);
-        //intent.putExtra(TERM_ID_KEY, termId);
         startActivity(intent);
     }
 
@@ -43,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
     private List<TermEntity> termsData = new ArrayList<>();
     private TermAdapter mAdapter;
     private MainViewModel mViewModel;
-    private int termId;
-
-    //TermEntity term = mAdapter.get(position);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

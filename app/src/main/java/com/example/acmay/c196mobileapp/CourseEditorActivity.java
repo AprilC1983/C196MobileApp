@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,7 +40,7 @@ public class CourseEditorActivity extends AppCompatActivity {
     void continueClickHandler(){
         saveAndReturn();
         Intent intent = new Intent(this, MentorEditorActivity.class);
-        intent.putExtra("courseKey", courseID);
+        intent.putExtra(COURSE_ID_KEY, courseID);
         startActivity(intent);
     }
 
@@ -58,7 +59,7 @@ public class CourseEditorActivity extends AppCompatActivity {
     private CourseViewModel mViewModel;
     private boolean mNewCourse, mEditing;
     private int courseID;
-    private int term;
+    private int termID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,8 @@ public class CourseEditorActivity extends AppCompatActivity {
             public void onChanged(@Nullable CourseEntity courseEntity) {
                 if(courseEntity != null && !mEditing) {
                     courseTextView.setText(courseEntity.getTitle());
-                    courseID = courseEntity.getCourseID();
+                    //courseID = courseEntity.getCourseID();
+                    Log.i("other", "courseid: " + courseID);
                 }
             }
         });
@@ -96,15 +98,14 @@ public class CourseEditorActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         if(extras == null){
-            //term = extras.getInt(TERM_ID_KEY);
             setTitle(R.string.new_course);
             mNewCourse = true;
         } else {
             setTitle(R.string.edit_course);
-            int courseId = extras.getInt(COURSE_ID_KEY);
-            mViewModel.loadData(courseId);
-            //term = extras.getInt(TERM_ID_KEY);
-            term = extras.getInt(TERM_ID_KEY);
+            courseID = extras.getInt(COURSE_ID_KEY);
+            Log.i("cid", "course id = " + courseID);
+            mViewModel.loadData(courseID);
+            termID = extras.getInt(TERM_ID_KEY);
         }
 
     }
@@ -141,7 +142,7 @@ public class CourseEditorActivity extends AppCompatActivity {
         String start = courseStart.getText().toString();
         String end = courseEnd.getText().toString();
 
-        mViewModel.saveCourse(term, title, start, end);
+        mViewModel.saveCourse(termID, title, start, end);
         finish();
     }
 

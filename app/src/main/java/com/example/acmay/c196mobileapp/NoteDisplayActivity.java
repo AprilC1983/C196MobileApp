@@ -30,7 +30,7 @@ public class NoteDisplayActivity extends AppCompatActivity {
 
     public static final String TAG = "Note Display";
 
-    @OnClick(R.id.edit_fab)
+    @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, NoteEditorActivity.class);
         startActivity(intent);

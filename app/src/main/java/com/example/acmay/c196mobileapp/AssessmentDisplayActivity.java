@@ -22,14 +22,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
+
 public class AssessmentDisplayActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    @OnClick(R.id.edit_fab)
+    @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
+        //intent.putExtra(ASS_ID_KEY)
         startActivity(intent);
     }
 

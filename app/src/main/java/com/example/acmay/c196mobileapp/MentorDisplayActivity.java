@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.database.MentorEntity;
 import com.example.acmay.c196mobileapp.ui.MentorAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
@@ -23,6 +24,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.MENTOR_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
+
 public class MentorDisplayActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
@@ -30,19 +35,19 @@ public class MentorDisplayActivity extends AppCompatActivity {
 
     public static final String TAG = "Mentor Display";
 
-    @OnClick(R.id.edit_fab)
+    @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, MentorEditorActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseId);
         startActivity(intent);
         Log.i(TAG, "fabClickHandler: create Mentor");
     }
 
 
-
-
-    private List<MentorEntity> mentorsData = new ArrayList<>();
+    private List<MentorEntity> allMentors = new ArrayList<>();
     private MentorAdapter mAdapter;
     private MainViewModel mViewModel;
+    private int courseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +63,20 @@ public class MentorDisplayActivity extends AppCompatActivity {
     }
 
 
+    //displays the selected mentor(s)
     private void initViewModel() {
 
         final Observer<List<MentorEntity>> mentorsObserver = new Observer<List<MentorEntity>>() {
             @Override
             public void onChanged(@Nullable List<MentorEntity> mentorEntities) {
-                mentorsData.clear();
-                mentorsData.addAll(mentorEntities);
+                allMentors.clear();
+                allMentors.addAll(mentorEntities);
+
+                List<MentorEntity> selectedMentors;
+                selectedMentors = getSelected(allMentors);
 
                 if(mAdapter == null){
-                    mAdapter = new MentorAdapter(mentorsData, MentorDisplayActivity.this);
+                    mAdapter = new MentorAdapter(selectedMentors, MentorDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
@@ -82,6 +91,7 @@ public class MentorDisplayActivity extends AppCompatActivity {
     }
 
 
+    //initializes the recyclerview
     private void initRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -92,5 +102,23 @@ public class MentorDisplayActivity extends AppCompatActivity {
 
         mRecyclerView.addItemDecoration(divider);
 
+    }
+
+    //returns a list of courses associated with the selected term
+    private List<MentorEntity> getSelected(List<MentorEntity> all){
+        Bundle extras = getIntent().getExtras();
+        courseId = extras.getInt(COURSE_ID_KEY);
+
+        List<MentorEntity> selected = new ArrayList<>();
+        for(int i = 0; i < allMentors.size(); i++){
+            MentorEntity mentor;
+            mentor = allMentors.get(i);
+
+            int course = mentor.getCourseID();
+            if(course == courseId){
+                selected.add(mentor);
+            }
+        }
+        return selected;
     }
 }

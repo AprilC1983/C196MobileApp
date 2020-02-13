@@ -33,8 +33,6 @@ public class MentorDetailActivity extends AppCompatActivity {
     //Exits Mentor detail screen and returns user to the list of courses
     @OnClick(R.id.mentor_detail_exit)
     void continueClickHandler(){
-        Intent intent = new Intent(this, MentorDisplayActivity.class);
-        startActivity(intent);
         finish();
     }
 
@@ -75,7 +73,7 @@ public class MentorDetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable MentorEntity mentorEntity) {
                 if(mentorEntity != null && !mEditing) {
-                    mentorDetailTextView.setText(mentorEntity.getName());
+                    mentorDetailTextView.setText(mentorEntity.getName() + " assigned to course " + mentorEntity.getCourseID());
                     phone.setText("Phone: " + mentorEntity.getPhone());
                     email.setText("Email: " + mentorEntity.getEmail());
                 }

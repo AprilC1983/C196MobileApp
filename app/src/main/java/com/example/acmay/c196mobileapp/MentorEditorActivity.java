@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.MENTOR_ID_KEY;
 
@@ -37,7 +38,7 @@ public class MentorEditorActivity extends AppCompatActivity {
     void continueClickHandler(){
         saveAndReturn();
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
-        intent.putExtra("courseKey", course);
+        intent.putExtra(COURSE_ID_KEY, courseId);
         startActivity(intent);
 
     }
@@ -56,7 +57,8 @@ public class MentorEditorActivity extends AppCompatActivity {
 
     private MentorViewModel mViewModel;
     private boolean mNewMentor, mEditing;
-    private int course;
+    private int courseId;
+    private int mentorId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,7 @@ public class MentorEditorActivity extends AppCompatActivity {
             public void onChanged(@Nullable MentorEntity mentorEntity) {
                 if(mentorEntity != null && !mEditing) {
                     mTextView.setText(mentorEntity.getName());
+                    mentorId = mentorEntity.getMentorID();
                 }
             }
         });
@@ -95,9 +98,9 @@ public class MentorEditorActivity extends AppCompatActivity {
             mNewMentor = true;
         } else {
             setTitle(R.string.edit_mentor);
-            int mentorId = extras.getInt(MENTOR_ID_KEY);
+            mentorId = extras.getInt(MENTOR_ID_KEY);
             mViewModel.loadData(mentorId);
-            course = extras.getInt("courseKey");
+            courseId = extras.getInt(COURSE_ID_KEY);
         }
     }
 
@@ -129,8 +132,11 @@ public class MentorEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveMentor(course, mTextView.getText().toString(), phoneText.getText().toString(),
-                emailText.getText().toString());
+        String name = mTextView.getText().toString();
+        String phone = phoneText.getText().toString();
+        String email = emailText.getText().toString();
+
+        mViewModel.saveMentor(courseId, name, phone, email);
         finish();
     }
 

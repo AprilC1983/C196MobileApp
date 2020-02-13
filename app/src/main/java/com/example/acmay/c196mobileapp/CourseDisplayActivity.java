@@ -33,7 +33,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
     public static final String TAG = "Course Display";
 
-    @OnClick(R.id.edit_fab)
+    @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, CourseEditorActivity.class);
         intent.putExtra(TERM_ID_KEY, termId);
@@ -45,8 +45,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
     private CourseAdapter mAdapter;
     private MainViewModel mViewModel;
 
-    //Bundle extras = getIntent().getExtras();
-    int termId;
+    private int termId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +68,6 @@ public class CourseDisplayActivity extends AppCompatActivity {
         final Observer<List<CourseEntity>> coursesObserver = new Observer<List<CourseEntity>>() {
             @Override
             public void onChanged(@Nullable List<CourseEntity> courseEntities) {
-                //List<CourseEntity> selectedCourses = new ArrayList<>();
                 allCourses.clear();
                 allCourses.addAll(courseEntities);
 
