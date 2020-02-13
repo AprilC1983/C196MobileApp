@@ -41,10 +41,7 @@ public class MentorDisplayActivity extends AppCompatActivity {
 
 
     private List<MentorEntity> mentorsData = new ArrayList<>();
-    //private List<MentorEntity> MentorsData = new ArrayList<>();
-    //private List<AssessmentEntity> assessmentsData = new ArrayList<>();
     private MentorAdapter mAdapter;
-    //private MentorAdapter cAdapter;
     private MainViewModel mViewModel;
 
     @Override
@@ -53,7 +50,8 @@ public class MentorDisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
         initRecyclerView();
         initViewModel();
