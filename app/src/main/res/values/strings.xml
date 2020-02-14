@@ -14,10 +14,10 @@
     <string name="enter_end_date">End</string>
     <string name="continue_button_text">Continue</string>
     <string name="enter_course_name">Enter course name</string>
-    <string name="in_progress">In Progress</string>
-    <string name="completed">Completed</string>
+    <string name="in_progress">Ongoing</string>
+    <string name="completed">Complete</string>
     <string name="dropped">Dropped</string>
-    <string name="plan_to_take">Plan to take</string>
+    <string name="plan_to_take">Planned</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="save_and_continue">Continue</string>

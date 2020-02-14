@@ -31,10 +31,13 @@ public class CourseEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.course_text)
     TextView courseTextView;
+    /*
     @BindView(R.id.course_start_text)
     TextView courseStart;
     @BindView(R.id.course_end_text)
     TextView courseEnd;
+
+     */
     @BindView(R.id.plan_to_take_rb)
     RadioButton plannedRb;
     @BindView(R.id.in_progress_rb)
@@ -118,8 +121,8 @@ public class CourseEditorActivity extends AppCompatActivity {
                     }
 
                     courseTextView.setText(courseEntity.getTitle());
-                    courseStart.setText(courseEntity.getStartDate());
-                    courseEnd.setText(courseEntity.getEndDate());
+                    //courseStart.setText(courseEntity.getStartDate());
+                    //courseEnd.setText(courseEntity.getEndDate());
                 }
             }
         });
@@ -168,8 +171,8 @@ public class CourseEditorActivity extends AppCompatActivity {
 
     private void saveAndReturn() {
         String title = courseTextView.getText().toString();
-        String start = courseStart.getText().toString();
-        String end = courseEnd.getText().toString();
+        //String start = courseStart.getText().toString();
+        //String end = courseEnd.getText().toString();
         String status = "";
 
         if(plannedRb.isChecked()){
@@ -182,7 +185,7 @@ public class CourseEditorActivity extends AppCompatActivity {
             status = dropped;
         }
 
-            mViewModel.saveCourse(termID, start, end, title, status);
+            //mViewModel.saveCourse(termID, start, end, title, status);
             finish();
     }
 
