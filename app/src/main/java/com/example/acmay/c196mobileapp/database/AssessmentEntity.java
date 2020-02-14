@@ -14,11 +14,11 @@ public class AssessmentEntity {
     private int assessmentID;
     private int courseID;
     private Date createDate;
-    private String dueDate;
+    private Date dueDate;
     private String title;
     private String type;
 
-    public AssessmentEntity(int courseID, Date createDate, String dueDate, String title, String type) {
+    public AssessmentEntity(int courseID, Date createDate, Date dueDate, String title, String type) {
         this.courseID = courseID;
         this.createDate = createDate;
         this.title = title;
@@ -107,11 +107,11 @@ public class AssessmentEntity {
         this.courseID = courseID;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 

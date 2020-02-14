@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.example.acmay.c196mobileapp.database.AssessmentEntity;
 import com.example.acmay.c196mobileapp.viewmodel.AssessmentViewModel;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,8 +38,8 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     @BindView(R.id.performance_rb)
     RadioButton performanceRb;
 
-    //@BindView(R.id.assessment_due_date)
-    //TextView dueText;
+    @BindView(R.id.assessment_due_picker)
+    DatePicker dueDate;
 
     public AssessmentEditorActivity() throws ParseException {
     }
@@ -149,8 +151,10 @@ public class AssessmentEditorActivity extends AppCompatActivity {
 
     private void saveAndReturn() {
         String title = assessmentTextView.getText().toString();
-        //String dueDate = dueText.getText().toString();
         String type = "";
+        int dueDay = dueDate.getDayOfMonth();
+        int dueMonth = dueDate.getMonth();
+        int dueYear = dueDate.getYear();
 
         if(objectiveRb.isChecked()){
             type = obj;
@@ -158,7 +162,9 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             type = perf;
         }
 
-        //mViewModel.saveAssessment(courseId, dueDate, title, type);
+        Date due = new Date(dueYear, dueMonth - 1, dueDay);
+
+        mViewModel.saveAssessment(courseId, due, title, type);
         finish();
     }
 
