@@ -11,13 +11,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.viewmodel.CourseViewModel;
 
-import java.sql.Date;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,13 +32,12 @@ public class CourseEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.course_text)
     TextView courseTextView;
-    /*
-    @BindView(R.id.course_start_text)
-    TextView courseStart;
-    @BindView(R.id.course_end_text)
-    TextView courseEnd;
 
-     */
+    @BindView(R.id.course_start_picker)
+    DatePicker courseStart;
+    @BindView(R.id.course_end_picker)
+    DatePicker courseEnd;
+
     @BindView(R.id.plan_to_take_rb)
     RadioButton plannedRb;
     @BindView(R.id.in_progress_rb)
@@ -171,8 +171,6 @@ public class CourseEditorActivity extends AppCompatActivity {
 
     private void saveAndReturn() {
         String title = courseTextView.getText().toString();
-        //String start = courseStart.getText().toString();
-        //String end = courseEnd.getText().toString();
         String status = "";
 
         if(plannedRb.isChecked()){
@@ -185,7 +183,18 @@ public class CourseEditorActivity extends AppCompatActivity {
             status = dropped;
         }
 
-            //mViewModel.saveCourse(termID, start, end, title, status);
+        int startDay = courseStart.getDayOfMonth();
+        int startMonth = courseStart.getMonth();
+        int startYear = courseStart.getYear();
+
+        int endDay = courseEnd.getDayOfMonth();
+        int endMonth = courseEnd.getMonth();
+        int endYear = courseEnd.getYear();
+
+        java.util.Date start = new java.util.Date(startYear, startMonth - 1, startDay);
+        java.util.Date end = new Date(endYear, endMonth - 1, endDay);
+
+            mViewModel.saveCourse(termID, start, end, title, status);
             finish();
     }
 

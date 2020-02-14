@@ -45,4 +45,5 @@
     <string name="view_notes">View Notes</string>
     <string name="objective">Objective</string>
     <string name="performance">Performance</string>
+    <string name="due_date">Due date</string>
 </resources>

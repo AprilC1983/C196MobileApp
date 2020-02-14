@@ -11,7 +11,7 @@ import android.content.Context;
 import static android.arch.persistence.room.Room.databaseBuilder;
 
 @Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class,
-        MentorEntity.class, NoteEntity.class}, version = 17)
+        MentorEntity.class, NoteEntity.class}, version = 18)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     /*

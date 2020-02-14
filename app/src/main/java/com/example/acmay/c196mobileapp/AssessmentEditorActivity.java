@@ -35,8 +35,9 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     RadioButton objectiveRb;
     @BindView(R.id.performance_rb)
     RadioButton performanceRb;
-    @BindView(R.id.assessment_due_date)
-    TextView dueText;
+
+    //@BindView(R.id.assessment_due_date)
+    //TextView dueText;
 
     public AssessmentEditorActivity() throws ParseException {
     }
@@ -92,7 +93,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
                     String assessmentType = assessmentEntity.getType();
 
                     assessmentTextView.setText(assessmentEntity.getTitle());
-                    dueText.setText(assessmentEntity.getDueDate());
+                    //dueText.setText(assessmentEntity.getDueDate());
 
                     if(assessmentType == perf){
                         performanceRb.setChecked(true);
@@ -148,7 +149,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
 
     private void saveAndReturn() {
         String title = assessmentTextView.getText().toString();
-        String dueDate = dueText.getText().toString();
+        //String dueDate = dueText.getText().toString();
         String type = "";
 
         if(objectiveRb.isChecked()){
@@ -157,7 +158,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             type = perf;
         }
 
-        mViewModel.saveAssessment(courseId, dueDate, title, type);
+        //mViewModel.saveAssessment(courseId, dueDate, title, type);
         finish();
     }
 
