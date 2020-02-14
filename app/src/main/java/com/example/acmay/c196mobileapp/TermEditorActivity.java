@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +15,10 @@ import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.viewmodel.TermViewModel;
+
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -132,7 +137,17 @@ public class TermEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        //mViewModel.saveTerm(mTextView.getText().toString(), startText.getText().toString(), endText.getText().toString());
+        int startDay = startDate.getDayOfMonth();
+        int startMonth = startDate.getMonth();
+        int startYear = startDate.getYear();
+
+        int endDay = endDate.getDayOfMonth();
+        int endMonth = endDate.getMonth();
+        int endYear = endDate.getYear();
+
+        Date start = new Date(startYear, startMonth - 1, startDay);
+        Date end = new Date(endYear, endMonth - 1, endDay);
+        mViewModel.saveTerm(mTextView.getText().toString(), start, end);
         finish();
     }
 

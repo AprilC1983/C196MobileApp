@@ -53,7 +53,7 @@
         app:layout_constraintHorizontal_bias="0.906"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.685"
+        app:layout_constraintVertical_bias="0.754"
         tools:targetApi="o" />
 
     <Button
@@ -102,7 +102,7 @@
         app:layout_constraintEnd_toStartOf="@+id/term_end_picker"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.674" />
+        app:layout_constraintVertical_bias="0.731" />
 
     <!--
     <Button

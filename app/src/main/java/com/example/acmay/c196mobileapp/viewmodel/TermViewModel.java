@@ -35,7 +35,7 @@ public class TermViewModel extends AndroidViewModel {
         });
     }
 
-    public void saveTerm(String termText, String start, String end) {
+    public void saveTerm(String termText, Date start, Date end) {
         TermEntity term = mLiveTerm.getValue();
 
 
@@ -43,11 +43,11 @@ public class TermViewModel extends AndroidViewModel {
             if(TextUtils.isEmpty(termText.trim())){
                 return;
             }
-            term = new TermEntity(new Date(), start.trim(), end.trim(), termText.trim());
+            term = new TermEntity(new Date(), start, end, termText.trim());
         } else{
             term.setTitle(termText.trim());
-            term.setStartDate(start.trim());
-            term.setEndDate(end.trim());
+            term.setStartDate(start);
+            term.setEndDate(end);
 
         }
 
