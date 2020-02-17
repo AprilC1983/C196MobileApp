@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.acmay.c196mobileapp.Exceptions.HasCoursesAssignedException;
 import com.example.acmay.c196mobileapp.utilities.SampleData;
 
 import java.util.List;
@@ -88,8 +89,16 @@ public class AppRepository {
             @Override
             public void run() {
                 int courses = mDb.termDao().getCourses(term.getId());
-                Log.i("oberon", "Number of courses in selected term: " + courses);
-                mDb.termDao().deleteTerm(term);
+                try {
+                    if (courses != 0) {
+                        throw new HasCoursesAssignedException("This term has courses assigned to it");
+                    }else if(courses == 0) {
+                        mDb.termDao().deleteTerm(term);
+                    }
+                } catch(HasCoursesAssignedException ex){
+                    Log.i("oberon", "Do not delete term, " + courses + " courses assigned to it");
+                }
+
             }
         });
     }
