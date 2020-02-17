@@ -55,7 +55,16 @@ public class TermViewModel extends AndroidViewModel {
     }
 
     public void deleteTerm() {
+
         mRepository.deleteTerm(mLiveTerm.getValue());
     }
+
+    /*
+    //Experimental method
+    public int getTermCount(){
+        return mRepository.getTermCount();
+    }
+
+     */
 
 }

@@ -8,8 +8,8 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "courses"/*, foreignKeys = @ForeignKey(entity = TermEntity.class,
-        parentColumns = "termID", childColumns = "termID", onDelete = ForeignKey.CASCADE)*/)
+@Entity(tableName = "courses", foreignKeys = @ForeignKey(entity = TermEntity.class,
+        parentColumns = "termID", childColumns = "termID", onDelete = ForeignKey.CASCADE))
 public class CourseEntity {
     @PrimaryKey(autoGenerate = true)
     private int courseID;

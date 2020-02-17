@@ -2,6 +2,7 @@ package com.example.acmay.c196mobileapp.database;
 
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.util.Log;
 
 import com.example.acmay.c196mobileapp.utilities.SampleData;
 
@@ -20,6 +21,8 @@ public class AppRepository {
 
     private AppDatabase mDb;
     private Executor executer = Executors.newSingleThreadExecutor();
+    private int numTerms;
+    private int numCourses;
 
     public static AppRepository getInstance(Context context) {
         if(ourInstance == null){
@@ -84,10 +87,32 @@ public class AppRepository {
         executer.execute(new Runnable() {
             @Override
             public void run() {
+                int courses = mDb.termDao().getCourses(term.getId());
+                Log.i("oberon", "Number of courses in selected term: " + courses);
                 mDb.termDao().deleteTerm(term);
             }
         });
     }
+
+
+
+/*
+    //Experimental method
+    public int getCourseCount(){
+        executer.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                numCourses = mDb.termDao().getCourses();
+                Log.i("oberon", "The total number of courses is " + numCourses);
+                Log.i("oberon", "The number of terms is " + numTerms);
+            }
+        });
+        Log.i("oberon", "numTerms value outside runnable method: " + numTerms);
+        return numTerms;
+    }
+
+ */
 
     //Course-specific methods
     private LiveData<List<CourseEntity>> getAllCourses(){

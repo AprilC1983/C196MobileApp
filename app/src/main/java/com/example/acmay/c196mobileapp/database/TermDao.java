@@ -32,4 +32,7 @@ public interface TermDao {
 
     @Query("SELECT COUNT(*) FROM terms")
     int getCount();
+
+    @Query("SELECT COUNT(*) FROM courses WHERE termID = :id")
+    int getCourses(int id);
 }

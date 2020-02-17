@@ -65,6 +65,7 @@ public class TermEditorActivity extends AppCompatActivity {
     private TermViewModel mViewModel;
     private boolean mNewTerm, mEditing;
     private int termID;
+    private final String TAG = "oberon";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
