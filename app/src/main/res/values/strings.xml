@@ -48,4 +48,6 @@
     <string name="due_date">Due date</string>
     <string name="terms">Terms</string>
     <string name="delete_term">Delete Term</string>
+    <string name="channel_name">Terms Channel</string>
+    <string name="channel_description">Alerts related to terms</string>
 </resources>

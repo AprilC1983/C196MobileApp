@@ -7,5 +7,5 @@ public class Constants {
     public static final String NOTE_ID_KEY = "note_id_key";
     public static final String MENTOR_ID_KEY = "mentor_id_key";
     public static final String EDITING_KEY = "editing_key";
-    public static final String NOTIFICATION_CHANEL_ID = "10001";
+    public static final String CHANNEL_ID = "10001";
 }

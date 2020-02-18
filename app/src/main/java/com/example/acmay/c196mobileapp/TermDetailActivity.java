@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,6 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 //import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_DETAIL_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.CHANNEL_ID;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
@@ -41,12 +43,12 @@ public class TermDetailActivity extends AppCompatActivity {
 
     //exits term detail screen
     @OnClick(R.id.term_detail_exit)
-    void cancelClickHandler(){
+    void cancelClickHandler() {
         finish();
     }
 
     @OnClick(R.id.delete_term_btn)
-    void delete(){
+    void delete() {
         mViewModel.deleteTerm(TermDetailActivity.this);
 
     }
@@ -65,7 +67,7 @@ public class TermDetailActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             mEditing = savedInstanceState.getBoolean(EDITING_KEY);
         }
 
@@ -73,7 +75,7 @@ public class TermDetailActivity extends AppCompatActivity {
     }
 
 
-    private void initViewModel(){
+    private void initViewModel() {
         mViewModel = ViewModelProviders.of(this)
                 .get(TermDetailViewModel.class);
 
@@ -81,7 +83,7 @@ public class TermDetailActivity extends AppCompatActivity {
         mViewModel.mLiveTerm.observe(this, new Observer<TermEntity>() {
             @Override
             public void onChanged(@Nullable TermEntity termEntity) {
-                if(termEntity != null && !mEditing) {
+                if (termEntity != null && !mEditing) {
                     termDetailTextView.setText("Term: " + termEntity.getTitle());
                     termStart.setText("Start Date: " + termEntity.getStartDate());
                     termEnd.setText("End Date: " + termEntity.getEndDate());
@@ -93,7 +95,7 @@ public class TermDetailActivity extends AppCompatActivity {
         });
 
         Bundle extras = getIntent().getExtras();
-        if(extras == null){
+        if (extras == null) {
             setTitle(R.string.selected_term);
             mNewTermDetail = true;
         } else {
