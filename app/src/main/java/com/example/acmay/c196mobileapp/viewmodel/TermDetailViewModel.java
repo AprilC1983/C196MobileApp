@@ -36,9 +36,13 @@ public class TermDetailViewModel extends AndroidViewModel {
         });
     }
 
-    public void deleteTerm(Context context) {
+    public boolean deleteTerm() {
 
-        mRepository.deleteTerm(mLiveTerm.getValue(), context);
+        boolean found = mRepository.deleteTerm(mLiveTerm.getValue());
+        return found;
     }
 
+    public boolean hasCourses(){
+        return mRepository.hasCourses(mLiveTerm.getValue());
+    }
 }

@@ -9,12 +9,15 @@ import android.content.DialogInterface;
 import android.util.Log;
 import android.widget.Button;
 
+import com.example.acmay.c196mobileapp.Callables.CourseCallable;
 import com.example.acmay.c196mobileapp.Exceptions.HasCoursesAssignedException;
 import com.example.acmay.c196mobileapp.utilities.SampleData;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
@@ -29,7 +32,8 @@ public class AppRepository {
 
     private AppDatabase mDb;
     private Executor executer = Executors.newSingleThreadExecutor();
-    //private int numTerms;
+    //boolean found;
+
     //private int numCourses;
 
     public static AppRepository getInstance(Context context) {
@@ -93,25 +97,70 @@ public class AppRepository {
 
 
     //This term verifies whether a term has courses assigned to it and deletes the term if co courses are assigned
-    public void deleteTerm(final TermEntity term, final Context context) {
-        executer.execute(new Runnable() {
+    public boolean deleteTerm(final TermEntity term) {
+        //final Boolean[] coursesFound = {true};
+        Boolean found = true;
+
+        //CourseCallable callable = new CourseCallable(hasCourses(term));
+        Callable<Boolean> callable = new Callable<Boolean>() {
             @Override
-            public void run() {
-                //int courses = mDb.termDao().getCourses(term.getId());
-                int numCourses = mDb.termDao().getCourses(term.getId());
-                try {
-                    if (numCourses != 0) {
-                        throw new HasCoursesAssignedException("This term has courses assigned to it");
-                    }else if(numCourses == 0) {
-                        mDb.termDao().deleteTerm(term);
-                    }
-                } catch(HasCoursesAssignedException ex){
-                    Log.i("oberon", "Do not delete term, " + numCourses + " courses assigned to it");
-                    //displayAlert(context);
+            public Boolean call() throws Exception {
+                final Boolean[] coursesFound = {true};
+                coursesFound[0] = hasCourses(term);
+
+                if(!coursesFound[0]){
+                    mDb.termDao().deleteTerm(term);
+                    //Log.i("oberon", "call: A term was deleted");
+                }else if(coursesFound[0]){
+                    //Log.i("obreon", "call: A number of courses were found");
                 }
 
+                Log.i("oberon", "coursesFound  = " + coursesFound[0]);
+                return coursesFound[0];
             }
-        });
+        };
+
+        FutureTask task = new FutureTask(callable);
+        Thread thread = new Thread(task);
+        thread.start();
+
+
+        try {
+            //found = callable.call().compareTo(found);
+            boolean test = callable.call().booleanValue();
+            Log.i("oberon", "deleteTerm: " + test);
+        } catch (Exception e) {
+            Log.i("oberon", "deleteTerm: something went wrong");
+            e.printStackTrace();
+        }
+        return found;
+        /*
+        try{
+            if(hasCourses(term)){
+                throw new HasCoursesAssignedException("This term has courses assigned to it and cannot be deleted");
+            }else if(!hasCourses(term)){
+                mDb.termDao().deleteTerm(term);
+            }
+        }catch(HasCoursesAssignedException ex){
+            Log.i("oberon", "deleteTerm: Selected term has courses assigned");
+        }
+
+         */
+    }
+
+    //determines whether there are courses in the selected term
+    public boolean hasCourses(final TermEntity term){
+        boolean courses = true;
+        int numCourses = mDb.termDao().getCourses(term.getId());
+        if(numCourses != 0){
+            courses = true;
+            //Log.i("oberon", "hasCourses: The value is " + courses);
+        }else if(numCourses == 0){
+            courses = false;
+            //Log.i("oberon", "hasCourses: The value is " + courses);
+        }
+        //Log.i("oberon", "hasCourses: The value is " + courses);
+        return courses;
     }
 
 
@@ -258,7 +307,7 @@ public class AppRepository {
             }
         });
     }
-
+/*
     //Creates an alert dialog
     public void displayAlert(Context context){
         //Create an alert popup
@@ -274,4 +323,5 @@ public class AppRepository {
         alert.setTitle("Error");
         alert.show();
     }
+ */
 }

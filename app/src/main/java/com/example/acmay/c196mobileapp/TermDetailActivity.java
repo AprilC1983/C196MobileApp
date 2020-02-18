@@ -1,7 +1,10 @@
 package com.example.acmay.c196mobileapp;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,8 +41,13 @@ public class TermDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.delete_term_btn)
     void delete(){
-        mViewModel.deleteTerm(TermDetailActivity.this);
-        finish();
+        boolean found = mViewModel.deleteTerm();
+        if(found){
+            displayAlert(TermDetailActivity.this);
+        }
+        //Need way to trigger alertDisplay() method
+        //finish();
+
     }
 
     private TermDetailViewModel mViewModel;
@@ -106,4 +114,19 @@ public class TermDetailActivity extends AppCompatActivity {
     }
 
 
+    //Creates an alert dialog
+    public void displayAlert(Context context){
+        //Create an alert popup
+        AlertDialog.Builder adb = new AlertDialog.Builder(context);
+        adb.setMessage("Cannot delete terms with courses assigned")
+                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = adb.create();
+        alert.setTitle("Error");
+        alert.show();
+    }
 }
