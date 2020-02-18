@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.acmay.c196mobileapp">
 
+    <uses-permission android:name = "android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +16,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -149,6 +149,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.acmay.c196mobileapp.MainActivity" />
         </activity>
+
+        <receiver android:name= ".notifications.NotificationPublisher" />
 
 
     </application>

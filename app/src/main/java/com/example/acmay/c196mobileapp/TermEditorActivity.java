@@ -118,7 +118,7 @@ public class TermEditorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         if(!mNewTerm){
             MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_editor, menu);
+            inflater.inflate(R.menu.menu_main, menu);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -126,6 +126,7 @@ public class TermEditorActivity extends AppCompatActivity {
     //*************************************************************************************************************
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        /*
         if(item.getItemId() == android.R.id.home){
             //Dialog dialog = new Dialog(TermEditorActivity.this);
             //dialog.show();
@@ -136,7 +137,10 @@ public class TermEditorActivity extends AppCompatActivity {
             mViewModel.deleteTerm(TermEditorActivity.this);
             finish();
         }
+
+         */
         return super.onOptionsItemSelected(item);
+
     }
 
     @Override
