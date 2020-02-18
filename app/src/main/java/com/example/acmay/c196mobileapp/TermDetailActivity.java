@@ -10,10 +10,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.viewmodel.TermDetailViewModel;
+
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,15 +45,6 @@ public class TermDetailActivity extends AppCompatActivity {
     @OnClick(R.id.delete_term_btn)
     void delete(){
         mViewModel.deleteTerm(TermDetailActivity.this);
-        /*
-        boolean found = mViewModel.deleteTerm(TermDetailActivity.this);
-        if(found){
-            displayAlert(TermDetailActivity.this);
-        }
-
-         */
-        //Need way to trigger alertDisplay() method
-        //finish();
 
     }
 
@@ -88,6 +82,9 @@ public class TermDetailActivity extends AppCompatActivity {
                     termDetailTextView.setText("Term: " + termEntity.getTitle());
                     termStart.setText("Start Date: " + termEntity.getStartDate());
                     termEnd.setText("End Date: " + termEntity.getEndDate());
+
+                    Date start = termEntity.getStartDate();
+
                 }
             }
         });
@@ -104,33 +101,14 @@ public class TermDetailActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     public void onBackPressed() {
         finish();
     }
 
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(EDITING_KEY, true);
         super.onSaveInstanceState(outState);
-    }
-
-
-    //Creates an alert dialog
-    public void displayAlert(Context context){
-        //Create an alert popup
-        AlertDialog.Builder adb = new AlertDialog.Builder(context);
-        adb.setMessage("Cannot delete terms with courses assigned")
-                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = adb.create();
-        alert.setTitle("Error");
-        alert.show();
     }
 }

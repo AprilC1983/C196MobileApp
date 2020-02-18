@@ -1,18 +1,12 @@
 package com.example.acmay.c196mobileapp.database;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.Notification;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.util.Log;
-import android.widget.Button;
 
-import com.example.acmay.c196mobileapp.Callables.CourseCallable;
 import com.example.acmay.c196mobileapp.Exceptions.HasCoursesAssignedException;
-import com.example.acmay.c196mobileapp.TermDetailActivity;
 import com.example.acmay.c196mobileapp.utilities.SampleData;
 
 import java.util.List;
@@ -20,8 +14,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 public class AppRepository {
     private static AppRepository ourInstance;

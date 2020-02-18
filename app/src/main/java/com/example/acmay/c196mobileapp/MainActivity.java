@@ -100,22 +100,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*
-    //Creates an alert dialog
-    public void displayAlert(Context context){
-        //Create an alert popup
-        AlertDialog.Builder adb = new AlertDialog.Builder(context);
-        adb.setMessage("Cannot delete terms with courses assigned")
-                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = adb.create();
-        alert.setTitle("Error");
-        alert.show();
-    }
-
-     */
 }
