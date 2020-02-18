@@ -5,12 +5,14 @@ import android.app.Dialog;
 import android.app.Notification;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.widget.Button;
 
 import com.example.acmay.c196mobileapp.Callables.CourseCallable;
 import com.example.acmay.c196mobileapp.Exceptions.HasCoursesAssignedException;
+import com.example.acmay.c196mobileapp.TermDetailActivity;
 import com.example.acmay.c196mobileapp.utilities.SampleData;
 
 import java.util.List;
@@ -97,42 +99,43 @@ public class AppRepository {
 
 
     //This term verifies whether a term has courses assigned to it and deletes the term if co courses are assigned
-    public boolean deleteTerm(final TermEntity term) {
-        //final Boolean[] coursesFound = {true};
+    public boolean deleteTerm(final TermEntity term, final Context context) {
+        final Boolean[] coursesFound = {true};
         Boolean found = true;
 
-        //CourseCallable callable = new CourseCallable(hasCourses(term));
         Callable<Boolean> callable = new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
                 final Boolean[] coursesFound = {true};
                 coursesFound[0] = hasCourses(term);
 
-                if(!coursesFound[0]){
-                    mDb.termDao().deleteTerm(term);
-                    //Log.i("oberon", "call: A term was deleted");
-                }else if(coursesFound[0]){
-                    //Log.i("obreon", "call: A number of courses were found");
-                }
+                try {
+                    if (!coursesFound[0]) {
+                        mDb.termDao().deleteTerm(term);
+                        Log.i("oberon", "call: A term was deleted");
+                    } else if (coursesFound[0]) {
+                        //Log.i("oberon", "call: A number of courses were found");
+                        throw new HasCoursesAssignedException("courses assigned");
+                    }
+                    }catch(HasCoursesAssignedException ex){
+                    Log.i("oberon", "call: An exception was thrown");
+                    displayAlert(context);
+                    }
 
-                Log.i("oberon", "coursesFound  = " + coursesFound[0]);
+
+
+                //Log.i("oberon", "coursesFound  = " + coursesFound[0]);
                 return coursesFound[0];
             }
+
         };
+
+        displayAlert(context);
 
         FutureTask task = new FutureTask(callable);
         Thread thread = new Thread(task);
         thread.start();
 
-
-        try {
-            //found = callable.call().compareTo(found);
-            boolean test = callable.call().booleanValue();
-            Log.i("oberon", "deleteTerm: " + test);
-        } catch (Exception e) {
-            Log.i("oberon", "deleteTerm: something went wrong");
-            e.printStackTrace();
-        }
         return found;
         /*
         try{
@@ -307,12 +310,12 @@ public class AppRepository {
             }
         });
     }
-/*
+
     //Creates an alert dialog
     public void displayAlert(Context context){
         //Create an alert popup
         AlertDialog.Builder adb = new AlertDialog.Builder(context);
-        adb.setMessage("Cannot delete terms with courses assigned")
+        adb.setMessage("Term will be deleted unless courses are assigned to it")
                 .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -320,8 +323,8 @@ public class AppRepository {
                     }
                 });
         AlertDialog alert = adb.create();
-        alert.setTitle("Error");
+        alert.setTitle("Alert");
         alert.show();
     }
- */
+
 }

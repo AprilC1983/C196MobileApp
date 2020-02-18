@@ -41,10 +41,14 @@ public class TermDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.delete_term_btn)
     void delete(){
-        boolean found = mViewModel.deleteTerm();
+        mViewModel.deleteTerm(TermDetailActivity.this);
+        /*
+        boolean found = mViewModel.deleteTerm(TermDetailActivity.this);
         if(found){
             displayAlert(TermDetailActivity.this);
         }
+
+         */
         //Need way to trigger alertDisplay() method
         //finish();
 

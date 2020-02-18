@@ -133,7 +133,7 @@ public class TermEditorActivity extends AppCompatActivity {
             saveAndReturn();
             return true;
         } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteTerm();
+            mViewModel.deleteTerm(TermEditorActivity.this);
             finish();
         }
         return super.onOptionsItemSelected(item);

@@ -55,8 +55,8 @@ public class TermViewModel extends AndroidViewModel {
         mRepository.insertTerm(term);
     }
 
-    public void deleteTerm() {
-        mRepository.deleteTerm(mLiveTerm.getValue());
+    public void deleteTerm(Context context) {
+        mRepository.deleteTerm(mLiveTerm.getValue(), context);
     }
 
 }
