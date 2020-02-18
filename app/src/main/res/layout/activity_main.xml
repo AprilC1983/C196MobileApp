@@ -31,14 +31,4 @@
         app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_add" />
 
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="366dp"
-        android:layout_height="451dp"
-
-        android:text="Do it!" />
-
-
-
 </android.support.design.widget.CoordinatorLayout>

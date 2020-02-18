@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,6 +34,7 @@ import com.example.acmay.c196mobileapp.ui.TermAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -57,16 +59,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @OnClick(R.id.button)
-    void doItHandler(){
-        createNotificationChannel();
-    }
-
 
     private List<TermEntity> termsData = new ArrayList<>();
     private TermAdapter mAdapter;
     private MainViewModel mViewModel;
     int termId;
+    private int x;
     private String titleTxt = "Alert";
     private String msgTxt = "A message";
 
@@ -80,9 +78,11 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initRecyclerView();
         initViewModel();
+
+        createNotificationChannel();
     }
 
-
+//***********************************************WORK WITH TERMS HERE*******************************************
     private void initViewModel() {
 
         final Observer<List<TermEntity>> termsObserver = new Observer<List<TermEntity>>() {
@@ -91,12 +91,16 @@ public class MainActivity extends AppCompatActivity {
                 termsData.clear();
                 termsData.addAll(termEntities);
 
+                for(int i = 0; i < termEntities.size(); i++){
+                    Date date = termEntities.get(i).getStartDate();
+                    Log.i("notify", "The selected date is " + date);
+                }
+
                 if(mAdapter == null){
                     mAdapter = new TermAdapter(termsData, MainActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
-
 
                 }
             }
@@ -106,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 .get(MainViewModel.class);
 
         mViewModel.mTerms.observe(this, termsObserver);
+
     }
 
 
@@ -189,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
 // notificationId is a unique int for each notification that you must define
             notificationManager.notify(1, builder.build());
 
-            Intent snoozeIntent = new Intent(this, NotificationPublisher.class);
+            Intent snoozeIntent = new Intent(this, BroadcastReceiver.class);
             snoozeIntent.setAction("snooze");
             snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
             PendingIntent snoozePendingIntent =
