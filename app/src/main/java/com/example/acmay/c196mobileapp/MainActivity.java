@@ -1,7 +1,10 @@
 package com.example.acmay.c196mobileapp;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Button;
 
 import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.ui.TermAdapter;
@@ -95,4 +99,23 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addItemDecoration(divider);
 
     }
+
+    /*
+    //Creates an alert dialog
+    public void displayAlert(Context context){
+        //Create an alert popup
+        AlertDialog.Builder adb = new AlertDialog.Builder(context);
+        adb.setMessage("Cannot delete terms with courses assigned")
+                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = adb.create();
+        alert.setTitle("Error");
+        alert.show();
+    }
+
+     */
 }

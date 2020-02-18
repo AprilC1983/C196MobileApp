@@ -36,6 +36,12 @@ public class TermDetailActivity extends AppCompatActivity {
         finish();
     }
 
+    @OnClick(R.id.delete_term_btn)
+    void delete(){
+        mViewModel.deleteTerm(TermDetailActivity.this);
+        finish();
+    }
+
     private TermDetailViewModel mViewModel;
     private boolean mNewTermDetail, mEditing;
 

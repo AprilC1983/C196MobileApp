@@ -1,5 +1,7 @@
 package com.example.acmay.c196mobileapp;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -49,10 +51,11 @@ public class TermEditorActivity extends AppCompatActivity {
     }
 
      */
-
+//******************************** DON'T FORGET TO FIX THIS *******************************
     //Exits the create term screen without saving
     @OnClick(R.id.term_cancel_btn)
     void cancelClickHandler(){
+        //mViewModel.deleteTerm(TermEditorActivity.this);
         finish();
     }
 
@@ -120,13 +123,17 @@ public class TermEditorActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //*************************************************************************************************************
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home){
+            //Dialog dialog = new Dialog(TermEditorActivity.this);
+            //dialog.show();
+
             saveAndReturn();
             return true;
         } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteTerm();
+            mViewModel.deleteTerm(TermEditorActivity.this);
             finish();
         }
         return super.onOptionsItemSelected(item);

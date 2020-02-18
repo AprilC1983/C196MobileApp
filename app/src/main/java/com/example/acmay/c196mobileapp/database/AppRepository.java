@@ -1,8 +1,13 @@
 package com.example.acmay.c196mobileapp.database;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.Notification;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
+import android.widget.Button;
 
 import com.example.acmay.c196mobileapp.Exceptions.HasCoursesAssignedException;
 import com.example.acmay.c196mobileapp.utilities.SampleData;
@@ -10,6 +15,8 @@ import com.example.acmay.c196mobileapp.utilities.SampleData;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class AppRepository {
     private static AppRepository ourInstance;
@@ -22,8 +29,8 @@ public class AppRepository {
 
     private AppDatabase mDb;
     private Executor executer = Executors.newSingleThreadExecutor();
-    private int numTerms;
-    private int numCourses;
+    //private int numTerms;
+    //private int numCourses;
 
     public static AppRepository getInstance(Context context) {
         if(ourInstance == null){
@@ -84,44 +91,29 @@ public class AppRepository {
         });
     }
 
-    public void deleteTerm(final TermEntity term) {
+
+    //This term verifies whether a term has courses assigned to it and deletes the term if co courses are assigned
+    public void deleteTerm(final TermEntity term, final Context context) {
         executer.execute(new Runnable() {
             @Override
             public void run() {
-                int courses = mDb.termDao().getCourses(term.getId());
+                //int courses = mDb.termDao().getCourses(term.getId());
+                int numCourses = mDb.termDao().getCourses(term.getId());
                 try {
-                    if (courses != 0) {
+                    if (numCourses != 0) {
                         throw new HasCoursesAssignedException("This term has courses assigned to it");
-                    }else if(courses == 0) {
+                    }else if(numCourses == 0) {
                         mDb.termDao().deleteTerm(term);
                     }
                 } catch(HasCoursesAssignedException ex){
-                    Log.i("oberon", "Do not delete term, " + courses + " courses assigned to it");
+                    Log.i("oberon", "Do not delete term, " + numCourses + " courses assigned to it");
+                    //displayAlert(context);
                 }
 
             }
         });
     }
 
-
-
-/*
-    //Experimental method
-    public int getCourseCount(){
-        executer.execute(new Runnable() {
-            @Override
-            public void run() {
-
-                numCourses = mDb.termDao().getCourses();
-                Log.i("oberon", "The total number of courses is " + numCourses);
-                Log.i("oberon", "The number of terms is " + numTerms);
-            }
-        });
-        Log.i("oberon", "numTerms value outside runnable method: " + numTerms);
-        return numTerms;
-    }
-
- */
 
     //Course-specific methods
     private LiveData<List<CourseEntity>> getAllCourses(){
@@ -267,4 +259,19 @@ public class AppRepository {
         });
     }
 
+    //Creates an alert dialog
+    public void displayAlert(Context context){
+        //Create an alert popup
+        AlertDialog.Builder adb = new AlertDialog.Builder(context);
+        adb.setMessage("Cannot delete terms with courses assigned")
+                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = adb.create();
+        alert.setTitle("Error");
+        alert.show();
+    }
 }

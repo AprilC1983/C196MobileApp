@@ -47,4 +47,5 @@
     <string name="performance">Performance</string>
     <string name="due_date">Due date</string>
     <string name="terms">Terms</string>
+    <string name="delete_term">Delete Term</string>
 </resources>

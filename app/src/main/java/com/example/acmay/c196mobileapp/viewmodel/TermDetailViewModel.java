@@ -3,6 +3,7 @@ package com.example.acmay.c196mobileapp.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -33,6 +34,11 @@ public class TermDetailViewModel extends AndroidViewModel {
                 mLiveTerm.postValue(term);
             }
         });
+    }
+
+    public void deleteTerm(Context context) {
+
+        mRepository.deleteTerm(mLiveTerm.getValue(), context);
     }
 
 }
