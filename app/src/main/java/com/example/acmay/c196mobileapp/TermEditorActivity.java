@@ -149,6 +149,7 @@ public class TermEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
+
         int startDay = startDate.getDayOfMonth();
         int startMonth = startDate.getMonth();
         int startYear = startDate.getYear();
@@ -157,8 +158,8 @@ public class TermEditorActivity extends AppCompatActivity {
         int endMonth = endDate.getMonth();
         int endYear = endDate.getYear();
 
-        Date start = new Date(startYear, startMonth - 1, startDay);
-        Date end = new Date(endYear, endMonth - 1, endDay);
+        Date start = new Date(startYear - 1900, startMonth, startDay );
+        Date end = new Date(endYear - 1900, endMonth, endDay);
         mViewModel.saveTerm(mTextView.getText().toString(), start, end);
         finish();
     }
