@@ -196,6 +196,10 @@ public class CourseEditorActivity extends AppCompatActivity {
     private void saveAndReturn() {
         String title = courseTextView.getText().toString();
         String status = "";
+        String startMessage;
+        String endMessage;
+        long startLong;
+        long endLong;
 
         if(plannedRb.isChecked()){
             status = planned;
@@ -215,8 +219,17 @@ public class CourseEditorActivity extends AppCompatActivity {
         int endMonth = courseEnd.getMonth();
         int endYear = courseEnd.getYear();
 
-        java.util.Date start = new java.util.Date(startYear, startMonth - 1, startDay);
-        java.util.Date end = new Date(endYear, endMonth - 1, endDay);
+        java.util.Date start = new java.util.Date(startYear - 1900, startMonth, startDay);
+        java.util.Date end = new Date(endYear - 1900, endMonth, endDay);
+
+        startLong = start.getTime();
+        endLong = end.getTime();
+        startMessage = title + " begins today";
+        endMessage = title + " is ending today";
+
+        createNotificationChannel(startLong, startMessage);
+        createNotificationChannel(endLong, endMessage);
+        Log.i("goat", "hjfhvjh ");
 
             mViewModel.saveCourse(termID, start, end, title, status);
             finish();

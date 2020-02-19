@@ -21,6 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ALERT;
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 
@@ -65,7 +67,15 @@ public class AlertActivity extends AppCompatActivity {
             mEditing = savedInstanceState.getBoolean(EDITING_KEY);
         }
 
-        alertTxt.setText("You have a course beginning soon");
+        Bundle extras = getIntent().getExtras();
+        if(extras == null){
+            setTitle("Error");
+            alertTxt.setText("Sorry, message unavailable");
+        } else {
+            setTitle("Alert");
+            String message = (String) extras.get(COURSE_ALERT);
+            alertTxt.setText(message);
+        }
 
     }
 
