@@ -51,4 +51,5 @@
     <string name="channel_name">Terms Channel</string>
     <string name="channel_description">Alerts related to terms</string>
     <string name="set_goal">Set Goal</string>
+    <string name="alert">Alert</string>
 </resources>

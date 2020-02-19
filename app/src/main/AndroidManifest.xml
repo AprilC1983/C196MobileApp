@@ -150,6 +150,16 @@
                 android:value="com.example.acmay.c196mobileapp.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".AlertActivity"
+            android:label="@string/alert"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acmay.c196mobileapp.MainActivity" />
+        </activity>
+
         <receiver android:name= ".notifications.NotificationPublisher" />
 
 

@@ -49,14 +49,13 @@ import butterknife.OnClick;
 
 import static android.app.Notification.EXTRA_NOTIFICATION_ID;
 import static com.example.acmay.c196mobileapp.utilities.Constants.CHANNEL_ID;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ALERT;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
-
-    private static final String TAG = "Main Activity";
 
     @OnClick(R.id.add_fab)
     void fabClickHandler(){
@@ -70,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
     private TermAdapter mAdapter;
     private MainViewModel mViewModel;
     int termId;
-    private int x;
-    private String titleTxt = "Alert";
     private String msgTxt = "A message";
 
     @Override
@@ -85,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
         initViewModel();
 
-        //createNotificationChannel();
+        createNotificationChannel();
     }
 
 //***********************************************WORK WITH TERMS HERE*******************************************
@@ -186,7 +183,10 @@ private void createNotificationChannel() {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel);
 
-        Intent intent = new Intent(this, NoteEditorActivity.class);
+
+//Specifies which screen launches***********************************************************************8
+        Intent intent = new Intent(this, AlertActivity.class);
+        intent.putExtra(COURSE_ALERT, msgTxt);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
@@ -194,7 +194,7 @@ private void createNotificationChannel() {
 //This will trigger an alert for start and end dates
         Calendar calendar = Calendar.getInstance();
         AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC, calendar.getTimeInMillis() + 7000, pendingIntent);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC, calendar.getTimeInMillis() + 1000, pendingIntent);
 
         /*
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)

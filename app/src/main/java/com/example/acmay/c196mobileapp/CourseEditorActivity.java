@@ -1,8 +1,14 @@
 package com.example.acmay.c196mobileapp;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,12 +24,15 @@ import android.widget.TextView;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.viewmodel.CourseViewModel;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.CHANNEL_ID;
+import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ALERT;
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
@@ -47,19 +56,6 @@ public class CourseEditorActivity extends AppCompatActivity {
     @BindView(R.id.dropped_rb)
     RadioButton droppedRb;
 
-    /*
-    //saves entered course data and continues to the assessment editor screen
-    @OnClick(R.id.course_continue_btn)
-    void continueClickHandler(){
-        saveAndReturn();
-        Intent intent = new Intent(this, MentorEditorActivity.class);
-        intent.putExtra(COURSE_ID_KEY, courseID);
-        Log.i("editorkeys", "continueClickHandler: from course editor cid is" + courseID);
-        startActivity(intent);
-    }
-
-     */
-
     //exits course screen without saving data
     @OnClick(R.id.course_cancel_btn)
     void cancelClickHandler(){
@@ -76,10 +72,11 @@ public class CourseEditorActivity extends AppCompatActivity {
     private boolean mNewCourse, mEditing;
     private int courseID;
     private int termID;
-    String planned = "Plan to take";
-    String taking = "In Progress";
-    String completed = "Completed";
-    String dropped = "Dropped";
+    private String planned = "Plan to take";
+    private String taking = "In Progress";
+    private String completed = "Completed";
+    private String dropped = "Dropped";
+    private String msgTxt = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,8 +118,6 @@ public class CourseEditorActivity extends AppCompatActivity {
                     }
 
                     courseTextView.setText(courseEntity.getTitle());
-                    //courseStart.setText(courseEntity.getStartDate());
-                    //courseEnd.setText(courseEntity.getEndDate());
                 }
             }
         });
@@ -140,6 +135,32 @@ public class CourseEditorActivity extends AppCompatActivity {
             termID = extras.getInt(TERM_ID_KEY);
         }
 
+    }
+
+    //Creates a notification channel
+    private void createNotificationChannel(long date, String courseMsg) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
+//Specifies which screen launches***********************************************************************8
+            Intent intent = new Intent(this, AlertActivity.class);
+            intent.putExtra(COURSE_ALERT, courseMsg);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+//This will trigger an alert for start and end dates
+            AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC, date, pendingIntent);
+
+        }
     }
 
     @Override

@@ -9,4 +9,5 @@
     <dimen name="spinner_width">250dp</dimen>
     <dimen name="label_width">50dp</dimen>
     <dimen name="rb_width">125dp</dimen>
+    <dimen name="button_width">150dp</dimen>
 </resources>
