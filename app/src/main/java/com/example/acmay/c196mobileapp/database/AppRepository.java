@@ -1,13 +1,19 @@
 package com.example.acmay.c196mobileapp.database;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.util.Log;
 
+import com.example.acmay.c196mobileapp.Exceptions.HasCoursesAssignedException;
 import com.example.acmay.c196mobileapp.utilities.SampleData;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 
 public class AppRepository {
     private static AppRepository ourInstance;
@@ -20,6 +26,9 @@ public class AppRepository {
 
     private AppDatabase mDb;
     private Executor executer = Executors.newSingleThreadExecutor();
+    //boolean found;
+
+    //private int numCourses;
 
     public static AppRepository getInstance(Context context) {
         if(ourInstance == null){
@@ -80,14 +89,75 @@ public class AppRepository {
         });
     }
 
-    public void deleteTerm(final TermEntity term) {
-        executer.execute(new Runnable() {
+
+    //This term verifies whether a term has courses assigned to it and deletes the term if co courses are assigned
+    public boolean deleteTerm(final TermEntity term, final Context context) {
+        final Boolean[] coursesFound = {true};
+        Boolean found = true;
+
+        Callable<Boolean> callable = new Callable<Boolean>() {
             @Override
-            public void run() {
+            public Boolean call() throws Exception {
+                final Boolean[] coursesFound = {true};
+                coursesFound[0] = hasCourses(term);
+
+                try {
+                    if (!coursesFound[0]) {
+                        mDb.termDao().deleteTerm(term);
+                        Log.i("oberon", "call: A term was deleted");
+                    } else if (coursesFound[0]) {
+                        //Log.i("oberon", "call: A number of courses were found");
+                        throw new HasCoursesAssignedException("courses assigned");
+                    }
+                    }catch(HasCoursesAssignedException ex){
+                    Log.i("oberon", "call: An exception was thrown");
+                    displayAlert(context);
+                    }
+
+
+
+                //Log.i("oberon", "coursesFound  = " + coursesFound[0]);
+                return coursesFound[0];
+            }
+
+        };
+
+        displayAlert(context);
+
+        FutureTask task = new FutureTask(callable);
+        Thread thread = new Thread(task);
+        thread.start();
+
+        return found;
+        /*
+        try{
+            if(hasCourses(term)){
+                throw new HasCoursesAssignedException("This term has courses assigned to it and cannot be deleted");
+            }else if(!hasCourses(term)){
                 mDb.termDao().deleteTerm(term);
             }
-        });
+        }catch(HasCoursesAssignedException ex){
+            Log.i("oberon", "deleteTerm: Selected term has courses assigned");
+        }
+
+         */
     }
+
+    //determines whether there are courses in the selected term
+    public boolean hasCourses(final TermEntity term){
+        boolean courses = true;
+        int numCourses = mDb.termDao().getCourses(term.getId());
+        if(numCourses != 0){
+            courses = true;
+            //Log.i("oberon", "hasCourses: The value is " + courses);
+        }else if(numCourses == 0){
+            courses = false;
+            //Log.i("oberon", "hasCourses: The value is " + courses);
+        }
+        //Log.i("oberon", "hasCourses: The value is " + courses);
+        return courses;
+    }
+
 
     //Course-specific methods
     private LiveData<List<CourseEntity>> getAllCourses(){
@@ -231,6 +301,22 @@ public class AppRepository {
                 mDb.noteDao().deleteNote(note);
             }
         });
+    }
+
+    //Creates an alert dialog
+    public void displayAlert(Context context){
+        //Create an alert popup
+        AlertDialog.Builder adb = new AlertDialog.Builder(context);
+        adb.setMessage("Term will be deleted unless courses are assigned to it")
+                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = adb.create();
+        alert.setTitle("Alert");
+        alert.show();
     }
 
 }

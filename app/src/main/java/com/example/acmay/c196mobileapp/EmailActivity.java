@@ -22,51 +22,44 @@ import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.EMAIL_ID;
 import static com.example.acmay.c196mobileapp.utilities.Constants.MESSAGE_ID;
 import static com.example.acmay.c196mobileapp.utilities.Constants.NOTE_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.SUBJECT_ID;
 
-public class NoteEditorActivity extends AppCompatActivity {
+public class EmailActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.note_text)
-    TextView noteTextView;
+    @BindView(R.id.recipientTxt)
+    TextView recipTxt;
+    @BindView(R.id.subjectTxt)
+    TextView subTxt;
+    @BindView(R.id.messageTxt)
+    TextView msgTxt;
 
     //exits Note screen without saving data
-    @OnClick(R.id.note_cancel)
-    void cancelClickHandler(){
-        //Intent intent = new Intent(this, CourseDetailActivity.class);
-        //intent.putExtra(COURSE_ID_KEY, courseId);
-        //startActivity(intent);
+    @OnClick(R.id.sendBtn)
+    void sendClickHandler(){
+        String message = msgTxt.getText().toString();
+        String recipient = recipTxt.getText().toString();
+        String subject = subTxt.getText().toString();
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{recipient});
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
+        intent.setType("message/rfc822");
+
+        startActivity(Intent.createChooser(intent,"Choose Mail App"));
         finish();
     }
 
-    //Saves Note data without continuing to the assessment editor
-    @OnClick(R.id.note_save)
-    void saveClickHandler(){
-        Intent intent = new Intent(this, NoteDisplayActivity.class);
-        intent.putExtra(COURSE_ID_KEY, courseId);
-        startActivity(intent);
-        saveAndReturn();
-    }
-
-    @OnClick(R.id.email_fab)
-    void emailClickHandler(){
-        String message = noteTextView.getText().toString();
-        Intent intent = new Intent(this, EmailActivity.class);
-        intent.putExtra(MESSAGE_ID, message);
-        mViewModel.saveNote(courseId, noteTextView.getText().toString());
-        startActivity(intent);
-    }
-
-
-    private NoteViewModel mViewModel;
-    private boolean mNewNote, mEditing;
-    private int courseId;
+    private boolean mEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.note_editor);
+        setContentView(R.layout.email_editor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
@@ -78,37 +71,15 @@ public class NoteEditorActivity extends AppCompatActivity {
             mEditing = savedInstanceState.getBoolean(EDITING_KEY);
         }
 
-        initViewModel();
-    }
-
-
-    private void initViewModel(){
-        mViewModel = ViewModelProviders.of(this)
-                .get(NoteViewModel.class);
-
-
-        mViewModel.mLiveNote.observe(this, new Observer<NoteEntity>() {
-            @Override
-            public void onChanged(@Nullable NoteEntity noteEntity) {
-                if(noteEntity != null && !mEditing) {
-                    noteTextView.setText(noteEntity.getText());
-                }
-            }
-        });
-
         Bundle extras = getIntent().getExtras();
-        if(extras == null){
-            setTitle(R.string.edit_note);
-            mNewNote = true;
-        } else {
-            setTitle(R.string.edit_note);
-            int noteId = extras.getInt(NOTE_ID_KEY);
-            mViewModel.loadData(noteId);
-            courseId = extras.getInt(COURSE_ID_KEY);
-            Log.i("nid", "initViewModel: cid is " + courseId);
+
+        if(extras != null) {
+            String note = extras.getString(MESSAGE_ID);
+            msgTxt.setText(note);
+        }else if(extras == null){
+            Log.i("email", "onCreate: extras was null");
         }
     }
-
 
     @Override
     public void onBackPressed() {
@@ -116,12 +87,7 @@ public class NoteEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveNote(courseId, noteTextView.getText().toString());
         finish();
-    }
-
-    private void save(){
-        mViewModel.saveNote(courseId, noteTextView.getText().toString());
     }
 
     @Override
@@ -133,8 +99,8 @@ public class NoteEditorActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //if(!mNewCourse){
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
         //}
         return super.onCreateOptionsMenu(menu);
     }

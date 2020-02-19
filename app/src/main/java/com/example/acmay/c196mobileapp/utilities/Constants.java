@@ -7,8 +7,9 @@ public class Constants {
     public static final String NOTE_ID_KEY = "note_id_key";
     public static final String MENTOR_ID_KEY = "mentor_id_key";
     public static final String EDITING_KEY = "editing_key";
-    //public static final String TERM_DETAIL_ID_KEY = "term_detail_id_key";
-    //public static final String COURSE_DETAIL_ID_KEY = "course_detail_id_key";
-    //public static final String MENTOR_DETAIL_ID_KEY = "mentor_detail_id_key";
-    //public static final String ASSESSMENT_DETAIL_ID_KEY = "assessment_detail_id_key";
+    public static final String CHANNEL_ID = "10001";
+    public static final String ALERT_MESSAGE_KEY = "alert_message";
+    public static final String EMAIL_ID = "email_id";
+    public static final String SUBJECT_ID = "subject_id";
+    public static final String MESSAGE_ID = "message_id";
 }

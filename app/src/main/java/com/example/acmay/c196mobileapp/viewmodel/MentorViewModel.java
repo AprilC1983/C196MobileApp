@@ -45,6 +45,8 @@ public class MentorViewModel extends AndroidViewModel {
             mentor = new MentorEntity(course, new Date(), name.trim(), phone, email);
         } else{
             mentor.setName(name.trim());
+            mentor.setPhone(phone);
+            mentor.setEmail(email);
         }
         mRepository.insertMentor(mentor);
     }

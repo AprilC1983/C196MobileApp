@@ -10,7 +10,9 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.ui.TermAdapter;
@@ -30,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    private static final String TAG = "Main Activity";
-
     @OnClick(R.id.add_fab)
     void fabClickHandler(){
         Intent intent = new Intent(this, TermEditorActivity.class);
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private TermAdapter mAdapter;
     private MainViewModel mViewModel;
     int termId;
+    private String msgTxt = "A message";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +66,22 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<TermEntity> termEntities) {
                 termsData.clear();
                 termsData.addAll(termEntities);
+/*
+                for(int i = 0; i < termEntities.size(); i++){
+                    Date start = termEntities.get(i).getStartDate();
+                    Date end = termEntities.get(i).getEndDate();
+
+                    long startNum = start.getTime();
+                    long endNum = end.getTime();
+                }
+
+ */
 
                 if(mAdapter == null){
                     mAdapter = new TermAdapter(termsData, MainActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
-
 
                 }
             }
@@ -81,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 .get(MainViewModel.class);
 
         mViewModel.mTerms.observe(this, termsObserver);
+
     }
 
 
@@ -95,4 +106,30 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addItemDecoration(divider);
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //if(!mNewTerm){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_main, menu);
+        //}
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        /*
+        if(item.getItemId() == android.R.id.home){
+            saveAndReturn();
+            return true;
+        } else if(item.getItemId() == R.id.action_delete){
+            mViewModel.deleteCourse();
+            finish();
+        }
+
+         */
+        return super.onOptionsItemSelected(item);
+    }
+
 }
+

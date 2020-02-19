@@ -1,86 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <EditText
         android:id="@+id/display_text"
-        android:layout_width="375dp"
+        android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_margin="@dimen/text_margin"
+        android:layout_marginEnd="92dp"
+        android:layout_marginRight="92dp"
         android:layout_marginBottom="4dp"
         android:autofillHints=""
         android:hint="@string/enter_term_details"
         android:inputType="text|textCapSentences"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.37"
+        tools:targetApi="o" />
+
+    <DatePicker
+        android:id="@+id/term_start_picker"
+        android:layout_width="@dimen/spinner_width"
+        android:layout_height="@dimen/spinner_height"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.383"
+        app:layout_constraintVertical_bias="0.532"
         tools:targetApi="o" />
 
+    <DatePicker
+        android:id="@+id/term_end_picker"
+        android:layout_width="@dimen/spinner_width"
+        android:layout_height="@dimen/spinner_height"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
 
-    <EditText
-        android:id="@+id/start_date_text"
-        android:layout_width="375dp"
-        android:layout_height="55dp"
-        android:layout_margin="@dimen/text_margin"
-        android:layout_marginBottom="4dp"
-        android:autofillHints=""
-        android:hint="@string/enter_start"
-        android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.906"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/display_text"
-        app:layout_constraintVertical_bias="0.056"
-        tools:targetApi="o" />
-
-    <EditText
-        android:id="@+id/end_date_text"
-        android:layout_width="375dp"
-        android:layout_height="55dp"
-        android:layout_margin="@dimen/text_margin"
-        android:layout_marginBottom="4dp"
-        android:autofillHints=""
-        android:hint="@string/enter_end_date"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_date_text"
-        app:layout_constraintVertical_bias="0.064"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.754"
         tools:targetApi="o" />
 
     <Button
         android:id="@+id/term_cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/term_save_btn"
+        app:layout_constraintEnd_toStartOf="@+id/term_save_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/end_date_text"
-        app:layout_constraintVertical_bias="0.781" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.948" />
 
     <Button
         android:id="@+id/term_save_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/term_cancel_btn"
-        app:layout_constraintTop_toBottomOf="@+id/end_date_text"
-        app:layout_constraintVertical_bias="0.781" />
+        app:layout_constraintHorizontal_bias="0.789"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.948" />
+
+    <TextView
+        android:id="@+id/start_label"
+        android:layout_width="@dimen/label_width"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/term_start_picker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.54" />
+
+    <TextView
+        android:id="@+id/end_label"
+        android:layout_width="@dimen/label_width"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_end_date"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/term_end_picker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.731" />
 
     <!--
     <Button

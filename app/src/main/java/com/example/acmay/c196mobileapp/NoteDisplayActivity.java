@@ -11,6 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.database.MentorEntity;
@@ -35,7 +38,6 @@ public class NoteDisplayActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    public static final String TAG = "nnnn";
 
     @OnClick(R.id.add_fab)
     void fabClickHandler(){
@@ -114,7 +116,6 @@ public class NoteDisplayActivity extends AppCompatActivity {
     private List<NoteEntity> getSelected(List<NoteEntity> all){
         Bundle extras = getIntent().getExtras();
         courseId = extras.getInt(COURSE_ID_KEY);
-        Log.i("zz", "getSelected in note display cid is: " + courseId);
 
         List<NoteEntity> selected = new ArrayList<>();
 
@@ -128,5 +129,27 @@ public class NoteDisplayActivity extends AppCompatActivity {
             }
         }
         return selected;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        /*
+        if(item.getItemId() == android.R.id.home){
+            saveAndReturn();
+            return true;
+        } else if(item.getItemId() == R.id.action_delete){
+            mViewModel.deleteCourse();
+            finish();
+        }
+
+         */
+        return super.onOptionsItemSelected(item);
     }
 }

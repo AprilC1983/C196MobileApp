@@ -1,8 +1,9 @@
 package com.example.acmay.c196mobileapp;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,10 +12,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.viewmodel.TermViewModel;
+
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,10 +34,10 @@ public class TermEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.display_text)
     TextView mTextView;
-    @BindView(R.id.start_date_text)
-    TextView startText;
-    @BindView(R.id.end_date_text)
-    TextView endText;
+    @BindView(R.id.term_start_picker)
+    DatePicker startDate;
+    @BindView(R.id.term_end_picker)
+    DatePicker endDate;
 
     /*
     //Saves the term information and continues to the new course screen
@@ -45,10 +51,11 @@ public class TermEditorActivity extends AppCompatActivity {
     }
 
      */
-
+//******************************** DON'T FORGET TO FIX THIS *******************************
     //Exits the create term screen without saving
     @OnClick(R.id.term_cancel_btn)
     void cancelClickHandler(){
+        //mViewModel.deleteTerm(TermEditorActivity.this);
         finish();
     }
 
@@ -61,7 +68,7 @@ public class TermEditorActivity extends AppCompatActivity {
     private TermViewModel mViewModel;
     private boolean mNewTerm, mEditing;
     private int termID;
-    int termIDEEE;
+    private final String TAG = "oberon";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +97,8 @@ public class TermEditorActivity extends AppCompatActivity {
             public void onChanged(@Nullable TermEntity termEntity) {
                 if(termEntity != null && !mEditing) {
                     mTextView.setText(termEntity.getTitle());
-                    //termID = termEntity.getId();
-                    Log.i("editorkeys", "onChanged: tid is " + termID);
+                    //startText.setText(termEntity.getStartDate());
+                    //endText.setText(termEntity.getEndDate());
                 }
             }
         });
@@ -111,21 +118,29 @@ public class TermEditorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         if(!mNewTerm){
             MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_editor, menu);
+            inflater.inflate(R.menu.menu_main, menu);
         }
         return super.onCreateOptionsMenu(menu);
     }
 
+    //*************************************************************************************************************
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        /*
         if(item.getItemId() == android.R.id.home){
+            //Dialog dialog = new Dialog(TermEditorActivity.this);
+            //dialog.show();
+
             saveAndReturn();
             return true;
         } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteTerm();
+            mViewModel.deleteTerm(TermEditorActivity.this);
             finish();
         }
+
+         */
         return super.onOptionsItemSelected(item);
+
     }
 
     @Override
@@ -134,7 +149,18 @@ public class TermEditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTerm(mTextView.getText().toString(), startText.getText().toString(), endText.getText().toString());
+
+        int startDay = startDate.getDayOfMonth();
+        int startMonth = startDate.getMonth();
+        int startYear = startDate.getYear();
+
+        int endDay = endDate.getDayOfMonth();
+        int endMonth = endDate.getMonth();
+        int endYear = endDate.getYear();
+
+        Date start = new Date(startYear - 1900, startMonth, startDay );
+        Date end = new Date(endYear - 1900, endMonth, endDay);
+        mViewModel.saveTerm(mTextView.getText().toString(), start, end);
         finish();
     }
 

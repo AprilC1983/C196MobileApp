@@ -3,6 +3,7 @@ package com.example.acmay.c196mobileapp.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -35,7 +36,7 @@ public class TermViewModel extends AndroidViewModel {
         });
     }
 
-    public void saveTerm(String termText, String start, String end) {
+    public void saveTerm(String termText, Date start, Date end) {
         TermEntity term = mLiveTerm.getValue();
 
 
@@ -43,19 +44,19 @@ public class TermViewModel extends AndroidViewModel {
             if(TextUtils.isEmpty(termText.trim())){
                 return;
             }
-            term = new TermEntity(new Date(), start.trim(), end.trim(), termText.trim());
+            term = new TermEntity(new Date(), start, end, termText.trim());
         } else{
             term.setTitle(termText.trim());
-            term.setStartDate(start.trim());
-            term.setEndDate(end.trim());
+            term.setStartDate(start);
+            term.setEndDate(end);
 
         }
 
         mRepository.insertTerm(term);
     }
 
-    public void deleteTerm() {
-        mRepository.deleteTerm(mLiveTerm.getValue());
+    public void deleteTerm(Context context) {
+        mRepository.deleteTerm(mLiveTerm.getValue(), context);
     }
 
 }

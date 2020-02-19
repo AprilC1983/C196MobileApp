@@ -8,19 +8,19 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "courses"/*, foreignKeys = @ForeignKey(entity = TermEntity.class,
-        parentColumns = "termID", childColumns = "termID", onDelete = ForeignKey.CASCADE)*/)
+@Entity(tableName = "courses", foreignKeys = @ForeignKey(entity = TermEntity.class,
+        parentColumns = "termID", childColumns = "termID", onDelete = ForeignKey.CASCADE))
 public class CourseEntity {
     @PrimaryKey(autoGenerate = true)
     private int courseID;
     private int termID;
     private Date createDate;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
     private String title;
     private String status;
 
-    public CourseEntity(int termID, Date createDate, String startDate, String endDate, String title, String status) {
+    public CourseEntity(int termID, Date createDate, Date startDate, Date endDate, String title, String status) {
         this.termID = termID;
         this.createDate = createDate;
         this.startDate = startDate;
@@ -30,7 +30,7 @@ public class CourseEntity {
     }
 
     @Ignore
-    public CourseEntity(int termID, Date createDate, String title, String startDate, String endDate) {
+    public CourseEntity(int termID, Date createDate, String title, Date startDate, Date endDate) {
         this.termID = termID;
         this.createDate = createDate;
         this.startDate = startDate;
@@ -95,19 +95,19 @@ public class CourseEntity {
         this.createDate = createDate;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

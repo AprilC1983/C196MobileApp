@@ -1,22 +1,33 @@
 package com.example.acmay.c196mobileapp;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.viewmodel.TermDetailViewModel;
+
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 //import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_DETAIL_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.CHANNEL_ID;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
@@ -32,8 +43,14 @@ public class TermDetailActivity extends AppCompatActivity {
 
     //exits term detail screen
     @OnClick(R.id.term_detail_exit)
-    void cancelClickHandler(){
+    void cancelClickHandler() {
         finish();
+    }
+
+    @OnClick(R.id.delete_term_btn)
+    void delete() {
+        mViewModel.deleteTerm(TermDetailActivity.this);
+
     }
 
     private TermDetailViewModel mViewModel;
@@ -50,7 +67,7 @@ public class TermDetailActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             mEditing = savedInstanceState.getBoolean(EDITING_KEY);
         }
 
@@ -58,7 +75,7 @@ public class TermDetailActivity extends AppCompatActivity {
     }
 
 
-    private void initViewModel(){
+    private void initViewModel() {
         mViewModel = ViewModelProviders.of(this)
                 .get(TermDetailViewModel.class);
 
@@ -66,16 +83,19 @@ public class TermDetailActivity extends AppCompatActivity {
         mViewModel.mLiveTerm.observe(this, new Observer<TermEntity>() {
             @Override
             public void onChanged(@Nullable TermEntity termEntity) {
-                if(termEntity != null && !mEditing) {
+                if (termEntity != null && !mEditing) {
                     termDetailTextView.setText("Term: " + termEntity.getTitle());
                     termStart.setText("Start Date: " + termEntity.getStartDate());
                     termEnd.setText("End Date: " + termEntity.getEndDate());
+
+                    Date start = termEntity.getStartDate();
+
                 }
             }
         });
 
         Bundle extras = getIntent().getExtras();
-        if(extras == null){
+        if (extras == null) {
             setTitle(R.string.selected_term);
             mNewTermDetail = true;
         } else {
@@ -86,12 +106,10 @@ public class TermDetailActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     public void onBackPressed() {
         finish();
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -99,5 +117,25 @@ public class TermDetailActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        /*
+        if(item.getItemId() == android.R.id.home){
+            saveAndReturn();
+            return true;
+        } else if(item.getItemId() == R.id.action_delete){
+            mViewModel.deleteCourse();
+            finish();
+        }
+
+         */
+        return super.onOptionsItemSelected(item);
+    }
 }
