@@ -1,7 +1,10 @@
 package com.example.acmay.c196mobileapp;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,12 +13,15 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.acmay.c196mobileapp.database.TermEntity;
 import com.example.acmay.c196mobileapp.ui.TermAdapter;
+import com.example.acmay.c196mobileapp.utilities.MyScheduler;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -25,9 +31,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.acmay.c196mobileapp.utilities.Constants.JOB_ID;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -38,13 +46,19 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(TERM_ID_KEY, termId);
         startActivity(intent);
     }
+    /*
+    @OnClick(R.id.sch)
+    void clickSch(){
+        Log.i("MyScheduler", "clickSch: The button can also be clicked");
+    }
+
+     */
 
 
     private List<TermEntity> termsData = new ArrayList<>();
     private TermAdapter mAdapter;
     private MainViewModel mViewModel;
     int termId;
-    private String msgTxt = "A message";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +70,33 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initRecyclerView();
         initViewModel();
+        scheduleJob(null);
+
     }
 
+    //************************************Scheduler Methods Here*********************************//
+    public void scheduleJob(View v){
+        ComponentName componentName = new ComponentName(this, MyScheduler.class);
+        JobInfo info= new JobInfo.Builder(JOB_ID, componentName)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                .build();
+
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int resultCode = scheduler.schedule(info);
+        if(resultCode == JobScheduler.RESULT_SUCCESS){
+            Log.i(TAG, "Job scheduled successfully");
+        }else{
+            Log.i(TAG, "Job scheduling failed");
+        }
+    }
+
+    public void cancelJob(View v){
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        scheduler.cancel(JOB_ID);
+        Log.i(TAG, "Job cancelled");
+    }
+
+    //********************************************************************************************//
 
     private void initViewModel() {
 

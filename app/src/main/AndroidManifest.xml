@@ -177,6 +177,8 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".utilities.MyScheduler"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
 
     </application>
 

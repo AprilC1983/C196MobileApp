@@ -22,10 +22,8 @@ import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
-import static com.example.acmay.c196mobileapp.utilities.Constants.EMAIL_ID;
 import static com.example.acmay.c196mobileapp.utilities.Constants.MESSAGE_ID;
 import static com.example.acmay.c196mobileapp.utilities.Constants.NOTE_ID_KEY;
-import static com.example.acmay.c196mobileapp.utilities.Constants.SUBJECT_ID;
 
 public class EmailActivity extends AppCompatActivity {
 
