@@ -38,7 +38,6 @@ public class NoteDisplayActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    public static final String TAG = "nnnn";
 
     @OnClick(R.id.add_fab)
     void fabClickHandler(){
@@ -117,7 +116,6 @@ public class NoteDisplayActivity extends AppCompatActivity {
     private List<NoteEntity> getSelected(List<NoteEntity> all){
         Bundle extras = getIntent().getExtras();
         courseId = extras.getInt(COURSE_ID_KEY);
-        Log.i("zz", "getSelected in note display cid is: " + courseId);
 
         List<NoteEntity> selected = new ArrayList<>();
 

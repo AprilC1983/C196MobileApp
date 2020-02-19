@@ -22,6 +22,7 @@ import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.MESSAGE_ID;
 import static com.example.acmay.c196mobileapp.utilities.Constants.NOTE_ID_KEY;
 
 public class NoteEditorActivity extends AppCompatActivity {
@@ -46,6 +47,14 @@ public class NoteEditorActivity extends AppCompatActivity {
         intent.putExtra(COURSE_ID_KEY, courseId);
         startActivity(intent);
         saveAndReturn();
+    }
+
+    @OnClick(R.id.email_fab)
+    void emailClickHandler(){
+        String message = noteTextView.getText().toString();
+        Intent intent = new Intent(this, EmailActivity.class);
+        intent.putExtra(MESSAGE_ID, message);
+        startActivity(intent);
     }
 
 
