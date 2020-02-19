@@ -39,20 +39,19 @@ public class EmailActivity extends AppCompatActivity {
 
     //exits Note screen without saving data
     @OnClick(R.id.sendBtn)
-    void cancelClickHandler(){
-        Log.i("bats", "send: button was pressed");
+    void sendClickHandler(){
         String message = msgTxt.getText().toString();
         String recipient = recipTxt.getText().toString();
         String subject = subTxt.getText().toString();
 
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_EMAIL, recipient);
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{recipient});
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, message);
         intent.setType("message/rfc822");
 
         startActivity(Intent.createChooser(intent,"Choose Mail App"));
-        Log.i("bats", "send: button was pressed");
+        finish();
     }
 
     private boolean mEditing;

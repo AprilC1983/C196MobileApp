@@ -54,6 +54,7 @@ public class NoteEditorActivity extends AppCompatActivity {
         String message = noteTextView.getText().toString();
         Intent intent = new Intent(this, EmailActivity.class);
         intent.putExtra(MESSAGE_ID, message);
+        mViewModel.saveNote(courseId, noteTextView.getText().toString());
         startActivity(intent);
     }
 
@@ -117,6 +118,10 @@ public class NoteEditorActivity extends AppCompatActivity {
     private void saveAndReturn() {
         mViewModel.saveNote(courseId, noteTextView.getText().toString());
         finish();
+    }
+
+    private void save(){
+        mViewModel.saveNote(courseId, noteTextView.getText().toString());
     }
 
     @Override

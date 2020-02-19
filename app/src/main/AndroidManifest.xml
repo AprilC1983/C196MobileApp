@@ -169,6 +169,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.acmay.c196mobileapp.MainActivity" />
             <intent-filter>
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.SEND"/>
                 <category android:name="android.intent.category.DEFAULT"/>
