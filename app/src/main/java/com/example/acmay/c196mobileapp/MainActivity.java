@@ -85,14 +85,7 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
         initViewModel();
 
-        int id = 2;
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("NotificationText", "some text");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, '9', pendingIntent);
-
-        createNotificationChannel();
+        //createNotificationChannel();
     }
 
 //***********************************************WORK WITH TERMS HERE*******************************************
@@ -106,16 +99,13 @@ public class MainActivity extends AppCompatActivity {
 
                 for(int i = 0; i < termEntities.size(); i++){
                     Date start = termEntities.get(i).getStartDate();
+                    Date end = termEntities.get(i).getEndDate();
 
-                    Date date = new Date();
+                    long startNum = start.getTime();
+                    long endNum = end.getTime();
+                    //modify method to take long argument
 
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                    String s = dateFormat.format(date);
-                    String d = dateFormat.format(start);
-
-                    boolean same = s.equals(d);
-
-                    Log.i("yyyyy", termEntities.get(i).getTitle() + " is " + s + " TODAY: " + d + " " + same);
+                    //Log.i("yyyyy", "The difference is ");
                 }
 
                 if(mAdapter == null){
@@ -193,23 +183,20 @@ private void createNotificationChannel() {
         NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
         channel.setDescription(description);
 
-
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel);
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, NoteEditorActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-        //Alarm
 
+//This will trigger an alert for start and end dates
         Calendar calendar = Calendar.getInstance();
-        long interval = 24*60*60*1000;
         AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        //alarmManager.setExact(AlarmManager.RTC_WAKEUP,
-          //      calendar.getTimeInMillis(), interval , pendingIntent);
-        alarmManager.setExact(AlarmManager.RTC, calendar.getTimeInMillis() + 15000, pendingIntent);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC, calendar.getTimeInMillis() + 7000, pendingIntent);
 
+        /*
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notifications)
                 .setContentTitle("My notification")
@@ -219,41 +206,11 @@ private void createNotificationChannel() {
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
-        //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-
+         */
 
    //    notificationId is a unique int for each notification that you must define
+        //notificationManager.notify(1, builder.build());
 
-        notificationManager.notify(1, builder.build());
-
-        /*
-        Intent snoozeIntent = new Intent(this, BroadcastReceiver.class);
-        snoozeIntent.setAction("snooze");
-        snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
-        PendingIntent snoozePendingIntent =
-                PendingIntent.getBroadcast(this, 0, snoozeIntent, 0);
-
-        //Try to create an alarm
-        //Intent alarmIntent = new Intent(this, BroadcastReceiver.class);
-
-
-        Intent alarmIntent = new Intent(this, BroadcastReceiver.class);
-        intent.putExtra("NotificationText", "some text");
-        PendingIntent pendingAlarm = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, 10000, pendingAlarm);
-
-        //NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-        builder
-                .setSmallIcon(R.drawable.ic_notifications)
-                .setContentTitle("Spiders")
-                .setContentText("Spiders EVERYWHERE")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingAlarm)
-                .addAction(R.drawable.ic_notifications, getString(R.string.assessment_name),
-                        pendingAlarm);
-
-    */
         }
     }
 

@@ -3,14 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.acmay.c196mobileapp.MainActivity">
     <item
-        android:id="@+id/action_courses"
+        android:id="@+id/action_goals"
         android:orderInCategory="100"
-        android:title="@string/courses"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_terms"
-        android:orderInCategory="101"
-        android:title="@string/terms"
+        android:title="@string/set_goal"
         app:showAsAction="never" />
 
 </menu>
