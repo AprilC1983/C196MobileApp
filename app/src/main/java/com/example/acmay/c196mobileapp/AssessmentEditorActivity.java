@@ -49,7 +49,7 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     @BindView(R.id.assessment_due_picker)
     DatePicker dueDate;
 
-    public AssessmentEditorActivity() throws ParseException {
+    public AssessmentEditorActivity() {
     }
 
     //Saves assessment data and returns to the main screen

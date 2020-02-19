@@ -9,4 +9,7 @@ public class Constants {
     public static final String EDITING_KEY = "editing_key";
     public static final String CHANNEL_ID = "10001";
     public static final String ALERT_MESSAGE_KEY = "alert_message";
+    public static final String EMAIL_ID = "email_id";
+    public static final String SUBJECT_ID = "subject_id";
+    public static final String MESSAGE_ID = "message_id";
 }
