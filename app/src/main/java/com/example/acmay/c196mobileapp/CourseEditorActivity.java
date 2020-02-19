@@ -24,7 +24,6 @@ import android.widget.TextView;
 import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.viewmodel.CourseViewModel;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -32,7 +31,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.CHANNEL_ID;
-import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ALERT;
+import static com.example.acmay.c196mobileapp.utilities.Constants.ALERT_MESSAGE_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
@@ -138,7 +137,7 @@ public class CourseEditorActivity extends AppCompatActivity {
     }
 
     //Creates a notification channel
-    private void createNotificationChannel(long date, String courseMsg) {
+    private void createAlert(long date, String courseMsg) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
@@ -151,7 +150,7 @@ public class CourseEditorActivity extends AppCompatActivity {
 
 //Specifies which screen launches***********************************************************************8
             Intent intent = new Intent(this, AlertActivity.class);
-            intent.putExtra(COURSE_ALERT, courseMsg);
+            intent.putExtra(ALERT_MESSAGE_KEY, courseMsg);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
@@ -227,9 +226,8 @@ public class CourseEditorActivity extends AppCompatActivity {
         startMessage = title + " begins today";
         endMessage = title + " is ending today";
 
-        createNotificationChannel(startLong, startMessage);
-        createNotificationChannel(endLong, endMessage);
-        Log.i("goat", "hjfhvjh ");
+        createAlert(startLong, startMessage);
+        createAlert(endLong, endMessage);
 
             mViewModel.saveCourse(termID, start, end, title, status);
             finish();

@@ -1,29 +1,19 @@
 package com.example.acmay.c196mobileapp;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.example.acmay.c196mobileapp.database.CourseEntity;
-import com.example.acmay.c196mobileapp.viewmodel.CourseDetailViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
-import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ALERT;
-import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.ALERT_MESSAGE_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 
 public class AlertActivity extends AppCompatActivity {
@@ -73,7 +63,7 @@ public class AlertActivity extends AppCompatActivity {
             alertTxt.setText("Sorry, message unavailable");
         } else {
             setTitle("Alert");
-            String message = (String) extras.get(COURSE_ALERT);
+            String message = (String) extras.get(ALERT_MESSAGE_KEY);
             alertTxt.setText(message);
         }
 

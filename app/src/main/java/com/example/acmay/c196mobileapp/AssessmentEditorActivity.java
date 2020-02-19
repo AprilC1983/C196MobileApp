@@ -1,12 +1,18 @@
 package com.example.acmay.c196mobileapp;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +31,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.ASS_ID_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.CHANNEL_ID;
+import static com.example.acmay.c196mobileapp.utilities.Constants.ALERT_MESSAGE_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
 
@@ -122,6 +130,32 @@ public class AssessmentEditorActivity extends AppCompatActivity {
         }
     }
 
+    //Creates a notification channel
+    private void createAlert(long date, String message) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
+//Specifies which screen launches***********************************************************************8
+            Intent intent = new Intent(this, AlertActivity.class);
+            intent.putExtra(ALERT_MESSAGE_KEY, message);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+//This will trigger an alert for start and end dates
+            AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC, date, pendingIntent);
+
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -155,9 +189,11 @@ public class AssessmentEditorActivity extends AppCompatActivity {
     private void saveAndReturn() {
         String title = assessmentTextView.getText().toString();
         String type = "";
+        String message = "Reminder: " + title + " is due today";
         int dueDay = dueDate.getDayOfMonth();
         int dueMonth = dueDate.getMonth();
         int dueYear = dueDate.getYear();
+        long dueLong;
 
         if(objectiveRb.isChecked()){
             type = obj;
@@ -165,7 +201,10 @@ public class AssessmentEditorActivity extends AppCompatActivity {
             type = perf;
         }
 
-        Date due = new Date(dueYear, dueMonth - 1, dueDay);
+        Date due = new Date(dueYear - 1900, dueMonth, dueDay);
+        dueLong = due.getTime();
+
+        createAlert(dueLong, message);
 
         mViewModel.saveAssessment(courseId, due, title, type);
         finish();
