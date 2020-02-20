@@ -35,10 +35,10 @@
     <string name="view_courses">View Courses</string>
     <string name="selected_term">Selected Term</string>
     <string name="selected_course">Selected Course</string>
-    <string name="return_to_course_list">Return to Courses</string>
-    <string name="return_to_terms_list">Return to Terms</string>
-    <string name="return_to_mentor_list">Return to Mentor List</string>
-    <string name="return_to_assessment_list">Return to Assessment List</string>
+    <string name="return_to_course_list">Back</string>
+    <string name="return_to_terms_list">Back to Terms</string>
+    <string name="return_to_mentor_list">Back to Mentors</string>
+    <string name="return_to_assessment_list">Back to Assessments</string>
     <string name="enter_note">Enter Note</string>
     <string name="notes">Notes</string>
     <string name="edit_note">Edit Note</string>
