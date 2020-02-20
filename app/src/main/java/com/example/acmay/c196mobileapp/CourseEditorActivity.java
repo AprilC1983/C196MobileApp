@@ -166,14 +166,14 @@ public class CourseEditorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         if(!mNewCourse){
             MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_main, menu);
+            inflater.inflate(R.menu.menu_editor, menu);
         }
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*
+
         if(item.getItemId() == android.R.id.home){
             saveAndReturn();
             return true;
@@ -182,7 +182,7 @@ public class CourseEditorActivity extends AppCompatActivity {
             finish();
         }
 
-         */
+
         return super.onOptionsItemSelected(item);
     }
 

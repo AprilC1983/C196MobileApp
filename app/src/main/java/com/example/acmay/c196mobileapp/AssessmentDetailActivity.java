@@ -111,6 +111,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -129,8 +130,10 @@ public class AssessmentDetailActivity extends AppCompatActivity {
             finish();
         }
 
-         */
+
         return super.onOptionsItemSelected(item);
     }
 
+
+     */
 }

@@ -137,6 +137,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
         return selected;
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

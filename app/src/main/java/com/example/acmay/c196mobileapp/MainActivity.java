@@ -107,29 +107,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //if(!mNewTerm){
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_main, menu);
-        //}
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        /*
-        if(item.getItemId() == android.R.id.home){
-            saveAndReturn();
-            return true;
-        } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteCourse();
-            finish();
-        }
-
-         */
-        return super.onOptionsItemSelected(item);
-    }
-
 }
 
