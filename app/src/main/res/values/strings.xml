@@ -35,8 +35,8 @@
     <string name="view_courses">View Courses</string>
     <string name="selected_term">Selected Term</string>
     <string name="selected_course">Selected Course</string>
-    <string name="return_to_course_list">Return to Course List</string>
-    <string name="return_to_terms_list">Return to Terms List</string>
+    <string name="return_to_course_list">Return to Courses</string>
+    <string name="return_to_terms_list">Return to Terms</string>
     <string name="return_to_mentor_list">Return to Mentor List</string>
     <string name="return_to_assessment_list">Return to Assessment List</string>
     <string name="enter_note">Enter Note</string>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,39 +8,37 @@
 
     <TextView
         android:id="@+id/term_title_text"
-        android:layout_width="375dp"
+        android:layout_width="@dimen/text_width"
         android:layout_height="55dp"
         android:layout_margin="@dimen/text_margin"
-        android:layout_marginBottom="4dp"
+        android:layout_marginHorizontal="@dimen/text_margin"
         android:autofillHints=""
         android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.336"
+        app:layout_constraintVertical_bias="0.603"
         tools:targetApi="o" />
 
     <TextView
         android:id="@+id/term_start_text"
-        android:layout_width="375dp"
+        android:layout_width="@dimen/text_width"
         android:layout_height="55dp"
-        android:layout_margin="@dimen/text_margin"
-        android:layout_marginBottom="4dp"
         android:autofillHints=""
         android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/term_title_text"
-        app:layout_constraintVertical_bias="0.056"
-        tools:targetApi="o"  />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.713"
+        tools:targetApi="o" />
 
     <TextView
         android:id="@+id/term_end_text"
-        android:layout_width="375dp"
+        android:layout_width="@dimen/text_width"
         android:layout_height="55dp"
         android:layout_margin="@dimen/text_margin"
         android:layout_marginBottom="4dp"
@@ -49,36 +46,35 @@
         android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/term_start_text"
-        app:layout_constraintVertical_bias="0.097"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.845"
         tools:targetApi="o" />
 
     <Button
         android:id="@+id/term_detail_exit"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:text="@string/return_to_terms_list"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.84" />
+        app:layout_constraintVertical_bias="0.957" />
 
     <Button
         android:id="@+id/delete_term_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:text="@string/delete_term"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.919"
+        app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.84" />
+        app:layout_constraintVertical_bias="0.957" />
 
 
 </android.support.constraint.ConstraintLayout>

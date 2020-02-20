@@ -62,11 +62,13 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
-
+/*
         if(savedInstanceState != null){
             mEditing = savedInstanceState.getBoolean(EDITING_KEY);
         }
 
+
+ */
         initViewModel();
     }
 
@@ -82,7 +84,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
                 if(assessmentEntity != null && !mEditing) {
                     assessmentDetailTextView.setText("Title: " + assessmentEntity.getText());
                     type.setText("Assessment Type: " + assessmentEntity.getType());
-                    due.setText("Due on or before " + assessmentEntity.getDueDate());
+                    due.setText("Due on " + assessmentEntity.getDueDate());
                 }
             }
         });

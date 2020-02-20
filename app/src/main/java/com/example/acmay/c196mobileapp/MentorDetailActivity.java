@@ -58,10 +58,12 @@ public class MentorDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
-
+/*
         if(savedInstanceState != null){
             mEditing = savedInstanceState.getBoolean(EDITING_KEY);
         }
+
+ */
 
         initViewModel();
     }

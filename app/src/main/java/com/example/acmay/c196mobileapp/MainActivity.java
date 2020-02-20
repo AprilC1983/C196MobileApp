@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private TermAdapter mAdapter;
     private MainViewModel mViewModel;
     int termId;
-    private String msgTxt = "A message";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,16 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<TermEntity> termEntities) {
                 termsData.clear();
                 termsData.addAll(termEntities);
-/*
-                for(int i = 0; i < termEntities.size(); i++){
-                    Date start = termEntities.get(i).getStartDate();
-                    Date end = termEntities.get(i).getEndDate();
 
-                    long startNum = start.getTime();
-                    long endNum = end.getTime();
-                }
-
- */
 
                 if(mAdapter == null){
                     mAdapter = new TermAdapter(termsData, MainActivity.this);
