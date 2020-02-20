@@ -66,12 +66,6 @@ public class TermDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
-/*
-        if (savedInstanceState != null) {
-            mEditing = savedInstanceState.getBoolean(EDITING_KEY);
-        }
-
- */
 
         initViewModel();
     }
@@ -117,5 +111,24 @@ public class TermDetailActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(EDITING_KEY, true);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.action_back){
+            Intent intent = new Intent(this, MainActivity.class);
+            //startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

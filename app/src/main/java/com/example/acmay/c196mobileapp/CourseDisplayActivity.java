@@ -63,10 +63,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
         initRecyclerView();
         initViewModel();
     }
-
-
-
-    ///////////////////////////////////////////kjcnvkdfnkxfnd
+    
     private void initViewModel() {
 
         final Observer<List<CourseEntity>> coursesObserver = new Observer<List<CourseEntity>>() {
@@ -96,15 +93,6 @@ public class CourseDisplayActivity extends AppCompatActivity {
         mViewModel.mCourses.observe(this, coursesObserver);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
 
 
     private void initRecyclerView() {
@@ -147,16 +135,12 @@ public class CourseDisplayActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*
-        if(item.getItemId() == android.R.id.home){
-            saveAndReturn();
+        
+        if(item.getItemId() == R.id.action_back){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
             return true;
-        } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteCourse();
-            finish();
         }
-
-         */
         return super.onOptionsItemSelected(item);
     }
 }

@@ -113,7 +113,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    /*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -123,19 +123,14 @@ public class AssessmentDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*
-        if(item.getItemId() == android.R.id.home){
-            saveAndReturn();
-            return true;
-        } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteCourse();
+
+        if(item.getItemId() == R.id.action_back){
+            Intent intent = new Intent(this, AssessmentDisplayActivity.class);
+            //startActivity(intent);
             finish();
+            return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
-
-     */
 }
