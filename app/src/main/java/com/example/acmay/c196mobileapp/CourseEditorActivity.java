@@ -30,7 +30,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.CHANNEL_ID;
+import static com.example.acmay.c196mobileapp.utilities.Constants.END_ALERT_MESSAGE_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.END_CHANNEL_ID;
+import static com.example.acmay.c196mobileapp.utilities.Constants.START_CHANNEL_ID;
 import static com.example.acmay.c196mobileapp.utilities.Constants.ALERT_MESSAGE_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.COURSE_ID_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
@@ -135,20 +137,20 @@ public class CourseEditorActivity extends AppCompatActivity {
         }
 
     }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Creates a notification channel
     private void createAlert(long date, String courseMsg) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
+            CharSequence name = getString(R.string.start_channel_name);
+            String description = getString(R.string.course_channel_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            NotificationChannel channel = new NotificationChannel(START_CHANNEL_ID, name, importance);
             channel.setDescription(description);
 
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
 
-//Specifies which screen launches***********************************************************************8
+            //Launches alert screen
             Intent intent = new Intent(this, AlertActivity.class);
             intent.putExtra(ALERT_MESSAGE_KEY, courseMsg);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -161,6 +163,35 @@ public class CourseEditorActivity extends AppCompatActivity {
 
         }
     }
+
+    //***************************************************************************************************************
+
+    //Creates a notification channel
+    private void createEndAlert(long date, String courseMsg) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.end_channel_name);
+            String description = getString(R.string.course_channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(END_CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
+//Specifies which screen launches***********************************************************************8
+            Intent intent = new Intent(this, EndAlertActivity.class);
+            intent.putExtra(END_ALERT_MESSAGE_KEY, courseMsg);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+//This will trigger an alert for start and end dates
+            AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC, date, pendingIntent);
+
+        }
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -227,7 +258,7 @@ public class CourseEditorActivity extends AppCompatActivity {
         endMessage = title + " is ending today";
 
         createAlert(startLong, startMessage);
-        createAlert(endLong, endMessage);
+        createEndAlert(endLong, endMessage);
 
             mViewModel.saveCourse(termID, start, end, title, status);
             finish();

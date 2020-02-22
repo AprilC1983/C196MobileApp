@@ -19,7 +19,6 @@ import com.example.acmay.c196mobileapp.database.CourseEntity;
 import com.example.acmay.c196mobileapp.ui.CourseAdapter;
 import com.example.acmay.c196mobileapp.viewmodel.MainViewModel;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,7 +124,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
         return selected;
     }
 
-
+//Displays menu with home key across top of screen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -137,7 +136,7 @@ public class CourseDisplayActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         
         if(item.getItemId() == R.id.action_back){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, TermDisplayActivity.class);
             startActivity(intent);
             return true;
         }

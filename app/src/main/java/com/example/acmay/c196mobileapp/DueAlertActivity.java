@@ -13,12 +13,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.acmay.c196mobileapp.utilities.Constants.ALERT_MESSAGE_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.DUE_ALERT_MESSAGE_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.END_ALERT_MESSAGE_KEY;
 
-public class AlertActivity extends AppCompatActivity {
-
-
+public class DueAlertActivity extends AppCompatActivity {
     @BindView(R.id.alert_msg)
     TextView alertTxt;
     @BindView(R.id.ok_btn)
@@ -30,12 +29,14 @@ public class AlertActivity extends AppCompatActivity {
     //exits Course detail screen
     @OnClick(R.id.ignore_btn)
     void ignoreClickHandler(){
+        message = "";
         finish();
     }
 
     //open the note editor activity to add a note
     @OnClick(R.id.ok_btn)
     void addClickHandler(){
+        message = "";
         Intent intent = new Intent(this, TermDisplayActivity.class);
         startActivity(intent);
         finish();
@@ -43,6 +44,7 @@ public class AlertActivity extends AppCompatActivity {
 
     private boolean mEditing;
     private int courseId;
+    private String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +65,8 @@ public class AlertActivity extends AppCompatActivity {
             alertTxt.setText("Sorry, message unavailable");
         } else {
             setTitle("Alert");
-            String message = (String) extras.get(ALERT_MESSAGE_KEY);
-            alertTxt.setText("Reminder: Course beginning today"/* + message*/);
+            message = (String) extras.get(DUE_ALERT_MESSAGE_KEY);
+            alertTxt.setText("Reminder: Assessment due today"/* + message*/);
         }
 
     }
@@ -87,6 +89,4 @@ public class AlertActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
-
 }

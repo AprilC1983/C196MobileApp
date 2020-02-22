@@ -48,8 +48,14 @@
     <string name="due_date">Due date</string>
     <string name="terms">Terms</string>
     <string name="delete_term">Delete Term</string>
-    <string name="channel_name">Terms Channel</string>
-    <string name="channel_description">Alerts related to terms</string>
+    <string name="start_channel_name">Course Start Channel</string>
+    <string name="end_channel_name">Course End Channel</string>
+    <string name="due_channel_name">Assessment Due Channel</string>
+    <string name="course_channel_description">Course alerts</string>
+    <string name="due_channel_description">Assessment alerts</string>
     <string name="set_goal">Set Goal</string>
     <string name="alert">Alert</string>
+    <string name="welcome">Welcome</string>
+    <string name="view_terms">View Terms</string>
+    <string name="home">Home</string>
 </resources>

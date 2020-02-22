@@ -15,10 +15,9 @@ import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.ALERT_MESSAGE_KEY;
 import static com.example.acmay.c196mobileapp.utilities.Constants.EDITING_KEY;
+import static com.example.acmay.c196mobileapp.utilities.Constants.END_ALERT_MESSAGE_KEY;
 
-public class AlertActivity extends AppCompatActivity {
-
-
+public class EndAlertActivity extends AppCompatActivity {
     @BindView(R.id.alert_msg)
     TextView alertTxt;
     @BindView(R.id.ok_btn)
@@ -63,8 +62,8 @@ public class AlertActivity extends AppCompatActivity {
             alertTxt.setText("Sorry, message unavailable");
         } else {
             setTitle("Alert");
-            String message = (String) extras.get(ALERT_MESSAGE_KEY);
-            alertTxt.setText("Reminder: Course beginning today"/* + message*/);
+            String message = (String) extras.get(END_ALERT_MESSAGE_KEY);
+            alertTxt.setText("Reminder: Course ending today"/* + message*/);
         }
 
     }
@@ -87,6 +86,4 @@ public class AlertActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
-
 }

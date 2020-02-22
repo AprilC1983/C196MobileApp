@@ -27,7 +27,7 @@ import butterknife.OnClick;
 
 import static com.example.acmay.c196mobileapp.utilities.Constants.TERM_ID_KEY;
 
-public class MainActivity extends AppCompatActivity {
+public class TermDisplayActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if(mAdapter == null){
-                    mAdapter = new TermAdapter(termsData, MainActivity.this);
+                    mAdapter = new TermAdapter(termsData, TermDisplayActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else{
                     mAdapter.notifyDataSetChanged();
@@ -95,6 +95,24 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.addItemDecoration(divider);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.action_back){
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
