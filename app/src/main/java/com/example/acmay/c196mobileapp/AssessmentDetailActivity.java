@@ -62,11 +62,13 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
-
+/*
         if(savedInstanceState != null){
             mEditing = savedInstanceState.getBoolean(EDITING_KEY);
         }
 
+
+ */
         initViewModel();
     }
 
@@ -82,7 +84,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
                 if(assessmentEntity != null && !mEditing) {
                     assessmentDetailTextView.setText("Title: " + assessmentEntity.getText());
                     type.setText("Assessment Type: " + assessmentEntity.getType());
-                    due.setText("Due on or before " + assessmentEntity.getDueDate());
+                    due.setText("Due on " + assessmentEntity.getDueDate());
                 }
             }
         });
@@ -111,6 +113,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -120,16 +123,13 @@ public class AssessmentDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*
-        if(item.getItemId() == android.R.id.home){
-            saveAndReturn();
-            return true;
-        } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteCourse();
-            finish();
-        }
 
-         */
+        if(item.getItemId() == R.id.action_back){
+            Intent intent = new Intent(this, AssessmentDisplayActivity.class);
+            //startActivity(intent);
+            finish();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

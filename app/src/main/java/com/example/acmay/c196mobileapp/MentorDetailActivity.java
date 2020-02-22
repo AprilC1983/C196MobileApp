@@ -58,10 +58,12 @@ public class MentorDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
-
+/*
         if(savedInstanceState != null){
             mEditing = savedInstanceState.getBoolean(EDITING_KEY);
         }
+
+ */
 
         initViewModel();
     }
@@ -116,16 +118,13 @@ public class MentorDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*
-        if(item.getItemId() == android.R.id.home){
-            saveAndReturn();
-            return true;
-        } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteCourse();
-            finish();
-        }
 
-         */
+        if(item.getItemId() == R.id.action_back){
+            Intent intent = new Intent(this, MentorDisplayActivity.class);
+            //startActivity(intent);
+            finish();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

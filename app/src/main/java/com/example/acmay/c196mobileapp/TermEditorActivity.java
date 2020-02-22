@@ -114,34 +114,7 @@ public class TermEditorActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if(!mNewTerm){
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_main, menu);
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    //*************************************************************************************************************
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        /*
-        if(item.getItemId() == android.R.id.home){
-            //Dialog dialog = new Dialog(TermEditorActivity.this);
-            //dialog.show();
-
-            saveAndReturn();
-            return true;
-        } else if(item.getItemId() == R.id.action_delete){
-            mViewModel.deleteTerm(TermEditorActivity.this);
-            finish();
-        }
-
-         */
-        return super.onOptionsItemSelected(item);
-
-    }
+    
 
     @Override
     public void onBackPressed() {

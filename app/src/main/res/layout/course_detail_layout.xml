@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/course_title_text"
-        android:layout_width="375dp"
+        android:layout_width="@dimen/text_width"
         android:layout_height="55dp"
         android:layout_margin="@dimen/text_margin"
         android:layout_marginBottom="4dp"
@@ -17,15 +17,14 @@
         android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.336"
+        app:layout_constraintVertical_bias="0.502"
         tools:targetApi="o" />
 
     <TextView
         android:id="@+id/course_start_text"
-        android:layout_width="375dp"
+        android:layout_width="@dimen/text_width"
         android:layout_height="55dp"
         android:layout_margin="@dimen/text_margin"
         android:layout_marginBottom="4dp"
@@ -33,15 +32,14 @@
         android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_title_text"
-        app:layout_constraintVertical_bias="0.056"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.622"
         tools:targetApi="o" />
 
     <TextView
         android:id="@+id/course_end_text"
-        android:layout_width="375dp"
+        android:layout_width="@dimen/text_width"
         android:layout_height="55dp"
         android:layout_margin="@dimen/text_margin"
         android:layout_marginBottom="4dp"
@@ -49,15 +47,14 @@
         android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_start_text"
-        app:layout_constraintVertical_bias="0.097"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.732"
         tools:targetApi="o" />
 
     <TextView
         android:id="@+id/status_text"
-        android:layout_width="375dp"
+        android:layout_width="@dimen/text_width"
         android:layout_height="55dp"
         android:layout_margin="@dimen/text_margin"
         android:layout_marginBottom="4dp"
@@ -65,50 +62,47 @@
         android:hint=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_end_text"
-        app:layout_constraintVertical_bias="0.097"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.849"
         tools:targetApi="o" />
 
     <Button
         android:id="@+id/course_detail_exit"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/small_button"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
 
         android:text="@string/return_to_course_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_end_text"
-        app:layout_constraintVertical_bias="0.801" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956" />
 
     <Button
         android:id="@+id/add_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/small_button"
         android:layout_height="wrap_content"
         android:text="@string/enter_note"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.677"
-        app:layout_constraintStart_toEndOf="@id/view_btn"
-        app:layout_constraintTop_toBottomOf="@+id/course_end_text"
-        app:layout_constraintVertical_bias="0.519" />
+        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956" />
 
     <Button
         android:id="@+id/view_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/small_button"
         android:layout_height="wrap_content"
-        android:text="@string/view_notes"
 
+        android:text="@string/view_notes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_end_text"
-        app:layout_constraintVertical_bias="0.519" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956" />
 
 </android.support.constraint.ConstraintLayout>

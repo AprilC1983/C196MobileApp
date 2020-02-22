@@ -10,4 +10,7 @@
     <dimen name="label_width">50dp</dimen>
     <dimen name="rb_width">125dp</dimen>
     <dimen name="button_width">150dp</dimen>
+    <dimen name="app_height_2">150dp</dimen>
+    <dimen name="text_width">200dp</dimen>
+    <dimen name="small_button">110dp</dimen>
 </resources>
